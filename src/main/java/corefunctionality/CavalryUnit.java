@@ -11,7 +11,6 @@ public class CavalryUnit extends Unit {
     private static final int ARMOUR = 12;
     private static final int STANDARD_ATTACK_BONUS = 2;
     private static final int STANDARD_RESIST_BONUS = 1;
-    private int attackCounter = 0;
 
     /**
      * This method creates a cavalry unit
@@ -24,25 +23,23 @@ public class CavalryUnit extends Unit {
 
     /**
      * This method creates a cavalry unit with no predetermined values
-     * @param name the name of the commander unit
-     * @param health the health of the commander unit
-     * @param attack the unit's attack damage
-     * @param armour the unit's armour
+     * @param name the name of the cavalry unit
+     * @param health the health of the cavalry unit
+     * @param attack the cavalry unit's attack damage
+     * @param armour the cavalry unit's armour
      */
     public CavalryUnit(String name, int health, int attack, int armour){
         super(name, health, attack, armour);
     }
 
     /**
-     * TODO: Lage bedre counter
      * This method returns the cavalry unit's attack bonus.
      * @return the cavalry unit's resist bonus
      */
     @Override
     int getAttackBonus() {
-        if (attackCounter == 0) {
+        if (getHitsDealt() == 0) {
             ////Attack type: Charge
-            attackCounter++;
             return 6;
         } else {
             ////Attack type: Melee
@@ -51,13 +48,12 @@ public class CavalryUnit extends Unit {
     }
 
     /**
-     * TODO: Lage bedre counter
      * This method returns the cavalry unit's resist bonus
      * @return the cavalry unit's resist bonus
      */
     @Override
     int getResistBonus() {
-        if (attackCounter != 0) {
+        if (getHitsTaken() != 0) {
             ////Attack type: Melee
             return STANDARD_RESIST_BONUS;
         }

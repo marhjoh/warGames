@@ -11,7 +11,6 @@ public class RangedUnit extends Unit {
     private static final int ARMOUR = 8;
     private static final int ATTACK_BONUS = 3;
     private static final int STANDARD_RESIST_BONUS = 2;
-    int attackCounter = 0;
 
     /**
      * This method creates an object of a ranged unit
@@ -24,10 +23,10 @@ public class RangedUnit extends Unit {
 
     /**
      * This method creates a ranged unit with no predetermined values
-     * @param name the name of the commander unit
-     * @param health the health of the commander unit
-     * @param attack the unit's attack damage
-     * @param armour the unit's armour
+     * @param name the name of the ranged unit
+     * @param health the health of the ranged unit
+     * @param attack the ranged unit's attack damage
+     * @param armour the ranged unit's armour
      */
     public RangedUnit(String name, int health, int attack, int armour){
         super(name, health, attack, armour);
@@ -49,13 +48,11 @@ public class RangedUnit extends Unit {
      */
     @Override
     int getResistBonus() {
-        if(attackCounter == 0){
-            attackCounter++;
+        if(getHitsTaken() == 0){
             return 6;
         }
 
-        else if(attackCounter == 1){
-            attackCounter++;
+        else if(getHitsTaken() == 1){
             return 4;
         }
         else{

@@ -22,10 +22,10 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method creates an infantry unit with no predetermined values
-     * @param name the name of the commander unit
-     * @param health the health of the commander unit
-     * @param attack the unit's attack damage
-     * @param armour the unit's armour
+     * @param name the name of the infantry unit
+     * @param health the health of the infantry unit
+     * @param attack the infantry unit's attack damage
+     * @param armour the infantry unit's armour
      */
     public InfantryUnit(String name, int health, int attack, int armour){
         super(name, health, attack, armour);
@@ -33,7 +33,7 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method will return the attack bonus
-     * @return the unit's attack bonus.
+     * @return the infantry unit's attack bonus.
      */
     @Override
     int getAttackBonus() {
@@ -41,7 +41,7 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method will return the resist bonus
-     * @return the unit's resist bonus
+     * @return the infantry unit's resist bonus
      */
     @Override
     int getResistBonus() {

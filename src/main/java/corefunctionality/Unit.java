@@ -10,8 +10,8 @@ public abstract class Unit {
     private int health;
     private int attack;
     private int armour;
-    protected int hitsDealt;
-    protected int hitsTaken;
+    private int hitsDealt;
+    private int hitsTaken;
 
     /**
      * This method creates a unit
@@ -68,6 +68,20 @@ public abstract class Unit {
     public int getArmour() {
         return armour;
     }
+
+    /**
+     * This method returns the unit's hits dealt
+     * @return the hits dealt by the unit
+     */
+    public int getHitsDealt(){
+        return hitsDealt; }
+
+    /**
+     * This method returns the unit's taken hits
+     * @return the hits taken by the unit
+     */
+    public int getHitsTaken(){
+        return hitsTaken; }
 
     /**
      * This method sets the unit's health

@@ -10,7 +10,6 @@ public class CommanderUnit extends CavalryUnit {
     private static final int ARMOUR = 15;
     private static final int STANDARD_ATTACK_BONUS = 2;
     private static final int STANDARD_RESIST_BONUS = 1;
-    private int attackCounter = 0;
 
     /**
      * This method creates a commander unit
@@ -33,15 +32,13 @@ public class CommanderUnit extends CavalryUnit {
     }
 
     /**
-     * TODO: Lage bedre counter
-     * This method returns the cavalry unit's attack bonus.
-     * @return the cavalry unit's resist bonus
+     * This method returns the commander unit's attack bonus.
+     * @return the commander unit's resist bonus
      */
     @Override
     int getAttackBonus() {
-        if (attackCounter == 0) {
+        if (getHitsDealt() == 0) {
             //Attack type: Charge
-            attackCounter++;
             return 6;
         } else {
             //Attack type: Melee
@@ -50,13 +47,12 @@ public class CommanderUnit extends CavalryUnit {
     }
 
     /**
-     * TODO: Lage bedre counter
-     * This method returns the cavalry unit's resist bonus
-     * @return the cavalry unit's resist bonus
+     * This method returns the commander unit's resist bonus
+     * @return the commander unit's resist bonus
      */
     @Override
     int getResistBonus() {
-        if (attackCounter != 0) {
+        if (getHitsTaken() != 0) {
             ////Attack type: Melee
             return STANDARD_RESIST_BONUS;
         }
