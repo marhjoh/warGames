@@ -10,7 +10,16 @@ public abstract class Unit {
     private int health;
     private int attack;
     private int armour;
+    protected int hitsDealt;
+    protected int hitsTaken;
 
+    /**
+     * This method creates a unit
+     * @param name the name of the unit
+     * @param health the health of the unit
+     * @param attack the unit's attack damage
+     * @param armour the unit's armour
+     */
     protected Unit(String name, int health, int attack, int armour) {
         this.name = name;
         this.health = health;
@@ -18,8 +27,14 @@ public abstract class Unit {
         this.armour = armour;
     }
 
+    /**
+     * This method will attack the opponent
+     * @param opponent the one the attack inflicted.
+     */
     protected void attack(Unit opponent){
         opponent.setHealth(opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus()));
+        opponent.hitsTaken++;
+        hitsDealt++;
     }
 
     /**
@@ -68,8 +83,10 @@ public abstract class Unit {
      */
     @Override
     public String toString() {
-        return "Unit{" + "name='" + name + '\'' + ", health=" + health +
-                ", attack=" + attack + ", armour=" + armour + '}';
+        return "Name: " + name + "\n"
+                + "Health: " + health + "\n"
+                + "Attack: " + attack + "\n"
+                + "Armour: " + armour;
     }
 
     abstract int getAttackBonus();
