@@ -1,12 +1,16 @@
 package corefunctionality;
 
+import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class is a test class of the class CavalryUnit
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 class TestCavalryUnit {
 
@@ -15,10 +19,8 @@ class TestCavalryUnit {
     private CavalryUnit infantry1;
     private CavalryUnit infantry2;
 
-    /**
-     * This method will create objects for the tests before each test
-     */
     @BeforeEach
+    @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
         infantry1 = new CavalryUnit("Martin", 100, 10, 20);
         infantry2 = new CavalryUnit("Martin", 100, 20, 10);
@@ -32,9 +34,6 @@ class TestCavalryUnit {
         assertEquals(20, infantry1.getArmour());
     }
 
-    /**
-     * This method tests attack and setHealth.
-     */
     @Test
     void testAttackAndSetHealth() {
         infantry1.setHealth(50);
@@ -47,9 +46,6 @@ class TestCavalryUnit {
         assertEquals(54, infantry2.getHealth());
     }
 
-    /**
-     * This method tests the counter hitsTaken and hitsDealt
-     */
     @Test
     void testHitsDealtAndHitsTaken(){
         infantry1.attack(infantry2);
@@ -77,6 +73,7 @@ class TestCavalryUnit {
 
 
     @Test
+    @Description("")
     void testResistBonus() {
         assertEquals(0, infantry1.getResistBonus());
         assertEquals(0, infantry2.getResistBonus());

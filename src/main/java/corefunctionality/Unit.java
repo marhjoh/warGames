@@ -2,6 +2,8 @@ package corefunctionality;
 
 /**
  * This class represents a unit
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public abstract class Unit {
 

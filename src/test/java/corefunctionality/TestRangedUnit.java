@@ -1,12 +1,15 @@
 package corefunctionality;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class is a test class of the class RangedUnit
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 class TestRangedUnit {
 
@@ -14,10 +17,8 @@ class TestRangedUnit {
     private RangedUnit infantry1;
     private RangedUnit infantry2;
 
-    /**
-     * This method will create objects for the tests before each test
-     */
     @BeforeEach
+    @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
         infantry1 = new RangedUnit("Martin", 100, 10, 20);
         infantry2 = new RangedUnit("Martin", 100, 20, 10);
@@ -31,9 +32,6 @@ class TestRangedUnit {
         assertEquals(20, infantry1.getArmour());
     }
 
-    /**
-     * This method tests attack and setHealth.
-     */
     @Test
     void testAttackAndSetHealth() {
         infantry1.setHealth(50);
@@ -46,9 +44,6 @@ class TestRangedUnit {
         assertEquals(63, infantry2.getHealth());
     }
 
-    /**
-     * This method tests the counter hitsTaken and hitsDealt
-     */
     @Test
     void testHitsDealtAndHitsTaken(){
         infantry1.attack(infantry2);
@@ -76,6 +71,7 @@ class TestRangedUnit {
 
 
     @Test
+    @DisplayName("This test checks the change in resist bonus for the ranged unit")
     void testResistBonus() {
         //Ikke angrepet
         assertEquals(6, infantry1.getResistBonus());

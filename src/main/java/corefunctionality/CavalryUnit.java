@@ -3,6 +3,8 @@ package corefunctionality;
 /**
  * This class represents a cavalry unit
  * This unit's strength is charge (first attack), then melee (the rest attacks)
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class CavalryUnit extends Unit {
 

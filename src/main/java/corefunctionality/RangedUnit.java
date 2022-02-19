@@ -3,6 +3,8 @@ package corefunctionality;
 /**
  * This class represents a ranged unit
  * The unit's strength that it can attack from range
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class RangedUnit extends Unit {
 

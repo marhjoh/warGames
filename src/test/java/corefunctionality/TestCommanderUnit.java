@@ -1,12 +1,15 @@
 package corefunctionality;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class is a test class of the class CommanderUnit
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 class TestCommanderUnit {
 
@@ -14,10 +17,8 @@ class TestCommanderUnit {
     private CommanderUnit infantry1;
     private CommanderUnit infantry2;
 
-    /**
-     * This method will create objects for the tests before each test
-     */
     @BeforeEach
+    @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
         infantry1 = new CommanderUnit("Martin", 100, 10, 20);
         infantry2 = new CommanderUnit("Martin", 100, 20, 10);
@@ -31,9 +32,6 @@ class TestCommanderUnit {
         assertEquals(20, infantry1.getArmour());
     }
 
-    /**
-     * This method tests attack and setHealth.
-     */
     @Test
     void testAttackAndSetHealth() {
         infantry1.setHealth(50);
@@ -46,9 +44,6 @@ class TestCommanderUnit {
         assertEquals(54, infantry2.getHealth());
     }
 
-    /**
-     * This method tests the counter hitsTaken and hitsDealt
-     */
     @Test
     void testHitsDealtAndHitsTaken(){
         infantry1.attack(infantry2);

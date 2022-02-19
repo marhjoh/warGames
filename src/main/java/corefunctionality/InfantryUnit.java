@@ -3,6 +3,8 @@ package corefunctionality;
 /**
  * This class represent an infantry unit
  * This unit's strength is melee.
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class InfantryUnit extends Unit {
 
