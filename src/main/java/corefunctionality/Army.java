@@ -16,9 +16,29 @@ public class Army {
     private List<Unit> militia;
     private Random random;
 
+    /**
+     * This method creates an army
+     * @param name the name of the army
+     */
     public Army(String name){
         this.name = name;
-        militia = new ArrayList<Unit>();
+        militia = new ArrayList<>();
+        random = new Random();
+    }
+
+    /**
+     * This method creates an army
+     * @param name the name of the army
+     * @param militia the list of units
+     */
+    public Army(String name, List<Unit> militia){
+        this.name = name;
+        if(militia == null){
+            this.militia = new ArrayList<>();
+        }else{
+            this.militia = militia;
+        }
+
         random = new Random();
     }
 
@@ -43,7 +63,7 @@ public class Army {
      * @param unit the unit to be added to the militia
      */
     public void addToArmy(Unit unit){
-        militia.add(unit);
+        this.militia.add(unit);
     }
 
     /**
@@ -87,7 +107,7 @@ public class Army {
      */
     @Override
     public String toString() {
-        return "Name: " + name + "\n" + " Army: " + militia; }
+        return "Name: " + name + "\n" + "Army: " + militia; }
 
     /**
      * This method returns if the armies are equal or not
@@ -110,7 +130,4 @@ public class Army {
     public int hashCode() {
         return Objects.hash(name, militia);
     }
-
-
-
 }

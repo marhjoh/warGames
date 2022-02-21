@@ -14,6 +14,7 @@ public abstract class Unit {
     private int armour;
     private int hitsDealt;
     private int hitsTaken;
+    private boolean isAlive;
 
     /**
      * This method creates a unit
@@ -24,9 +25,13 @@ public abstract class Unit {
      */
     protected Unit(String name, int health, int attack, int armour) {
         this.name = name;
+        if(health <= 0){
+            throw new IllegalArgumentException("Invalid Health");
+        }
         this.health = health;
         this.attack = attack;
         this.armour = armour;
+        this.isAlive = true;
     }
 
     /**
@@ -37,6 +42,9 @@ public abstract class Unit {
         opponent.setHealth(opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus()));
         opponent.hitsTaken++;
         hitsDealt++;
+
+        if(opponent.getHealth() <= 0){
+            opponent.setIsAlive(false); }
     }
 
     /**
@@ -86,11 +94,29 @@ public abstract class Unit {
         return hitsTaken; }
 
     /**
+     * This method returns whether the unit is alive or not
+     * @return if the unit is alive or not
+     */
+    public boolean getIsAlive(){
+        return isAlive;}
+
+    /**
      * This method sets the unit's health
      * @param health the unit's health
      */
     public void setHealth(int health) {
+        if(health <= 0){
+            throw new IllegalArgumentException("Invalid health");
+        }
         this.health = health;
+    }
+
+    /**
+     * This method set's the unit alive or dead
+     * @param isAlive if the unit is alive or not
+     */
+    public void setIsAlive(boolean isAlive){
+        this.isAlive = isAlive;
     }
 
     /**
