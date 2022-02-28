@@ -70,7 +70,7 @@ public class Army {
      * This method adds all units from the input-list to the militia (unit list)
      * @param unitList the units to be added to the army
      */
-    public void addAll(List<Unit> unitList){
+    public void addAllToArmy(List<Unit> unitList){
         //unitList is input arraylist
         for(Unit unit: unitList){
             militia.add(unit); }
@@ -96,8 +96,8 @@ public class Army {
      * This method will return a random unit from the army (unit list)
      * @return a random unit from the militia (army / unit list)
      */
-    public Unit getRandom(){
-        int randomIndex = random.nextInt(0, militia.size());
+    public Unit getRandomUnit(){
+        int randomIndex = random.nextInt(0, militia.size()-1);
         return militia.get(randomIndex);
     }
 
@@ -107,7 +107,7 @@ public class Army {
      */
     @Override
     public String toString() {
-        return "Name: " + name + "\n" + "Army: " + militia; }
+        return "\nName: " + name + "\n" + "Army: " + militia; }
 
     /**
      * This method returns if the armies are equal or not

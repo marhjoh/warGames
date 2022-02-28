@@ -54,8 +54,14 @@ class TestArmy {
 
     @Test
     void addAll() {
-        norway.addToArmy(infantry1);
-        assertEquals(1, norway.getAllUnits().size());
+        ArrayList<Unit> humanArmy = new ArrayList<>();
+
+        humanArmy.add(infantry1);
+        humanArmy.add(commander1);
+
+        norway.addAllToArmy(humanArmy);
+
+        assertEquals(2, norway.getAllUnits().size());
     }
 
     @Test

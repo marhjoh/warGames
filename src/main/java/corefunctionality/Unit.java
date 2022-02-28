@@ -25,10 +25,7 @@ public abstract class Unit {
      */
     protected Unit(String name, int health, int attack, int armour) {
         this.name = name;
-        if(health <= 0){
-            throw new IllegalArgumentException("Invalid Health");
-        }
-        this.health = health;
+        setHealth(health);
         this.attack = attack;
         this.armour = armour;
         this.isAlive = true;
@@ -44,7 +41,8 @@ public abstract class Unit {
         hitsDealt++;
 
         if(opponent.getHealth() <= 0){
-            opponent.setIsAlive(false); }
+            opponent.setIsAlive(false);
+        }
     }
 
     /**
@@ -131,8 +129,17 @@ public abstract class Unit {
                 + "Armour: " + armour;
     }
 
+    /**
+     * This method returns the unit's attack bonus
+     * @return the unit's attack bonus
+     */
     abstract int getAttackBonus();
 
+
+    /**
+     * This method returns the unit's resist bonus
+     * @return the unit's resist bonus
+     */
     abstract int getResistBonus();
 
 
