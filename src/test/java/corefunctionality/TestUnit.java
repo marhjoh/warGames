@@ -26,6 +26,7 @@ class TestUnit {
     }
 
     @Test
+    @DisplayName("This method will test the constructor")
     void TestUnitConstructor() {
         assertEquals("Martin", infantry1.getName());
         assertEquals(100, infantry1.getHealth());
@@ -34,18 +35,23 @@ class TestUnit {
     }
 
     @Test
-    void testSetHealthAndAttack() {
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
         infantry1.setHealth(50);
-        assertEquals(50, infantry1.getHealth());
         infantry2.setHealth(60);
+        assertEquals(50, infantry1.getHealth());
         assertEquals(60, infantry2.getHealth());
-
-        infantry2.setHealth(infantry2.getHealth() - (infantry1.getAttack() + infantry1.getAttackBonus()) + (infantry2.getArmour() + infantry2.getResistBonus()));
-
-        assertEquals(58, infantry2.getHealth());
     }
 
     @Test
+    @DisplayName("This method will test the attack method")
+    void testAttack(){
+        infantry1.attack(infantry2);
+        assertEquals(98, infantry2.getHealth());
+    }
+
+    @Test
+    @DisplayName("This method will test the hitsDealt and hitsTaken counter in the attack method")
     void testHitsDealtAndHitsTaken(){
         infantry1.attack(infantry2);
         assertEquals(1, infantry1.getHitsDealt());
@@ -53,32 +59,36 @@ class TestUnit {
     }
 
     @Test
+    @DisplayName("This method will test the getName method")
     void testGetName() {
         assertEquals("Martin", infantry1.getName());
         assertEquals("Martin", infantry2.getName());
     }
 
    @Test
+   @DisplayName("This method will test the getHealth method")
    void testGetHealth() {
         assertEquals(100, infantry1.getHealth());
         assertEquals(100, infantry2.getHealth());
     }
 
     @Test
+    @DisplayName("This method will test the getAttack method")
     void testGetAttack() {
         assertEquals(10, infantry1.getAttack());
         assertEquals(20, infantry2.getAttack());
     }
 
-
     @Test
-    void testResistBonus() {
+    @DisplayName("This method will test the getResistBonus method")
+    void testGetResistBonus() {
         assertEquals(1, infantry1.getResistBonus());
         assertEquals(0, infantry2.getResistBonus());
     }
 
     @Test
-    void testAttackBonus() {
+    @DisplayName("This method will test the getAttackBonus method")
+    void testGetAttackBonus() {
         assertEquals(2, infantry1.getAttackBonus());
         assertEquals(6, infantry2.getAttackBonus());
     }
