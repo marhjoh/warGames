@@ -14,76 +14,90 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestCommanderUnit {
 
     // A dummy unit for testing the methods
-    private CommanderUnit infantry1;
-    private CommanderUnit infantry2;
+    private CommanderUnit commanderUnit1;
+    private CommanderUnit commanderUnit2;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
-        infantry1 = new CommanderUnit("Martin", 100, 10, 20);
-        infantry2 = new CommanderUnit("Martin", 100, 20, 10);
+        commanderUnit1 = new CommanderUnit("Martin", 100, 10, 20);
+        commanderUnit2 = new CommanderUnit("Martin", 100, 20, 10);
     }
 
     @Test
+    @DisplayName("This method will test the constructor")
     void TestCommanderUnitConstructor() {
-        assertEquals("Martin", infantry1.getName());
-        assertEquals(100, infantry1.getHealth());
-        assertEquals(10, infantry1.getAttack());
-        assertEquals(20, infantry1.getArmour());
+        assertEquals("Martin", commanderUnit1.getName());
+        assertEquals(100, commanderUnit1.getHealth());
+        assertEquals(10, commanderUnit1.getAttack());
+        assertEquals(20, commanderUnit1.getArmour());
     }
 
     @Test
-    void testAttackAndSetHealth() {
-        infantry1.setHealth(50);
-        assertEquals(50, infantry1.getHealth());
-        infantry2.setHealth(60);
-        assertEquals(60, infantry2.getHealth());
-
-        infantry2.setHealth(infantry2.getHealth() - (infantry1.getAttack() + infantry1.getAttackBonus()) + (infantry2.getArmour() + infantry2.getResistBonus()));
-
-        assertEquals(54, infantry2.getHealth());
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
+        commanderUnit1.setHealth(50);
+        commanderUnit2.setHealth(60);
+        assertEquals(50, commanderUnit1.getHealth());
+        assertEquals(60, commanderUnit2.getHealth());
     }
 
     @Test
-    void testHitsDealtAndHitsTaken(){
-        infantry1.attack(infantry2);
-        assertEquals(1, infantry1.getHitsDealt());
-        assertEquals(1, infantry2.getHitsTaken());
+    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
+    void testAttack(){
+        commanderUnit1.attack(commanderUnit2);
+        assertEquals(94, commanderUnit2.getHealth());
+        assertEquals(1, commanderUnit1.getHitsDealt());
+        assertEquals(1, commanderUnit2.getHitsTaken());
     }
 
     @Test
+    @DisplayName("This method will test the getName method")
     void testGetName() {
-        assertEquals("Martin", infantry1.getName());
-        assertEquals("Martin", infantry2.getName());
+        assertEquals("Martin", commanderUnit1.getName());
+        assertEquals("Martin", commanderUnit2.getName());
     }
 
     @Test
+    @DisplayName("This method will test the getHealth method")
     void testGetHealth() {
-        assertEquals(100, infantry1.getHealth());
-        assertEquals(100, infantry2.getHealth());
+        assertEquals(100, commanderUnit1.getHealth());
+        assertEquals(100, commanderUnit2.getHealth());
     }
 
     @Test
+    @DisplayName("This method will test the getAttack method")
     void testGetAttack() {
-        assertEquals(10, infantry1.getAttack());
-        assertEquals(20, infantry2.getAttack());
+        assertEquals(10, commanderUnit1.getAttack());
+        assertEquals(20, commanderUnit2.getAttack());
     }
 
 
     @Test
-    void testResistBonus() {
-        assertEquals(0, infantry1.getResistBonus());
-        assertEquals(0, infantry2.getResistBonus());
+    @DisplayName("This method will test the getResistBonus method")
+    void testGetResistBonus() {
+        assertEquals(0, commanderUnit1.getResistBonus());
+        assertEquals(0, commanderUnit2.getResistBonus());
     }
 
     @Test
-    void testAttackBonus() {
-        assertEquals(6, infantry1.getAttackBonus());
-        assertEquals(6, infantry2.getAttackBonus());
+    @DisplayName("This method will test the getAttackBonus method after the unit has attacked once")
+    void testAttackBonusAfterZeroAttacks() {
+        assertEquals(6, commanderUnit1.getAttackBonus());
+        assertEquals(6, commanderUnit2.getAttackBonus());
+        assertEquals(0, commanderUnit1.getHitsDealt());
+        assertEquals(0, commanderUnit2.getHitsTaken());
+    }
 
-        infantry1.attack(infantry2);
-        assertEquals(1, infantry1.getHitsDealt());
-        assertEquals(2, infantry1.getAttackBonus());
+    @Test
+    @DisplayName("This method will test the getAttackBonus method after the unit has attacked once")
+    void testAttackBonusAfterOneAttack() {
+        commanderUnit1.attack(commanderUnit2);
+        assertEquals(2, commanderUnit1.getAttackBonus());
+        assertEquals(6, commanderUnit2.getAttackBonus());
+        assertEquals(1, commanderUnit1.getHitsDealt());
+        assertEquals(1, commanderUnit2.getHitsTaken());
+
     }
 
 }
