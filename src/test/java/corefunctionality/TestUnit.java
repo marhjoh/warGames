@@ -44,16 +44,10 @@ class TestUnit {
     }
 
     @Test
-    @DisplayName("This method will test the attack method")
+    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
     void testAttack(){
         infantry1.attack(infantry2);
         assertEquals(98, infantry2.getHealth());
-    }
-
-    @Test
-    @DisplayName("This method will test the hitsDealt and hitsTaken counter in the attack method")
-    void testHitsDealtAndHitsTaken(){
-        infantry1.attack(infantry2);
         assertEquals(1, infantry1.getHitsDealt());
         assertEquals(1, infantry2.getHitsTaken());
     }
