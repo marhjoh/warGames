@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * This class represents a militia (an army)
@@ -129,5 +130,41 @@ public class Army {
     @Override
     public int hashCode() {
         return Objects.hash(name, militia);
+    }
+
+    /**
+     * This method returns the infantry units in the army
+     *
+     * @return the infantry units in the army as a list
+     */
+    public List<Unit> getInfantryUnits(){
+        return militia.stream().filter(p -> p instanceof InfantryUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns the cavalry units in the army
+     *
+     * @return the cavalry units in the army as a list
+     */
+    public List<Unit> getCavalryUnits(){
+        return militia.stream().filter(p -> p instanceof CavalryUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns the commander units in the army
+     *
+     * @return the commander units in the army as a list
+     */
+    public List<Unit> getCommanderUnits(){
+        return militia.stream().filter(p -> p instanceof CommanderUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns the ranged units in the ary
+     *
+     * @return the ranged units in the army as a list
+     */
+    public List<Unit> getRangedUnits(){
+        return militia.stream().filter(p -> p instanceof RangedUnit).collect(Collectors.toList());
     }
 }
