@@ -1,11 +1,13 @@
 package corefunctionality;
 
+import exceptions.UnitException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +21,8 @@ class TestArmy {
     // A dummy unit for testing the methods
     private Unit infantry1;
     private CommanderUnit commander1;
+    private CavalryUnit ranged1;
+    private CavalryUnit cavalry1;
     private Army norway;
     private Army sweden;
     private Army finland;
@@ -28,9 +32,11 @@ class TestArmy {
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
+    void Setup() throws UnitException {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         commander1 = new CommanderUnit("Martin", 100, 20, 10);
+        cavalry1 = new CavalryUnit("Martin", 100, 10, 20);
+        ranged1 = new CavalryUnit("Martin", 100, 10, 20);
         militia = new ArrayList<>();
         militia1 = new ArrayList<>();
         militia2 = null;
@@ -116,4 +122,45 @@ class TestArmy {
         assertEquals(false, norway.equals(sweden));
     }
 
+    @Test
+    @DisplayName("This method test if the infantry units in the army are returned")
+    void testGetInfantryUnits(){
+        militia.add(infantry1);
+        militia.add(commander1);
+
+        assertEquals("[Name: Martin\n" + "Health: 100\n" +
+                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+    }
+
+    @Test
+    @DisplayName("This method test if the commander units in the army are returned")
+    void testGetCommanderUnits(){
+        militia.add(infantry1);
+        militia.add(commander1);
+
+        assertEquals("[Name: Martin\n" + "Health: 100\n" +
+                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+    }
+
+    @Test
+    @DisplayName("This method test if the cavalry units in the army are returned")
+    void testGetCavalryUnits(){
+        militia.add(infantry1);
+        militia.add(commander1);
+        militia.add(cavalry1);
+
+        assertEquals("[Name: Martin\n" + "Health: 100\n" +
+                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+    }
+
+    @Test
+    @DisplayName("This method test if the ranged units in the army are returned")
+    void testGetRangedUnits(){
+        militia.add(infantry1);
+        militia.add(commander1);
+        militia.add(ranged1);
+
+        assertEquals("[Name: Martin\n" + "Health: 100\n" +
+                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+    }
 }
