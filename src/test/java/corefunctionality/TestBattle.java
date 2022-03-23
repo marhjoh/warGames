@@ -19,6 +19,8 @@ class TestBattle {
     private Unit commander1;
     private List<Army> militias;
     private Battle battle;
+    private Army island;
+    private Army finland;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
@@ -27,7 +29,7 @@ class TestBattle {
         militia1 = new ArrayList<>();
         militias = new ArrayList<>();
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
-        commander1 = new CommanderUnit("Martin", 100, 20, 10);
+        commander1 = new CommanderUnit("Martin", 100, 100, 10);
         militia.add(infantry1);
         militia.add(commander1);
         militia1.add(infantry1);
@@ -38,36 +40,46 @@ class TestBattle {
         militias.add(norway);
         militias.add(sweden);
 
+        List<Unit> militia2 = new ArrayList<>();
+        finland = new Army("Finland", militia2);
+
+        List<Unit> militia3 = new ArrayList<>();
+        island = new Army("Island", militia3);
     }
 
-
-    /**
-     * This method simulates a battle, a random unit from one army attacks a random unit from another army
-     * When one unit gets 0 or below that in health it is removed, this continues until one of the armies win
-     * @return the army that wins the battle
-     */
     @Test
-    @DisplayName("This method will return the army that wins the battle")
+    void testGetRandomArmy(){
+        List<Unit>militia2 = new ArrayList<>();
+        List<Unit> militia3 = new ArrayList<>();
+        List<Army> militias2 = new ArrayList<>();
+        militia2.add(infantry1);
+        militia2.add(commander1);
+        militia3.add(infantry1);
+        militia3.add(commander1);
+        Army poland = new Army("Poland", militia2);
+        Army england = new Army("England", militia3);
+        Battle battle2 = new Battle(poland, england);
+        militias2.add(poland);
+        militias2.add(england);
+
+        assertEquals(poland.toString(),battle2.getRandomArmy());
+    }
+
+    @Test
+    @DisplayName("This method will test the simulate method, which returns the army that wins the battle")
     void testSimulate(){
+        //TODO: testen kjører for evig dersom jeg fjerner throw invalid health
         assertNotNull(battle.simulate());
         assertEquals(norway,battle.simulate());
     }
 
     @Test
-    void getRandomArmy(){
-
-        militia.add(infantry1);
-        militia.add(commander1);
-        militia1.add(infantry1);
-        militia1.add(commander1);
-
-        militias.add(norway);
-        militias.add(sweden);
-    }
-
-    @Test
+    @DisplayName("This method will test the toString method")
     void testToString() {
-        assertEquals("Army One: \nName: Sweden\nArmy: []\n\nArmy Two: \nName: Norway\nArmy: []", battle.toString());
+        Battle battle = new Battle(island, finland); // didn't supply the armies with units
+        String expected = "Army One: \n" + "Name: Island\n" + "Army: []Army Two: \n" +
+                "Name: Finland\n" + "Army: []"; // the expected value
+        assertEquals(expected, battle.toString());
     }
 
 }
