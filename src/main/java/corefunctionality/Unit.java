@@ -33,6 +33,7 @@ public abstract class Unit {
 
     /**
      * This method will attack the opponent
+     *
      * @param opponent the one the attack inflicted.
      */
     protected void attack(Unit opponent){
@@ -47,7 +48,8 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's name
-     * @return the name pf the unit
+     *
+     * @return the name of the unit as a String
      */
     public String getName() {
         return name;
@@ -55,7 +57,8 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's health
-     * @return the health of the unit
+     *
+     * @return the health of the unit as an int
      */
     public int getHealth() {
         return health;
@@ -63,7 +66,8 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's attack damage
-     * @return the unit's attack damage
+     *
+     * @return the unit's attack damage as an int
      */
     public int getAttack() {
         return attack;
@@ -71,7 +75,8 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's armour
-     * @return the unit's armour
+     *
+     * @return the unit's armour as an int
      */
     public int getArmour() {
         return armour;
@@ -79,38 +84,44 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's hits dealt
-     * @return the hits dealt by the unit
+     *
+     * @return the hits dealt by the unit as an int
      */
     public int getHitsDealt(){
         return hitsDealt; }
 
     /**
      * This method returns the unit's taken hits
-     * @return the hits taken by the unit
+     *
+     * @return the hits taken by the unit as an int
      */
     public int getHitsTaken(){
         return hitsTaken; }
 
     /**
      * This method returns whether the unit is alive or not
-     * @return if the unit is alive or not
+     *
+     * @return if the unit is alive or not as a boolean
      */
     public boolean getIsAlive(){
         return isAlive;}
 
     /**
      * This method sets the unit's health
+     *
      * @param health the unit's health
      */
     public void setHealth(int health) {
         if(health <= 0){
             throw new IllegalArgumentException("Invalid health");
+        } else {
+            this.health = health;
         }
-        this.health = health;
     }
 
     /**
      * This method set's the unit alive or dead
+     *
      * @param isAlive if the unit is alive or not
      */
     public void setIsAlive(boolean isAlive){
@@ -119,7 +130,8 @@ public abstract class Unit {
 
     /**
      * This method returns a string consisting of all the fields in the unit class
-     * @return a string with all the information in the class field
+     *
+     * @return all the information in the class field as a String
      */
     @Override
     public String toString() {
@@ -131,14 +143,16 @@ public abstract class Unit {
 
     /**
      * This method returns the unit's attack bonus
-     * @return the unit's attack bonus
+     *
+     * @return the unit's attack bonus as an int
      */
     abstract int getAttackBonus();
 
 
     /**
      * This method returns the unit's resist bonus
-     * @return the unit's resist bonus
+     *
+     * @return the unit's resist bonus as an int
      */
     abstract int getResistBonus();
 
