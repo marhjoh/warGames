@@ -15,6 +15,7 @@ public class CommanderUnit extends CavalryUnit {
 
     /**
      * This method creates a commander unit
+     *
      * @param name the name of the commander unit
      * @param health the health of the commander unit
      */
@@ -24,6 +25,7 @@ public class CommanderUnit extends CavalryUnit {
 
     /**
      * This method creates a commander unit with no predetermined values
+     *
      * @param name the name of the commander unit
      * @param health the health of the commander unit
      * @param attack the unit's attack damage
@@ -35,7 +37,8 @@ public class CommanderUnit extends CavalryUnit {
 
     /**
      * This method returns the commander unit's attack bonus.
-     * @return the commander unit's resist bonus
+     *
+     * @return the commander unit's resist bonus as an int
      */
     @Override
     int getAttackBonus() {
@@ -50,7 +53,8 @@ public class CommanderUnit extends CavalryUnit {
 
     /**
      * This method returns the commander unit's resist bonus
-     * @return the commander unit's resist bonus
+     *
+     * @return the commander unit's resist bonus as an int
      */
     @Override
     int getResistBonus() {

@@ -16,6 +16,7 @@ public class RangedUnit extends Unit {
 
     /**
      * This method creates an object of a ranged unit
+     *
      * @param name the name of the ranged unit
      * @param health the health of the ranged unit
      */
@@ -25,6 +26,7 @@ public class RangedUnit extends Unit {
 
     /**
      * This method creates a ranged unit with no predetermined values
+     *
      * @param name the name of the ranged unit
      * @param health the health of the ranged unit
      * @param attack the ranged unit's attack damage
@@ -36,7 +38,8 @@ public class RangedUnit extends Unit {
 
     /**
      * This method returns the ranged unit's attack bonus
-     * @return the ranged unit's attack bonus
+     *
+     * @return the ranged unit's attack bonus as an int
      */
     @Override
     int getAttackBonus() {
@@ -46,7 +49,8 @@ public class RangedUnit extends Unit {
     /**
      * TODO: Hvis fiende drept, reset resist bonus - mulig while(isAlive)
      * This method returns the ranged unit's resist bonus
-     * @return the ranged unit's resist bonus
+     *
+     * @return the ranged unit's resist bonus as an int
      */
     @Override
     int getResistBonus() {
@@ -57,6 +61,7 @@ public class RangedUnit extends Unit {
         else if(getHitsTaken() == 1){
             return 4;
         }
+
         else{
             return STANDARD_RESIST_BONUS;
         }

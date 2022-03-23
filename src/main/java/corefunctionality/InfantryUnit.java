@@ -16,6 +16,7 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method creates an infantry unit
+     *
      * @param name the name of the infantry unit
      * @param health the health of the infantry unit
      */
@@ -24,6 +25,7 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method creates an infantry unit with no predetermined values
+     *
      * @param name the name of the infantry unit
      * @param health the health of the infantry unit
      * @param attack the infantry unit's attack damage
@@ -35,7 +37,8 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method will return the attack bonus
-     * @return the infantry unit's attack bonus.
+     *
+     * @return the infantry unit's attack bonus as an int
      */
     @Override
     int getAttackBonus() {
@@ -43,7 +46,8 @@ public class InfantryUnit extends Unit {
 
     /**
      * This method will return the resist bonus
-     * @return the infantry unit's resist bonus
+     *
+     * @return the infantry unit's resist bonus as an int
      */
     @Override
     int getResistBonus() {

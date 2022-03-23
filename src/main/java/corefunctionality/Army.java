@@ -29,6 +29,7 @@ public class Army {
 
     /**
      * This method creates an army
+     *
      * @param name the name of the army
      * @param militia the list of units
      */
@@ -45,7 +46,8 @@ public class Army {
 
     /**
      * This method returns the name of the militia
-     * @return the name of the militia
+     *
+     * @return the name of the militia as a String
      */
     public String getName() {
         return name;
@@ -53,7 +55,8 @@ public class Army {
 
     /**
      * This method returns the militia list (unit list)
-     * @return the militia list (unit list)
+     *
+     * @return the militia list/unit list as a list
      */
     public List<Unit> getAllUnits() {
         return militia;
@@ -61,6 +64,7 @@ public class Army {
 
     /**
      * This method adds a unit to the militia
+     *
      * @param unit the unit to be added to the militia
      */
     public void addToArmy(Unit unit){
@@ -69,6 +73,7 @@ public class Army {
 
     /**
      * This method adds all units from the input-list to the militia (unit list)
+     *
      * @param unitList the units to be added to the army
      */
     public void addAllToArmy(List<Unit> unitList){
@@ -79,6 +84,7 @@ public class Army {
 
     /**
      * This method removes a unit from the militia (army / unit list)
+     *
      * @param unit the unit to be removed
      */
     public void removeUnit(Unit unit){
@@ -87,7 +93,8 @@ public class Army {
 
     /**
      * This method returns whether the militia has units or not
-     * @return if the militia has units or not
+     *
+     * @return if the militia has units or not as a boolean
      */
     public boolean hasUnits(){
         return !militia.isEmpty();
@@ -95,6 +102,7 @@ public class Army {
 
     /**
      * This method will return a random unit from the army (unit list)
+     *
      * @return a random unit from the militia (army / unit list)
      */
     public Unit getRandomUnit(){
@@ -104,6 +112,7 @@ public class Army {
 
     /**
      * This method converts the class details to a string
+     *
      * @return the details in a string
      */
     @Override
@@ -112,8 +121,10 @@ public class Army {
 
     /**
      * This method returns if the armies are equal or not
+     *
      * @param o superclass object comparable
-     * @return if the militias are equal or not
+     *
+     * @return if the militias are equal or not as a boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -125,7 +136,8 @@ public class Army {
 
     /**
      * This method returns the army's hash code
-     * @return the militia's hash code
+     *
+     * @return the militia's hash code as an int
      */
     @Override
     public int hashCode() {

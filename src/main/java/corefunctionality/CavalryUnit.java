@@ -16,6 +16,7 @@ public class CavalryUnit extends Unit {
 
     /**
      * This method creates a cavalry unit
+     *
      * @param name   the name of the cavalry unit
      * @param health the health of the cavalry unit
      */
@@ -25,6 +26,7 @@ public class CavalryUnit extends Unit {
 
     /**
      * This method creates a cavalry unit with no predetermined values
+     *
      * @param name the name of the cavalry unit
      * @param health the health of the cavalry unit
      * @param attack the cavalry unit's attack damage
@@ -36,7 +38,8 @@ public class CavalryUnit extends Unit {
 
     /**
      * This method returns the cavalry unit's attack bonus.
-     * @return the cavalry unit's resist bonus
+     *
+     * @return the cavalry unit's resist bonus as an int
      */
     @Override
     int getAttackBonus() {
@@ -51,7 +54,8 @@ public class CavalryUnit extends Unit {
 
     /**
      * This method returns the cavalry unit's resist bonus
-     * @return the cavalry unit's resist bonus
+     *
+     * @return the cavalry unit's resist bonus as an int
      */
     @Override
     int getResistBonus() {
