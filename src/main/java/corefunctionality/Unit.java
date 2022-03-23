@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+
 /**
  * This class represents a unit
  * @author Martin Hegnum Johannessen
@@ -18,12 +20,15 @@ public abstract class Unit {
 
     /**
      * This method creates a unit
+     *
      * @param name the name of the unit
      * @param health the health of the unit
      * @param attack the unit's attack damage
      * @param armour the unit's armour
+     *
+     * @throws UnitException
      */
-    protected Unit(String name, int health, int attack, int armour) {
+    protected Unit(String name, int health, int attack, int armour) throws UnitException {
         this.name = name;
         setHealth(health);
         this.attack = attack;
@@ -35,8 +40,10 @@ public abstract class Unit {
      * This method will attack the opponent
      *
      * @param opponent the one the attack inflicted.
+     *
+     * @throws UnitException
      */
-    protected void attack(Unit opponent){
+    protected void attack(Unit opponent) throws UnitException {
         opponent.setHealth(opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus()));
         opponent.hitsTaken++;
         hitsDealt++;
@@ -110,12 +117,14 @@ public abstract class Unit {
      * This method sets the unit's health
      *
      * @param health the unit's health
+     *
+     * @throws UnitException
      */
-    public void setHealth(int health) {
-        if(health <= 0){
-            throw new IllegalArgumentException("Invalid health");
-        } else {
+    public void setHealth(int health) throws UnitException {
+        if (health >= 0){
             this.health = health;
+        } else {
+            throw new UnitException("Illegal value set in setHealth");
         }
     }
 
@@ -123,10 +132,17 @@ public abstract class Unit {
      * This method set's the unit alive or dead
      *
      * @param isAlive if the unit is alive or not
+     *
+     * @throws UnitException
      */
-    public void setIsAlive(boolean isAlive){
-        this.isAlive = isAlive;
+    public void setIsAlive(boolean isAlive) throws UnitException {
+        if (isAlive == false || isAlive == true) {
+            this.isAlive = isAlive;
+        } else {
+            throw new UnitException("Illegal value set in setIsAlive");
+        }
     }
+
 
     /**
      * This method returns a string consisting of all the fields in the unit class
