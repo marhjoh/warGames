@@ -179,4 +179,8 @@ public class Army {
     public List<Unit> getRangedUnits(){
         return militia.stream().filter(p -> p instanceof RangedUnit).collect(Collectors.toList());
     }
+
+    public void setArmyName(String name) {
+        this.name = name;
+    }
 }
