@@ -96,10 +96,18 @@ class TestCommanderUnit {
 
 
     @Test
-    @DisplayName("This method will test the getResistBonus method")
-    void testGetResistBonus() {
+    @DisplayName("This method will test the getResistBonus method after zero hits taken")
+    void testGetResistBonusAfterZeroHitsTaken() {
         assertEquals(0, commanderUnit1.getResistBonus());
         assertEquals(0, commanderUnit2.getResistBonus());
+    }
+
+    @Test
+    @DisplayName("This method will test the getResistBonus method after one hit taken")
+    void testGetResistBonusAfterOneHitTaken() {
+        commanderUnit1.attack(commanderUnit2);
+        assertEquals(1, commanderUnit2.getResistBonus());
+        assertEquals(1, commanderUnit2.getHitsTaken());
     }
 
     @Test

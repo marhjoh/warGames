@@ -1,6 +1,8 @@
 package corefunctionality;
 
+import exceptions.UnitException;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,12 +20,15 @@ class TestCavalryUnit {
     // A dummy unit for testing the methods
     private CavalryUnit cavalryUnit1;
     private CavalryUnit cavalryUnit2;
+    private CavalryUnit cavalryUnit3;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
+    void Setup() throws UnitException {
         cavalryUnit1 = new CavalryUnit("Martin", 100, 10, 20);
         cavalryUnit2 = new CavalryUnit("Martin", 100, 20, 10);
+        cavalryUnit3 = new CavalryUnit("Martin", 100);
+
     }
 
     @Test
@@ -36,21 +41,38 @@ class TestCavalryUnit {
     }
 
     @Test
-    @DisplayName("This method will test the setHealth method")
-    void testSetHealth() {
-        cavalryUnit1.setHealth(50);
-        cavalryUnit2.setHealth(60);
-        assertEquals(50, cavalryUnit1.getHealth());
-        assertEquals(60, cavalryUnit2.getHealth());
+    @DisplayName("This method will test the simple constructor")
+    void testSimpleCommanderUnitConstructor() {
+        assertEquals("Martin", cavalryUnit3.getName());
+        assertEquals(100, cavalryUnit3.getHealth());
+        assertEquals(20, cavalryUnit3.getAttack());
+        assertEquals(12, cavalryUnit3.getArmour());
     }
 
     @Test
-    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
-    void testAttack(){
-        cavalryUnit1.attack(cavalryUnit2);
-        assertEquals(94, cavalryUnit2.getHealth());
-        assertEquals(1, cavalryUnit1.getHitsDealt());
-        assertEquals(1, cavalryUnit2.getHitsTaken());
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
+        try {
+            cavalryUnit1.setHealth(0);
+            cavalryUnit2.setHealth(-999);
+
+        } catch (IllegalArgumentException e){
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                Integer.parseInt("One"); }
+            );
+        }
+    }
+
+    @Test
+    @DisplayName("This method will test the attack method")
+    void testAttack() {
+        try {
+            Unit dominantUnit = new InfantryUnit("Martin", 100, 200, 100);
+            Unit weakUnit = new InfantryUnit("Stian", 1, 1, 1);
+            dominantUnit.attack(weakUnit);
+        } catch (UnitException unitException) {
+            fail();
+        }
     }
 
     @Test
@@ -74,12 +96,21 @@ class TestCavalryUnit {
         assertEquals(20, cavalryUnit2.getAttack());
     }
 
-
     @Test
-    @DisplayName("This method will test the getResistBonus method")
-    void testGetResistBonus() {
+    @DisplayName("This method will test the getResistBonus method after zero hits taken")
+    void testGetResistBonusAfterZeroHitsTaken() {
         assertEquals(0, cavalryUnit1.getResistBonus());
         assertEquals(0, cavalryUnit2.getResistBonus());
+        assertEquals(0, cavalryUnit1.getHitsTaken());
+        assertEquals(0, cavalryUnit2.getHitsTaken());
+    }
+
+    @Test
+    @DisplayName("This method will test the getResistBonus method after one hit taken")
+    void testGetResistBonusAfterOneHitTaken() {
+        cavalryUnit1.attack(cavalryUnit2);
+        assertEquals(1, cavalryUnit2.getResistBonus());
+        assertEquals(1, cavalryUnit2.getHitsTaken());
     }
 
     @Test
@@ -94,8 +125,6 @@ class TestCavalryUnit {
     void testGetAttackBonusAfterOneAttack() {
         cavalryUnit1.attack(cavalryUnit2);
         assertEquals(2, cavalryUnit1.getAttackBonus());
-        assertEquals(6, cavalryUnit2.getAttackBonus());
         assertEquals(1, cavalryUnit1.getHitsDealt());
-        assertEquals(1, cavalryUnit2.getHitsTaken());
     }
 }
