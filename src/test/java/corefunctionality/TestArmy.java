@@ -26,13 +26,14 @@ class TestArmy {
     private Army norway;
     private Army sweden;
     private Army finland;
+    private Army simpleArmy;
     private List<Unit> militia;
     private List<Unit> militia1;
     private List<Unit> militia2;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() throws UnitException {
+    void Setup() {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         commander1 = new CommanderUnit("Martin", 100, 20, 10);
         cavalry1 = new CavalryUnit("Martin", 100, 10, 20);
@@ -43,6 +44,7 @@ class TestArmy {
         norway = new Army("Norway", militia);
         sweden = new Army("Sweden", militia1);
         finland = new Army("Finland", militia2);
+        simpleArmy = new Army("simple");
 
     }
 
@@ -61,6 +63,13 @@ class TestArmy {
     }
 
     @Test
+    @DisplayName("This method will test to create an army only with a name")
+    void testSimpleConstructor(){
+        assertEquals("simple", simpleArmy.getName());
+        assertEquals(0, simpleArmy.getAllUnits().size(), "A new arraylist was not created");
+    }
+
+    @Test
     @DisplayName("This method will test the getName method")
     void testGetName() {
         assertEquals("Norway", norway.getName());
@@ -68,13 +77,13 @@ class TestArmy {
 
     @Test
     @DisplayName("This method will test the getAllUnits method")
-    void getAllUnits() {
+    void testGetAllUnits() {
         assertEquals(0, norway.getAllUnits().size());
     }
 
     @Test
     @DisplayName("This method will test the addToArmy method")
-    void addToArmy() {
+    void testAddToArmy() {
         norway.addToArmy(infantry1);
         norway.addToArmy(commander1);
         assertEquals(2, norway.getAllUnits().size());
@@ -120,6 +129,30 @@ class TestArmy {
     @DisplayName("This method will test the equals method")
     void testEquals() {
         assertEquals(false, norway.equals(sweden));
+    }
+
+    @Test
+    @DisplayName("This method will test the getRandomUnit method")
+    void testGetRandomUnit(){
+        militia.add(infantry1);
+        militia.add(commander1);
+        Unit randomUnit = norway.getRandomUnit();
+        boolean expected = norway.getAllUnits().contains(randomUnit);
+        assertTrue(true);
+    }
+
+    @Test
+    @DisplayName("This method will test the hashCode method")
+    void testHashCode(){
+        int hashCodeNorway = norway.hashCode();
+        assertEquals(hashCodeNorway, norway.hashCode());
+    }
+
+    @Test
+    @DisplayName("This method will test the setArmyName method")
+    void testSetArmyName(){
+        norway.setArmyName("sverige");
+        assertEquals("sverige", norway.getName());
     }
 
     @Test

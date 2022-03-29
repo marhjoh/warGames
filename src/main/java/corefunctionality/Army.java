@@ -106,7 +106,8 @@ public class Army {
      * @return a random unit from the militia (army / unit list)
      */
     public Unit getRandomUnit(){
-        int randomIndex = random.nextInt(0, militia.size()-1);
+
+        int randomIndex = random.nextInt(militia.size());
         return militia.get(randomIndex);
     }
 
@@ -180,6 +181,11 @@ public class Army {
         return militia.stream().filter(p -> p instanceof RangedUnit).collect(Collectors.toList());
     }
 
+    /**
+     * This method sets the army name
+     *
+     * @param name army name to be set
+     */
     public void setArmyName(String name) {
         this.name = name;
     }
