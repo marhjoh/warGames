@@ -3,9 +3,7 @@ package filehandler;
 import corefunctionality.*;
 import exceptions.UnitException;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,19 +17,30 @@ public class ArmyFileHandler {
     /**
      * Create an Army from a CSV file.
      *
-     * @param path String to the CVS file.
      * @return Army of units
      */
-   public static Army readArmyCsv(String path) {
+   public static Army readArmyCsv(String filename) throws IOException {
        Army army = new Army("");
 
-       try (BufferedReader reader = Files.newBufferedReader(Path.of(path))) {
+       try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/armyFiles/"+filename+".csv"))) {
            String lineOfText;
-           army.setArmyName(reader.readLine());
+
+           // Reading first line in file
+           lineOfText = reader.readLine();
+           if(lineOfText.split(",").length != 1){
+               throw new IOException("File format error. There should only be one value");
+           }
+           army.setArmyName(lineOfText);
+
+           // Looping through unit lines
            while ((lineOfText = reader.readLine()) != null) {
 
                String[] units = lineOfText.split(",");
-               switch(units[0]){
+               if(units.length != 3){
+                   throw new IOException("Format error. There should be exactly 3 values");
+               }
+
+               switch(units[0].strip()){
                    case "CommanderUnit":
                        army.addToArmy(new CommanderUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
                        break;
@@ -50,7 +59,7 @@ public class ArmyFileHandler {
                }
            }
        } catch (IOException | UnitException e) {
-           System.out.println(e.getMessage());
+           throw new IOException(e.getMessage());
        }
        return army;
    }
@@ -59,19 +68,20 @@ public class ArmyFileHandler {
      * Write an Army from a CSV file.
      *
      * @param army units in the army.
-     * @param path String to the CVS file.
      */
-   public static void writeArmyCsv(Army army, String path) {
+    public static void writeArmyCsv(Army army, String fileName) throws IOException {
 
-       try (BufferedWriter writer = Files.newBufferedWriter(Path.of(path))) {
-           writer.write(army.getName() + "\n");
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/armyFiles/"+fileName+".csv"))){
+            writer.write(army.getName()+"\n");
 
-           for (Unit unit : army.getAllUnits()) {
-               writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n"); }
-           }
+            for (Unit unit : army.getAllUnits()) {
+                writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n");
+            }
 
-       catch (IOException ex) {
-           ex.printStackTrace();
-       }
-   }
+        }catch (IOException e){
+            throw new IOException(e.getMessage());
+        }
+
+
+    }
 }
