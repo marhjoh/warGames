@@ -39,7 +39,7 @@ class TestInfantryUnit {
 
     @Test
     @DisplayName("This method will test the simple constructor")
-    void testSimpleRangedUnitConstructor() {
+    void testSimpleInfantryUnitConstructor() {
         assertEquals("Martin", infantry3.getName());
         assertEquals(100, infantry3.getHealth());
         assertEquals(15, infantry3.getAttack());

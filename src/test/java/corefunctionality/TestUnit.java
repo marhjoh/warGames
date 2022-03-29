@@ -45,8 +45,8 @@ class TestUnit {
 
         } catch (IllegalArgumentException e){
             Assertions.assertThrows(IllegalArgumentException.class, () -> {
-                Integer.parseInt("One");
-            });
+                Integer.parseInt("One"); }
+            );
         }
     }
 
