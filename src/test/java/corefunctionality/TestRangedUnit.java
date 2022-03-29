@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,17 +18,19 @@ class TestRangedUnit {
     // A dummy unit for testing the methods
     private RangedUnit rangedUnit1;
     private RangedUnit rangedUnit2;
+    private RangedUnit rangedUnit3;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
-        rangedUnit1 = new RangedUnit("Martin", 100, 10, 20);
-        rangedUnit2 = new RangedUnit("Martin", 100, 20, 10);
+    void setup() {
+      rangedUnit1 = new RangedUnit("Martin", 100, 10, 20);
+      rangedUnit2 = new RangedUnit("Martin", 100, 20, 10);
+      rangedUnit3 = new RangedUnit("Martin", 100);
     }
 
     @Test
     @DisplayName("This method will test the constructor")
-    void TestRangedUnitConstructor() {
+    void testRangedUnitConstructor() {
         assertEquals("Martin", rangedUnit1.getName());
         assertEquals(100, rangedUnit1.getHealth());
         assertEquals(10, rangedUnit1.getAttack());
@@ -34,21 +38,38 @@ class TestRangedUnit {
     }
 
     @Test
-    @DisplayName("This method will test the setHealth method")
-    void testSetHealth() {
-        rangedUnit1.setHealth(50);
-        rangedUnit2.setHealth(60);
-        assertEquals(50, rangedUnit1.getHealth());
-        assertEquals(60, rangedUnit2.getHealth());
+    @DisplayName("This method will test the simple constructor")
+    void testSimpleRangedUnitConstructor() {
+        assertEquals("Martin", rangedUnit3.getName());
+        assertEquals(100, rangedUnit3.getHealth());
+        assertEquals(15, rangedUnit3.getAttack());
+        assertEquals(8, rangedUnit3.getArmour());
     }
 
     @Test
-    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
+        try {
+            rangedUnit1.setHealth(0);
+            rangedUnit2.setHealth(-999);
+        } catch (IllegalArgumentException e){
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                Integer.parseInt("One"); }
+            );
+        }
+    }
+
+    @Test
+    @DisplayName("This method will test the attack method")
     void testAttack(){
-        rangedUnit1.attack(rangedUnit2);
-        assertEquals(103, rangedUnit2.getHealth());
-        assertEquals(1, rangedUnit1.getHitsDealt());
-        assertEquals(1, rangedUnit2.getHitsTaken());
+        try {
+            Unit dominantUnit = new RangedUnit("Martin", 100, 200, 100);
+            Unit weakUnit = new RangedUnit("Stian", 1, 1, 1);
+            dominantUnit.attack(weakUnit);
+        }
+        catch (UnitException unitException){
+            fail();
+        }
     }
 
     @Test

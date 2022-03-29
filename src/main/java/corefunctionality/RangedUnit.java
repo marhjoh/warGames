@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+
 /**
  * This class represents a ranged unit
  * The unit's strength that it can attack from range
@@ -32,7 +34,7 @@ public class RangedUnit extends Unit {
      * @param attack the ranged unit's attack damage
      * @param armour the ranged unit's armour
      */
-    public RangedUnit(String name, int health, int attack, int armour){
+    public RangedUnit(String name, int health, int attack, int armour) {
         super(name, health, attack, armour);
     }
 
