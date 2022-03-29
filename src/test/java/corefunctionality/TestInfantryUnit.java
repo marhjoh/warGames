@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +18,14 @@ class TestInfantryUnit {
     // A dummy unit for testing the methods
     private InfantryUnit infantry1;
     private InfantryUnit infantry2;
+    private InfantryUnit infantry3;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         infantry2 = new InfantryUnit("Martin", 100, 20, 10);
+        infantry3 = new InfantryUnit("Martin", 100);
     }
 
     @Test
@@ -34,21 +38,38 @@ class TestInfantryUnit {
     }
 
     @Test
-    @DisplayName("This method will test the setHealth method")
-    void testSetHealth() {
-        infantry1.setHealth(50);
-        infantry2.setHealth(60);
-        assertEquals(50, infantry1.getHealth());
-        assertEquals(60, infantry2.getHealth());
+    @DisplayName("This method will test the simple constructor")
+    void testSimpleRangedUnitConstructor() {
+        assertEquals("Martin", infantry3.getName());
+        assertEquals(100, infantry3.getHealth());
+        assertEquals(15, infantry3.getAttack());
+        assertEquals(10, infantry3.getArmour());
     }
 
     @Test
-    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
+        try {
+            infantry1.setHealth(0);
+            infantry2.setHealth(-999);
+        } catch (IllegalArgumentException e){
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                Integer.parseInt("One"); }
+            );
+        }
+    }
+
+    @Test
+    @DisplayName("This method will test the attack method")
     void testAttack(){
-        infantry1.attack(infantry2);
-        assertEquals(99, infantry2.getHealth());
-        assertEquals(1, infantry1.getHitsDealt());
-        assertEquals(1, infantry2.getHitsTaken());
+        try {
+            Unit dominantUnit = new InfantryUnit("Martin", 100, 200, 100);
+            Unit weakUnit = new InfantryUnit("Stian", 1, 1, 1);
+            dominantUnit.attack(weakUnit);
+        }
+        catch (UnitException unitException){
+            fail();
+        }
     }
 
     @Test

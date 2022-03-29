@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+
 /**
  * This class represent an infantry unit
  * This unit's strength is melee.
@@ -20,7 +22,7 @@ public class InfantryUnit extends Unit {
      * @param name the name of the infantry unit
      * @param health the health of the infantry unit
      */
-    public InfantryUnit(String name, int health){
+    public InfantryUnit(String name, int health) {
         super(name, health, ATTACK_DAMAGE, ARMOUR); }
 
     /**
@@ -31,7 +33,7 @@ public class InfantryUnit extends Unit {
      * @param attack the infantry unit's attack damage
      * @param armour the infantry unit's armour
      */
-    public InfantryUnit(String name, int health, int attack, int armour){
+    public InfantryUnit(String name, int health, int attack, int armour) {
         super(name, health, attack, armour);
     }
 
