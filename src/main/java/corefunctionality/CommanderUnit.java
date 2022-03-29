@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+
 /**
  * This class represents a commander unit
  * This unit's strength is charge (first attack), then melee (the rest attacks)
@@ -31,7 +33,7 @@ public class CommanderUnit extends CavalryUnit {
      * @param attack the unit's attack damage
      * @param armour the unit's armour
      */
-    public CommanderUnit(String name, int health, int attack, int armour){
+    public CommanderUnit(String name, int health, int attack, int armour) {
         super(name, health, attack, armour);
     }
 

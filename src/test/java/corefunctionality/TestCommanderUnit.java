@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +18,14 @@ class TestCommanderUnit {
     // A dummy unit for testing the methods
     private CommanderUnit commanderUnit1;
     private CommanderUnit commanderUnit2;
+    private CommanderUnit commanderUnit3;
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
         commanderUnit1 = new CommanderUnit("Martin", 100, 10, 20);
         commanderUnit2 = new CommanderUnit("Martin", 100, 20, 10);
+        commanderUnit3 = new CommanderUnit("Martin", 100);
     }
 
     @Test
@@ -34,21 +38,39 @@ class TestCommanderUnit {
     }
 
     @Test
-    @DisplayName("This method will test the setHealth method")
-    void testSetHealth() {
-        commanderUnit1.setHealth(50);
-        commanderUnit2.setHealth(60);
-        assertEquals(50, commanderUnit1.getHealth());
-        assertEquals(60, commanderUnit2.getHealth());
+    @DisplayName("This method will test the simple constructor")
+    void testSimpleCommanderUnitConstructor() {
+        assertEquals("Martin", commanderUnit3.getName());
+        assertEquals(100, commanderUnit3.getHealth());
+        assertEquals(25, commanderUnit3.getAttack());
+        assertEquals(15, commanderUnit3.getArmour());
     }
 
     @Test
-    @DisplayName("This method will test the attack method, and the hitsDealt and hitsTaken counter in it")
+    @DisplayName("This method will test the setHealth method")
+    void testSetHealth() {
+        try {
+            commanderUnit1.setHealth(0);
+            commanderUnit2.setHealth(-999);
+
+        } catch (IllegalArgumentException e){
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                Integer.parseInt("One"); }
+            );
+        }
+    }
+
+    @Test
+    @DisplayName("This method will test the attack method")
     void testAttack(){
-        commanderUnit1.attack(commanderUnit2);
-        assertEquals(94, commanderUnit2.getHealth());
-        assertEquals(1, commanderUnit1.getHitsDealt());
-        assertEquals(1, commanderUnit2.getHitsTaken());
+        try {
+            Unit dominantUnit = new CommanderUnit("Martin", 100, 200, 100);
+            Unit weakUnit = new CommanderUnit("Stian", 1, 1, 1);
+            dominantUnit.attack(weakUnit);
+        }
+        catch (UnitException unitException){
+            fail();
+        }
     }
 
     @Test
@@ -81,12 +103,10 @@ class TestCommanderUnit {
     }
 
     @Test
-    @DisplayName("This method will test the getAttackBonus method after the unit has attacked once")
+    @DisplayName("This method will test the getAttackBonus method after the unit has attacked zero times")
     void testAttackBonusAfterZeroAttacks() {
         assertEquals(6, commanderUnit1.getAttackBonus());
-        assertEquals(6, commanderUnit2.getAttackBonus());
         assertEquals(0, commanderUnit1.getHitsDealt());
-        assertEquals(0, commanderUnit2.getHitsTaken());
     }
 
     @Test
@@ -94,10 +114,7 @@ class TestCommanderUnit {
     void testAttackBonusAfterOneAttack() {
         commanderUnit1.attack(commanderUnit2);
         assertEquals(2, commanderUnit1.getAttackBonus());
-        assertEquals(6, commanderUnit2.getAttackBonus());
         assertEquals(1, commanderUnit1.getHitsDealt());
-        assertEquals(1, commanderUnit2.getHitsTaken());
-
     }
 
 }
