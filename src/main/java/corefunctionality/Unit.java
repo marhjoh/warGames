@@ -28,7 +28,7 @@ public abstract class Unit {
      *
      * @throws UnitException
      */
-    protected Unit(String name, int health, int attack, int armour) throws UnitException {
+    protected Unit(String name, int health, int attack, int armour)  {
         this.name = name;
         setHealth(health);
         this.attack = attack;
@@ -40,17 +40,16 @@ public abstract class Unit {
      * This method will attack the opponent
      *
      * @param opponent the one the attack inflicted.
-     *
-     * @throws UnitException
      */
-    protected void attack(Unit opponent) throws UnitException {
-        opponent.setHealth(opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus()));
+    protected void attack(Unit opponent){
+        int opponentHealth = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus());
+        try{
+            opponent.setHealth(opponentHealth);
+        }catch (IllegalArgumentException e){
+            opponent.setHealth(0);
+        }
         opponent.hitsTaken++;
         hitsDealt++;
-
-        if(opponent.getHealth() <= 0){
-            opponent.setIsAlive(false);
-        }
     }
 
     /**
@@ -117,14 +116,15 @@ public abstract class Unit {
      * This method sets the unit's health
      *
      * @param health the unit's health
-     *
-     * @throws UnitException
      */
-    public void setHealth(int health) throws UnitException {
+    public void setHealth(int health) {
         if (health >= 0){
             this.health = health;
-        } else {
-            throw new UnitException("Illegal value set in setHealth");
+            if(this.health == 0){
+                isAlive = false;
+            }
+        }else{
+            throw new IllegalArgumentException("Health can not be lower than 0");
         }
     }
 
@@ -132,14 +132,12 @@ public abstract class Unit {
      * This method set's the unit alive or dead
      *
      * @param isAlive if the unit is alive or not
-     *
-     * @throws UnitException
      */
-    public void setIsAlive(boolean isAlive) throws UnitException {
+    public void setIsAlive(boolean isAlive) {
         if (isAlive == false || isAlive == true) {
             this.isAlive = isAlive;
         } else {
-            throw new UnitException("Illegal value set in setIsAlive");
+            throw new IllegalArgumentException("Illegal value set in setIsAlive");
         }
     }
 
