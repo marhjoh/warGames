@@ -21,7 +21,7 @@ class TestArmy {
     // A dummy unit for testing the methods
     private Unit infantry1;
     private CommanderUnit commander1;
-    private CavalryUnit ranged1;
+    private RangedUnit ranged1;
     private CavalryUnit cavalry1;
     private Army norway;
     private Army sweden;
@@ -37,7 +37,7 @@ class TestArmy {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         commander1 = new CommanderUnit("Martin", 100, 20, 10);
         cavalry1 = new CavalryUnit("Martin", 100, 10, 20);
-        ranged1 = new CavalryUnit("Martin", 100, 10, 20);
+        ranged1 = new RangedUnit("Martin", 100, 10, 20);
         militia = new ArrayList<>();
         militia1 = new ArrayList<>();
         militia2 = null;
@@ -158,8 +158,8 @@ class TestArmy {
     @Test
     @DisplayName("This method test if the infantry units in the army are returned")
     void testGetInfantryUnits(){
-        militia.add(infantry1);
-        militia.add(commander1);
+        norway.addToArmy(infantry1);
+        norway.addToArmy(commander1);
 
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
                 "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
@@ -168,32 +168,31 @@ class TestArmy {
     @Test
     @DisplayName("This method test if the commander units in the army are returned")
     void testGetCommanderUnits(){
-        militia.add(infantry1);
-        militia.add(commander1);
+        norway.addToArmy(infantry1);
+        norway.addToArmy(commander1);
 
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
-                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+                "Attack: 20\n" + "Armour: 10]", norway.getCommanderUnits().toString());
     }
 
     @Test
     @DisplayName("This method test if the cavalry units in the army are returned")
     void testGetCavalryUnits(){
-        militia.add(infantry1);
-        militia.add(commander1);
-        militia.add(cavalry1);
+        norway.addToArmy(infantry1);
+        norway.addToArmy(cavalry1);
 
+        //TODO: klarer ikke å skille dersom jeg legger den direkte inn i militia, klarer det dersom jeg legger den direkte til i norway.
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
-                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+                "Attack: 10\n" + "Armour: 20]", norway.getCavalryUnits().toString());
     }
 
     @Test
     @DisplayName("This method test if the ranged units in the army are returned")
     void testGetRangedUnits(){
-        militia.add(infantry1);
-        militia.add(commander1);
-        militia.add(ranged1);
+        norway.addToArmy(infantry1);
+        norway.addToArmy(ranged1);
 
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
-                "Attack: 10\n" + "Armour: 20]", norway.getInfantryUnits().toString());
+                "Attack: 10\n" + "Armour: 20]", norway.getRangedUnits().toString());
     }
 }
