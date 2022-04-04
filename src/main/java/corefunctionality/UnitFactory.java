@@ -11,7 +11,7 @@ import java.util.List;
 public class UnitFactory {
 
     /**
-     * This method will create a UnitFactory
+     * This is a constructor for a static class
      */
     private UnitFactory(){
     }
