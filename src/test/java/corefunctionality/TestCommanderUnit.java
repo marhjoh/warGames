@@ -49,15 +49,7 @@ class TestCommanderUnit {
     @Test
     @DisplayName("This method will test the setHealth method")
     void testSetHealth() {
-        try {
-            commanderUnit1.setHealth(0);
-            commanderUnit2.setHealth(-999);
-
-        } catch (IllegalArgumentException e){
-            Assertions.assertThrows(IllegalArgumentException.class, () -> {
-                Integer.parseInt("One"); }
-            );
-        }
+        Assertions.assertThrows(IllegalArgumentException.class, () -> commanderUnit1.setHealth(-999));
     }
 
     @Test
