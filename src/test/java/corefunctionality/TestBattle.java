@@ -1,5 +1,6 @@
 package corefunctionality;
 
+import exceptions.UnitException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,13 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestBattle {
 
-    private Army norway;
-    private Army sweden;
-    private List<Unit> militia;
-    private List<Unit> militia1;
-    private Unit infantry1;
-    private Unit commander1;
-    private List<Army> militias;
+    private Army dominantArmy;
+    private Army weakArmy;
     private Battle battle;
     private Army island;
     private Army finland;
@@ -25,52 +21,47 @@ class TestBattle {
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
     void Setup() {
-        militia = new ArrayList<>();
-        militia1 = new ArrayList<>();
-        militias = new ArrayList<>();
-        infantry1 = new InfantryUnit("Martin", 100, 10, 20);
-        commander1 = new CommanderUnit("Martin", 100, 100, 10);
-        militia.add(infantry1);
-        militia.add(commander1);
-        militia1.add(infantry1);
-        militia1.add(commander1);
-        norway = new Army("Norway", militia);
-        sweden = new Army("Sweden", militia1);
-        battle = new Battle(sweden, norway);
-        militias.add(norway);
-        militias.add(sweden);
+        //For testing toString
+        finland = new Army("Finland");
+        island = new Army("Island");
 
-        List<Unit> militia2 = new ArrayList<>();
-        finland = new Army("Finland", militia2);
+        //For testing battle
+        dominantArmy = new Army("DominantArmy");
+        weakArmy = new Army("WeakArmy");
+        battle = new Battle(dominantArmy, weakArmy);
+        InfantryUnit infantryUnit1 = new InfantryUnit("Martin", 100);
+        CavalryUnit cavalryUnit1 = new CavalryUnit("Marius", 100);
+        CommanderUnit commanderUnit1 = new CommanderUnit("Morten", 100);
+        RangedUnit rangedUnit1 = new RangedUnit("Mikkel", 100);
+        InfantryUnit infantryUnit2 = new InfantryUnit("Stian", 50);
+        InfantryUnit infantryUnit3 = new InfantryUnit("Synne", 50);
 
-        List<Unit> militia3 = new ArrayList<>();
-        island = new Army("Island", militia3);
+        dominantArmy.addToArmy(infantryUnit1);
+        dominantArmy.addToArmy(cavalryUnit1);
+        dominantArmy.addToArmy(commanderUnit1);
+        dominantArmy.addToArmy(rangedUnit1);
+        weakArmy.addToArmy(infantryUnit2);
+        weakArmy.addToArmy(infantryUnit3);
     }
 
     @Test
+    @DisplayName("This method will test the getRandomArmy method, which returns a random army in the battle")
     void testGetRandomArmy(){
-        List<Unit>militia2 = new ArrayList<>();
-        List<Unit> militia3 = new ArrayList<>();
-        List<Army> militias2 = new ArrayList<>();
-        militia2.add(infantry1);
-        militia2.add(commander1);
-        militia3.add(infantry1);
-        militia3.add(commander1);
-        Army poland = new Army("Poland", militia2);
-        Army england = new Army("England", militia3);
+        List<Army> militias = new ArrayList<>();
+        Army poland = new Army("Poland");
+        Army england = new Army("England");
         Battle battle2 = new Battle(poland, england);
-        militias2.add(poland);
-        militias2.add(england);
 
-        assertEquals(poland.toString(),battle2.getRandomArmy());
+        militias.add(poland);
+        militias.add(england);
+
+        assertTrue(militias.contains(battle2.getRandomArmy()), "The army was not found");
     }
 
     @Test
     @DisplayName("This method will test the simulate method, which returns the army that wins the battle")
     void testSimulate(){
-        //TODO: testen kjører for evig dersom jeg fjerner throw invalid health
-        assertNotNull(battle.simulate());
-        assertEquals(norway,battle.simulate());
+        assertEquals(dominantArmy,battle.simulate());
     }
 
     @Test

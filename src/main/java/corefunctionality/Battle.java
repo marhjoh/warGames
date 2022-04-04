@@ -1,5 +1,7 @@
 package corefunctionality;
 
+import exceptions.UnitException;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,7 +20,6 @@ public class Battle {
 
     /**
      * This method creates an instance of a battle
-     *
      * @param armyOne an army to battle
      * @param armyTwo an army to battle
      */
@@ -42,25 +43,23 @@ public class Battle {
      */
     public Army simulate(){
         while(armyOne.hasUnits() && armyTwo.hasUnits()) {
-            Unit attacker = getRandomArmy().getRandomUnit();
-            Unit armyOneUnit = armyOne.getRandomUnit();
-            Unit armyTwoUnit = armyTwo.getRandomUnit();
-            try{
-                if(armyOne.getAllUnits().contains(attacker)){
-                    attacker.attack(armyTwoUnit);
+
+            Unit defenderUnit;
+            if(random.nextInt(2) == 0){
+                defenderUnit = armyTwo.getRandomUnit();
+                armyOne.getRandomUnit().attack(defenderUnit);
+                if(!defenderUnit.getIsAlive()){
+                    armyTwo.removeUnit(defenderUnit);
                 }
-                if(armyTwo.getAllUnits().contains(attacker)) {
-                    attacker.attack(armyOneUnit);
+            }else{
+                defenderUnit = armyOne.getRandomUnit();
+                armyTwo.getRandomUnit().attack(defenderUnit);
+                if(!defenderUnit.getIsAlive()){
+                    armyOne.removeUnit(defenderUnit);
                 }
+
             }
-            catch(IllegalArgumentException InvalidHealth){
-                if(!armyOneUnit.getIsAlive() || armyOneUnit.getHealth() <= 0) {
-                    armyOne.removeUnit(armyOneUnit);
-                }
-                if(!armyTwoUnit.getIsAlive() || armyTwoUnit.getHealth() <= 0) {
-                    armyTwo.removeUnit(armyTwoUnit);
-                }
-            }
+
         }
 
         if(!armyOne.hasUnits()){
@@ -70,6 +69,7 @@ public class Battle {
             return armyOne;
         }
     }
+
 
     /**
      * This method returns a random army
@@ -82,7 +82,7 @@ public class Battle {
             return null;
         }
 
-        int randomIndex = random.nextInt(0, 1);
+        int randomIndex = random.nextInt(2);
         return militias.get(randomIndex);
     }
 
