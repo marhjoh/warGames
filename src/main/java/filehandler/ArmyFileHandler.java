@@ -4,9 +4,6 @@ import corefunctionality.*;
 import exceptions.UnitException;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 
 /**
  * Class with static methods for handling ArrayLists of Person.
@@ -39,29 +36,10 @@ public class ArmyFileHandler {
                if(units.length != 3){
                    throw new IOException("Format error. There should be exactly 3 values");
                }
-
-               switch(units[0].strip()){
-                   case "CommanderUnit":
-                       army.addToArmy(new CommanderUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
-                       break;
-
-                   case "CavalryUnit":
-                       army.addToArmy(new CavalryUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
-                       break;
-
-                   case "InfantryUnit":
-                       army.addToArmy(new InfantryUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
-                       break;
-
-                   case "RangedUnit":
-                       army.addToArmy(new RangedUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
-                       break;
-
-                   default:
-                       return null;
+               army.addToArmy(UnitFactory.createUnit(units[0].strip(), units[1].strip(), Integer.parseInt(units[2].strip())));
                }
            }
-       } catch (IOException | UnitException e) {
+       catch (IOException | UnitException e) {
            throw new IOException(e.getMessage());
        }
        return army;
