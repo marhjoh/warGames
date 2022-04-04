@@ -56,6 +56,9 @@ public class ArmyFileHandler {
                    case "RangedUnit":
                        army.addToArmy(new RangedUnit(units[1].strip(), Integer.parseInt(units[2].strip())));
                        break;
+
+                   default:
+                       return null;
                }
            }
        } catch (IOException | UnitException e) {
