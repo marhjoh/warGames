@@ -49,7 +49,6 @@ public class RangedUnit extends Unit {
     }
 
     /**
-     * TODO: Hvis fiende drept, reset resist bonus - mulig while(isAlive)
      * This method returns the ranged unit's resist bonus
      *
      * @return the ranged unit's resist bonus as an int
