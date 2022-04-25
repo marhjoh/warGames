@@ -28,7 +28,7 @@ class TestBattle {
         //For testing battle
         dominantArmy = new Army("DominantArmy");
         weakArmy = new Army("WeakArmy");
-        battle = new Battle(dominantArmy, weakArmy);
+        battle = new Battle(dominantArmy, weakArmy, 'F');
         InfantryUnit infantryUnit1 = new InfantryUnit("Martin", 100);
         CavalryUnit cavalryUnit1 = new CavalryUnit("Marius", 100);
         CommanderUnit commanderUnit1 = new CommanderUnit("Morten", 100);
@@ -50,7 +50,7 @@ class TestBattle {
         List<Army> militias = new ArrayList<>();
         Army poland = new Army("Poland");
         Army england = new Army("England");
-        Battle battle2 = new Battle(poland, england);
+        Battle battle2 = new Battle(poland, england, 'F');
 
         militias.add(poland);
         militias.add(england);
@@ -67,7 +67,7 @@ class TestBattle {
     @Test
     @DisplayName("This method will test the toString method")
     void testToString() {
-        Battle battle = new Battle(island, finland); // didn't supply the armies with units
+        Battle battle = new Battle(island, finland, 'F'); // didn't supply the armies with units
         String expected = "Army One: \n" + "Name: Island\n" + "Army: []Army Two: \n" +
                 "Name: Finland\n" + "Army: []"; // the expected value
         assertEquals(expected, battle.toString());
