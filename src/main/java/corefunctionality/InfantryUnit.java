@@ -1,10 +1,10 @@
 package corefunctionality;
 
-import exceptions.UnitException;
-
 /**
  * This class represent an infantry unit
  * This unit's strength is melee.
+ * Extra advantage when fighting in forest (both attack and defence).
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -13,8 +13,8 @@ public class InfantryUnit extends Unit {
     //The fields
     private static final int ATTACK_DAMAGE = 15;
     private static final int ARMOUR = 10;
-    private static final int ATTACK_BONUS = 2;
-    private static final int RESIST_BONUS = 1;
+    private static final int STANDARD_ATTACK_BONUS = 2;
+    private static final int STANDARD_RESIST_BONUS = 1;
 
     /**
      * This method creates an infantry unit
@@ -41,17 +41,27 @@ public class InfantryUnit extends Unit {
      * This method will return the attack bonus
      *
      * @return the infantry unit's attack bonus as an int
+     * @param terrain the location of the unit
      */
     @Override
-    int getAttackBonus() {
-        return ATTACK_BONUS; }
+    int getAttackBonus(char terrain) {
+        if(terrain == 'F'){
+            return STANDARD_ATTACK_BONUS + 3;
+        }
+        return STANDARD_ATTACK_BONUS;
+    }
 
     /**
      * This method will return the resist bonus
      *
      * @return the infantry unit's resist bonus as an int
+     * @param terrain the location of the unit
      */
     @Override
-    int getResistBonus() {
-        return RESIST_BONUS; }
+    int getResistBonus(char terrain) {
+        if(terrain == 'F'){
+            return STANDARD_RESIST_BONUS + 3;
+        }
+        return STANDARD_RESIST_BONUS;
+    }
 }

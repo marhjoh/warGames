@@ -1,10 +1,9 @@
 package corefunctionality;
 
-import exceptions.UnitException;
-
 /**
  * This class represents a cavalry unit
  * This unit's strength is charge (first attack), then melee (the rest attacks)
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -29,7 +28,7 @@ public class CavalryUnit extends Unit {
     /**
      * This method creates a cavalry unit with no predetermined values
      *
-     * @param name the name of the cavalry unit
+     * @param name   the name of the cavalry unit
      * @param health the health of the cavalry unit
      * @param attack the cavalry unit's attack damage
      * @param armour the cavalry unit's armour
@@ -41,29 +40,44 @@ public class CavalryUnit extends Unit {
     /**
      * This method returns the cavalry unit's attack bonus.
      *
+     * @param terrain the location of the unit
      * @return the cavalry unit's resist bonus as an int
      */
     @Override
-    int getAttackBonus() {
+    int getAttackBonus(char terrain) {
+
+        ////Attack type: Charge
         if (getHitsDealt() == 0) {
-            ////Attack type: Charge
-            return 6;
-        } else {
-            ////Attack type: Melee
-            return STANDARD_ATTACK_BONUS;
+            if (terrain == 'P') {
+                return 6 + 3; }
+            else{
+                return 6; }
         }
+        ////Attack type: Melee
+        else if (getHitsDealt() != 0){
+            if(terrain == 'P'){
+                return STANDARD_ATTACK_BONUS + 3; }
+        }
+
+        return STANDARD_ATTACK_BONUS;
     }
 
     /**
      * This method returns the cavalry unit's resist bonus
      *
+     * @param terrain the location of the unit
      * @return the cavalry unit's resist bonus as an int
      */
     @Override
-    int getResistBonus() {
+    int getResistBonus(char terrain) {
+
+        ////Attack type: Melee
         if (getHitsTaken() != 0) {
-            ////Attack type: Melee
-            return STANDARD_RESIST_BONUS;
+            if (terrain == 'F') {
+                return 0;
+            } else {
+                return STANDARD_RESIST_BONUS;
+            }
         }
         ////Attack type: Charge
         return 0;

@@ -40,9 +40,10 @@ public abstract class Unit {
      * This method will attack the opponent
      *
      * @param opponent the one the attack inflicted.
+     * @param terrain the location of the attack
      */
-    protected void attack(Unit opponent){
-        int opponentHealth = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.armour + opponent.getResistBonus());
+    protected void attack(Unit opponent, char terrain){
+        int opponentHealth = opponent.health - (this.attack + this.getAttackBonus(terrain)) + (opponent.armour + opponent.getResistBonus(terrain));
         try{
             opponent.setHealth(opponentHealth);
         }catch (IllegalArgumentException e){
@@ -159,16 +160,19 @@ public abstract class Unit {
      * This method returns the unit's attack bonus
      *
      * @return the unit's attack bonus as an int
+     * @param terrain the location of the unit
      */
-    abstract int getAttackBonus();
+    abstract int getAttackBonus(char terrain);
 
 
     /**
      * This method returns the unit's resist bonus
      *
      * @return the unit's resist bonus as an int
+     * @param terrain the location of the unit
      */
-    abstract int getResistBonus();
+    abstract int getResistBonus(char terrain);
+
 
 
 }

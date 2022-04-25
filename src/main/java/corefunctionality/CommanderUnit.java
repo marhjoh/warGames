@@ -1,7 +1,5 @@
 package corefunctionality;
 
-import exceptions.UnitException;
-
 /**
  * This class represents a commander unit
  * This unit's strength is charge (first attack), then melee (the rest attacks)
@@ -41,11 +39,13 @@ public class CommanderUnit extends CavalryUnit {
      * This method returns the commander unit's attack bonus.
      *
      * @return the commander unit's resist bonus as an int
+     * @param terrain the location of the unit
      */
     @Override
-    int getAttackBonus() {
+    int getAttackBonus(char terrain) {
+
+        //Attack type: Charge
         if (getHitsDealt() == 0) {
-            //Attack type: Charge
             return 6;
         } else {
             //Attack type: Melee
@@ -57,14 +57,16 @@ public class CommanderUnit extends CavalryUnit {
      * This method returns the commander unit's resist bonus
      *
      * @return the commander unit's resist bonus as an int
+     * @param terrain the location of the unit
      */
     @Override
-    int getResistBonus() {
+    int getResistBonus(char terrain) {
+
+        //Attack type: Melee
         if (getHitsTaken() != 0) {
-            ////Attack type: Melee
             return STANDARD_RESIST_BONUS;
         }
-        ////Attack type: Charge
+        //Attack type: Charge
         return 0;
     }
 }
