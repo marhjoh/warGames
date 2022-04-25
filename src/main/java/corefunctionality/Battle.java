@@ -2,13 +2,11 @@ package corefunctionality;
 
 import exceptions.UnitException;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * This class represents a battle between two armies
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -17,13 +15,17 @@ public class Battle {
     private Army armyTwo;
     private Random random;
     private List<Army> militias;
+    private final char[] terrains = {'F', 'P', 'H'};
+    private char terrain;
 
     /**
      * This method creates an instance of a battle
+     *
      * @param armyOne an army to battle
      * @param armyTwo an army to battle
+     * @param terrain the location of the battle
      */
-    public Battle(Army armyOne, Army armyTwo){
+    public Battle(Army armyOne, Army armyTwo, char terrain) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
 
@@ -32,7 +34,21 @@ public class Battle {
         militias.add(armyOne);
         militias.add(armyTwo);
 
+        setTerrain(terrain);
+
         random = new Random();
+    }
+
+    public void setTerrain(Character terrain) {
+        for (Character obtainTerrain : terrains) {
+            if (terrain.equals(obtainTerrain)) {
+                this.terrain = terrain;
+                break;
+            }
+        }
+        if (terrain == null) {
+            throw new IllegalArgumentException("Illegal terrain input");
+        }
     }
 
     /**
@@ -41,31 +57,28 @@ public class Battle {
      *
      * @return the winner of the battle as an Army
      */
-    public Army simulate(){
-        while(armyOne.hasUnits() && armyTwo.hasUnits()) {
+    public Army simulate() {
+        while (armyOne.hasUnits() && armyTwo.hasUnits()) {
 
             Unit defenderUnit;
-            if(random.nextInt(2) == 0){
+            if (random.nextInt(2) == 0) {
                 defenderUnit = armyTwo.getRandomUnit();
-                armyOne.getRandomUnit().attack(defenderUnit);
-                if(!defenderUnit.getIsAlive()){
+                armyOne.getRandomUnit().attack(defenderUnit, terrain);
+                if (!defenderUnit.getIsAlive()) {
                     armyTwo.removeUnit(defenderUnit);
                 }
-            }else{
+            } else {
                 defenderUnit = armyOne.getRandomUnit();
-                armyTwo.getRandomUnit().attack(defenderUnit);
-                if(!defenderUnit.getIsAlive()){
+                armyTwo.getRandomUnit().attack(defenderUnit, terrain);
+                if (!defenderUnit.getIsAlive()) {
                     armyOne.removeUnit(defenderUnit);
                 }
-
             }
-
         }
 
-        if(!armyOne.hasUnits()){
+        if (!armyOne.hasUnits()) {
             return armyTwo;
-        }
-        else{
+        } else {
             return armyOne;
         }
     }
@@ -76,9 +89,9 @@ public class Battle {
      *
      * @return a random Army
      */
-    public Army getRandomArmy(){
+    public Army getRandomArmy() {
 
-        if(militias.isEmpty()){
+        if (militias.isEmpty()) {
             return null;
         }
 
@@ -86,6 +99,10 @@ public class Battle {
         return militias.get(randomIndex);
     }
 
+    /**
+     * Returns the battle as a String
+     * @return the battle as a String
+     */
     @Override
     public String toString() {
         return "Army One: " + armyOne + "Army Two: " + armyTwo;
