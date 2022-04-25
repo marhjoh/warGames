@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * This class represent a Unit Factory
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
