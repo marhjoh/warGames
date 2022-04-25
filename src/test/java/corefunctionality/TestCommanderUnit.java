@@ -58,7 +58,7 @@ class TestCommanderUnit {
         try {
             Unit dominantUnit = new CommanderUnit("Martin", 100, 200, 100);
             Unit weakUnit = new CommanderUnit("Stian", 1, 1, 1);
-            dominantUnit.attack(weakUnit);
+            dominantUnit.attack(weakUnit, 'P');
         }
         catch (UnitException unitException){
             fail();
@@ -90,30 +90,30 @@ class TestCommanderUnit {
     @Test
     @DisplayName("This method will test the getResistBonus method after zero hits taken")
     void testGetResistBonusAfterZeroHitsTaken() {
-        assertEquals(0, commanderUnit1.getResistBonus());
-        assertEquals(0, commanderUnit2.getResistBonus());
+        assertEquals(0, commanderUnit1.getResistBonus('P'));
+        assertEquals(0, commanderUnit2.getResistBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getResistBonus method after one hit taken")
     void testGetResistBonusAfterOneHitTaken() {
-        commanderUnit1.attack(commanderUnit2);
-        assertEquals(1, commanderUnit2.getResistBonus());
+        commanderUnit1.attack(commanderUnit2, 'P');
+        assertEquals(1, commanderUnit2.getResistBonus('P'));
         assertEquals(1, commanderUnit2.getHitsTaken());
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method after the unit has attacked zero times")
     void testAttackBonusAfterZeroAttacks() {
-        assertEquals(6, commanderUnit1.getAttackBonus());
+        assertEquals(6, commanderUnit1.getAttackBonus('P'));
         assertEquals(0, commanderUnit1.getHitsDealt());
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method after the unit has attacked once")
     void testAttackBonusAfterOneAttack() {
-        commanderUnit1.attack(commanderUnit2);
-        assertEquals(2, commanderUnit1.getAttackBonus());
+        commanderUnit1.attack(commanderUnit2, 'P');
+        assertEquals(2, commanderUnit1.getAttackBonus('P'));
         assertEquals(1, commanderUnit1.getHitsDealt());
     }
 

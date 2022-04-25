@@ -1,7 +1,6 @@
 package corefunctionality;
 
 import exceptions.UnitException;
-import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -48,7 +47,7 @@ class TestUnit {
         try {
             Unit dominantUnit = new CommanderUnit("Martin", 100, 200, 100);
             Unit weakUnit = new CommanderUnit("Stian", 1, 1, 1);
-            dominantUnit.attack(weakUnit);
+            dominantUnit.attack(weakUnit, 'P');
         }
         catch (UnitException unitException){
             fail();
@@ -89,14 +88,14 @@ class TestUnit {
     @Test
     @DisplayName("This method will test the getResistBonus method")
     void testGetResistBonus() {
-        assertEquals(1, infantry1.getResistBonus());
-        assertEquals(0, infantry2.getResistBonus());
+        assertEquals(1, infantry1.getResistBonus('P'));
+        assertEquals(0, infantry2.getResistBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method")
     void testGetAttackBonus() {
-        assertEquals(2, infantry1.getAttackBonus());
-        assertEquals(6, infantry2.getAttackBonus());
+        assertEquals(2, infantry1.getAttackBonus('P'));
+        assertEquals(6, infantry2.getAttackBonus('P'));
     }
 }

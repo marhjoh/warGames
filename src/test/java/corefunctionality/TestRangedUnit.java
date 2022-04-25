@@ -58,7 +58,7 @@ class TestRangedUnit {
         try {
             Unit dominantUnit = new RangedUnit("Martin", 100, 200, 100);
             Unit weakUnit = new RangedUnit("Stian", 1, 1, 1);
-            dominantUnit.attack(weakUnit);
+            dominantUnit.attack(weakUnit, 'P');
         }
         catch (UnitException unitException){
             fail();
@@ -89,30 +89,30 @@ class TestRangedUnit {
     @Test
     @DisplayName("This method will test the getResistBonus method")
     void testGetResistBonus() {
-        assertEquals(6, rangedUnit1.getResistBonus());
-        assertEquals(6, rangedUnit2.getResistBonus());
+        assertEquals(6, rangedUnit1.getResistBonus('P'));
+        assertEquals(6, rangedUnit2.getResistBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getResistBonus method after the unit has been attacked once")
     void testGetResistBonusAfterOneAttack() {
-        rangedUnit1.attack(rangedUnit2);
-        assertEquals(4, rangedUnit2.getResistBonus());
+        rangedUnit1.attack(rangedUnit2, 'P');
+        assertEquals(4, rangedUnit2.getResistBonus('P'));
     }
 
 
     @Test
     @DisplayName("This method will test the getResistBonus method after the unit has been attacked twice")
     void testGetResistBonusAfterTwoAttacks() {
-        rangedUnit1.attack(rangedUnit2);
-        rangedUnit1.attack(rangedUnit2);
-        assertEquals(2, rangedUnit2.getResistBonus());
+        rangedUnit1.attack(rangedUnit2, 'P');
+        rangedUnit1.attack(rangedUnit2, 'P');
+        assertEquals(2, rangedUnit2.getResistBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method")
     void testGetAttackBonus() {
-        assertEquals(3, rangedUnit1.getAttackBonus());
-        assertEquals(3, rangedUnit2.getAttackBonus());
+        assertEquals(3, rangedUnit1.getAttackBonus('P'));
+        assertEquals(3, rangedUnit2.getAttackBonus('P'));
     }
 }

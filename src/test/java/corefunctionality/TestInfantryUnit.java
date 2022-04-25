@@ -58,7 +58,7 @@ class TestInfantryUnit {
         try {
             Unit dominantUnit = new InfantryUnit("Martin", 100, 200, 100);
             Unit weakUnit = new InfantryUnit("Stian", 1, 1, 1);
-            dominantUnit.attack(weakUnit);
+            dominantUnit.attack(weakUnit, 'P');
         }
         catch (UnitException unitException){
             fail();
@@ -90,14 +90,14 @@ class TestInfantryUnit {
     @Test
     @DisplayName("This method will test the getResistBonus method")
     void testGetResistBonus() {
-        assertEquals(1, infantry1.getResistBonus());
-        assertEquals(1, infantry2.getResistBonus());
+        assertEquals(1, infantry1.getResistBonus('P'));
+        assertEquals(1, infantry2.getResistBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method")
     void testGetAttackBonus() {
-        assertEquals(2, infantry1.getAttackBonus());
-        assertEquals(2, infantry2.getAttackBonus());
+        assertEquals(2, infantry1.getAttackBonus('P'));
+        assertEquals(2, infantry2.getAttackBonus('P'));
     }
 }

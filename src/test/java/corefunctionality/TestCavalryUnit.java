@@ -1,7 +1,6 @@
 package corefunctionality;
 
 import exceptions.UnitException;
-import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -61,7 +60,7 @@ class TestCavalryUnit {
         try {
             Unit dominantUnit = new InfantryUnit("Martin", 100, 200, 100);
             Unit weakUnit = new InfantryUnit("Stian", 1, 1, 1);
-            dominantUnit.attack(weakUnit);
+            dominantUnit.attack(weakUnit, 'P');
         } catch (UnitException unitException) {
             fail();
         }
@@ -91,32 +90,32 @@ class TestCavalryUnit {
     @Test
     @DisplayName("This method will test the getResistBonus method after zero hits taken")
     void testGetResistBonusAfterZeroHitsTaken() {
-        assertEquals(0, cavalryUnit1.getResistBonus());
-        assertEquals(0, cavalryUnit2.getResistBonus());
+        assertEquals(0, cavalryUnit1.getResistBonus('P'));
+        assertEquals(0, cavalryUnit2.getResistBonus('P'));
         assertEquals(0, cavalryUnit1.getHitsTaken());
         assertEquals(0, cavalryUnit2.getHitsTaken());
     }
 
     @Test
-    @DisplayName("This method will test the getResistBonus method after one hit taken")
+    @DisplayName("This method will test the getResistBonus method after one hit taken in forest terrain")
     void testGetResistBonusAfterOneHitTaken() {
-        cavalryUnit1.attack(cavalryUnit2);
-        assertEquals(1, cavalryUnit2.getResistBonus());
+        cavalryUnit1.attack(cavalryUnit2, 'F');
+        assertEquals(0, cavalryUnit2.getResistBonus('F'));
         assertEquals(1, cavalryUnit2.getHitsTaken());
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method")
-    void testGetAttackBonus() {
-        assertEquals(6, cavalryUnit1.getAttackBonus());
-        assertEquals(6, cavalryUnit2.getAttackBonus());
+    void testGetAttackBonusAfterZeroAttacks() {
+        assertEquals(9, cavalryUnit1.getAttackBonus('P'));
+        assertEquals(9, cavalryUnit2.getAttackBonus('P'));
     }
 
     @Test
     @DisplayName("This method will test the getAttackBonus method after the unit has attacked once")
     void testGetAttackBonusAfterOneAttack() {
-        cavalryUnit1.attack(cavalryUnit2);
-        assertEquals(2, cavalryUnit1.getAttackBonus());
+        cavalryUnit1.attack(cavalryUnit2, 'P');
+        assertEquals(5, cavalryUnit1.getAttackBonus('P'));
         assertEquals(1, cavalryUnit1.getHitsDealt());
     }
 }
