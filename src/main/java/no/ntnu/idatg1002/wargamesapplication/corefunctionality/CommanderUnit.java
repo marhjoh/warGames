@@ -1,4 +1,4 @@
-package corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
 /**
  * This class represents a commander unit
@@ -42,7 +42,7 @@ public class CommanderUnit extends CavalryUnit {
      * @param terrain the location of the unit
      */
     @Override
-    int getAttackBonus(char terrain) {
+    public int getAttackBonus(char terrain) {
 
         //Attack type: Charge
         if (getHitsDealt() == 0) {
@@ -60,7 +60,7 @@ public class CommanderUnit extends CavalryUnit {
      * @param terrain the location of the unit
      */
     @Override
-    int getResistBonus(char terrain) {
+    public int getResistBonus(char terrain) {
 
         //Attack type: Melee
         if (getHitsTaken() != 0) {

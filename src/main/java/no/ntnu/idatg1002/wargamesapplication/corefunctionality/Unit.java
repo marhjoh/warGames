@@ -1,6 +1,6 @@
-package corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
-import exceptions.UnitException;
+import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
 
 /**
  * This class represents a unit
@@ -42,7 +42,7 @@ public abstract class Unit {
      * @param opponent the one the attack inflicted.
      * @param terrain the location of the attack
      */
-    protected void attack(Unit opponent, char terrain){
+    public void attack(Unit opponent, char terrain){
         int opponentHealth = opponent.health - (this.attack + this.getAttackBonus(terrain)) + (opponent.armour + opponent.getResistBonus(terrain));
         try{
             opponent.setHealth(opponentHealth);

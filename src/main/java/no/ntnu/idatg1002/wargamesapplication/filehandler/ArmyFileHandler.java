@@ -1,7 +1,9 @@
-package filehandler;
+package no.ntnu.idatg1002.wargamesapplication.filehandler;
 
-import corefunctionality.*;
-import exceptions.UnitException;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.UnitFactory;
+import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Unit;
 
 import java.io.*;
 

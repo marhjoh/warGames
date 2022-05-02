@@ -1,6 +1,4 @@
-package corefunctionality;
-
-import exceptions.UnitException;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
 import java.util.*;
 
@@ -107,6 +105,5 @@ public class Battle {
     public String toString() {
         return "Army One: " + armyOne + "Army Two: " + armyTwo;
     }
-
 
 }

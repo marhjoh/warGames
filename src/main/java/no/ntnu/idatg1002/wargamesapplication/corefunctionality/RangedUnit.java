@@ -1,6 +1,4 @@
-package corefunctionality;
-
-import exceptions.UnitException;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
 /**
  * This class represents a ranged unit
