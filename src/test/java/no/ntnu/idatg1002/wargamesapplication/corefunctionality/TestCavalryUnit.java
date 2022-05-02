@@ -1,6 +1,6 @@
-package corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
-import exceptions.UnitException;
+import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

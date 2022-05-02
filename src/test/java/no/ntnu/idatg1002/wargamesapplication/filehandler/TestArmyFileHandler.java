@@ -1,12 +1,13 @@
-package filehandler;
+package no.ntnu.idatg1002.wargamesapplication.filehandler;
 
-import corefunctionality.*;
-import exceptions.UnitException;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.CommanderUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.InfantryUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.RangedUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
