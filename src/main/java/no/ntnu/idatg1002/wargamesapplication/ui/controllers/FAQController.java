@@ -28,6 +28,7 @@ public class FAQController {
     public void OnGoBackToMainMenuButtonClick(ActionEvent event) throws IOException{
         root = new FXMLLoader(getClass().getClassLoader().getResource("MainMenuView.fxml")).load();
         scene = new Scene(root);
+        WarGamesApplication.primaryStage.setTitle("Main Menu");
         WarGamesApplication.primaryStage.setScene(scene);
     }
 
