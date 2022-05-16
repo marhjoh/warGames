@@ -19,50 +19,45 @@ import java.util.ResourceBundle;
  */
 public class MainMenuController implements Initializable {
 
-  public MenuItem onExitApplication;
-  private Stage stage;
-  private Scene scene;
-  private Parent root;
+    public MenuItem onExitApplication;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
-  /**
-   * Makes the "Load Battle" button open the files.
-   * @param event
-   * @throws IOException
-   */
-  @FXML
-  private void onLoadBattleButtonClick(ActionEvent event) throws IOException {
-      //WarGamesApplication.goToSimulateBattle();
-  }
+    /**
+     * Makes the "Create new battle" button open the simulate battle view.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void onCreateNewBattleButtonClick(ActionEvent event) throws IOException {
+        root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
+        scene = new Scene(root);
+        WarGamesApplication.primaryStage.setTitle("Battle simulation");
+        WarGamesApplication.primaryStage.setScene(scene);
+    }
 
-  /**
-   * Makes the "View Brackets" button open the Bracket view.
-   * @param event
-   * @throws IOException
-   */
-  @FXML
-  private void onCreateNewBattleButtonClick(ActionEvent event) throws IOException {
-      //WarGamesApplication.goToSimulateBattle();
-  }
+    /**
+     * Makes the "Help, FAQ" menuitem open FAQ page
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void onFAQButtonClick(ActionEvent event) throws IOException {
+        root = new FXMLLoader(getClass().getClassLoader().getResource("FAQView.fxml")).load();
+        scene = new Scene(root);
+        WarGamesApplication.primaryStage.setTitle("FAQ - Frequently Asked Questions");
+        WarGamesApplication.primaryStage.setScene(scene);
+    }
 
-  /**
-   * Makes the "Help, FAQ" menuitem open FAQ page
-   * @param event
-   * @throws IOException
-   */
-  @FXML
-  private void onFAQButtonClick(ActionEvent event) throws IOException {
-    root = new FXMLLoader(getClass().getClassLoader().getResource("FAQView.fxml")).load();
-    scene = new Scene(root);
-    WarGamesApplication.primaryStage.setScene(scene);
-  }
-
-
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-  }
-
-  public void onExitApplication(ActionEvent actionEvent) {
-      WarGamesApplication.exitApplicationWindow();
-  }
-
+    /**
+     * initializing the view
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 }
