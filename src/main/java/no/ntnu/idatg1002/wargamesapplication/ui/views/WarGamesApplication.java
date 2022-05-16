@@ -89,6 +89,25 @@ public class WarGamesApplication extends Application {
     }
   }
 
+  @FXML
+  /**
+   * Method to show a confirmation popupmenu.
+   * @param e, The string of the confirmation message.
+   */
+  public static void confirmationPopUpWindow(String e) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("There was a confirmation");
+    alert.setContentText("Confirmation: " + e);
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent()) {
+      if (result.get() == ButtonType.OK) {
+
+      } else {
+      }
+    }
+  }
+
   /**
    * The stop() method is being called by the JavaFX-platform when the platform stops, are being
    * terminated.
