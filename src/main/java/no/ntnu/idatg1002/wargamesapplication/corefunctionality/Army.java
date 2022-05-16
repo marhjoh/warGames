@@ -1,5 +1,8 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,9 +22,10 @@ public class Army {
 
     /**
      * This method creates an army
+     *
      * @param name the name of the army
      */
-    public Army(String name){
+    public Army(String name) {
         this.name = name;
         militia = new ArrayList<>();
         random = new Random();
@@ -30,14 +34,14 @@ public class Army {
     /**
      * This method creates an army
      *
-     * @param name the name of the army
+     * @param name    the name of the army
      * @param militia the list of units
      */
-    public Army(String name, List<Unit> militia){
+    public Army(String name, List<Unit> militia) {
         this.name = name;
-        if(militia == null){
+        if (militia == null) {
             this.militia = new ArrayList<>();
-        }else{
+        } else {
             this.militia = militia;
         }
 
@@ -63,11 +67,20 @@ public class Army {
     }
 
     /**
+     * This method returns the militia list size
+     *
+     * @return the militia list size as an int
+     */
+    public int getUnitListSize() {
+        return militia.size();
+    }
+
+    /**
      * This method adds a unit to the militia
      *
      * @param unit the unit to be added to the militia
      */
-    public void addToArmy(Unit unit){
+    public void addToArmy(Unit unit) {
         this.militia.add(unit);
     }
 
@@ -76,10 +89,11 @@ public class Army {
      *
      * @param unitList the units to be added to the army
      */
-    public void addAllToArmy(List<Unit> unitList){
+    public void addAllToArmy(List<Unit> unitList) {
         //unitList is input arraylist
-        for(Unit unit: unitList){
-            militia.add(unit); }
+        for (Unit unit : unitList) {
+            militia.add(unit);
+        }
     }
 
     /**
@@ -87,7 +101,7 @@ public class Army {
      *
      * @param unit the unit to be removed
      */
-    public void removeUnit(Unit unit){
+    public void removeUnit(Unit unit) {
         militia.remove(unit);
     }
 
@@ -96,7 +110,7 @@ public class Army {
      *
      * @return if the militia has units or not as a boolean
      */
-    public boolean hasUnits(){
+    public boolean hasUnits() {
         return !militia.isEmpty();
     }
 
@@ -105,7 +119,7 @@ public class Army {
      *
      * @return a random unit from the militia (army / unit list)
      */
-    public Unit getRandomUnit(){
+    public Unit getRandomUnit() {
 
         int randomIndex = random.nextInt(militia.size());
         return militia.get(randomIndex);
@@ -118,13 +132,13 @@ public class Army {
      */
     @Override
     public String toString() {
-        return "\nName: " + name + "\n" + "Army: " + militia; }
+        return "\nName: " + name + "\n" + "Army: " + militia;
+    }
 
     /**
      * This method returns if the armies are equal or not
      *
      * @param o superclass object comparable
-     *
      * @return if the militias are equal or not as a boolean
      */
     @Override
@@ -150,7 +164,7 @@ public class Army {
      *
      * @return the infantry units in the army as a list
      */
-    public List<Unit> getInfantryUnits(){
+    public List<Unit> getInfantryUnits() {
         return militia.stream().filter(p -> p instanceof InfantryUnit).collect(Collectors.toList());
     }
 
@@ -159,8 +173,14 @@ public class Army {
      *
      * @return the cavalry units in the army as a list
      */
-    public List<Unit> getCavalryUnits(){
-        return militia.stream().filter(p -> p instanceof CavalryUnit).collect(Collectors.toList());
+    public List<Unit> getCavalryUnits() {
+        ArrayList<Unit> result = new ArrayList<>();
+        for (Unit unit : militia) {
+            if (unit instanceof CavalryUnit && !(unit instanceof CommanderUnit)) {
+                result.add(unit);
+            }
+        }
+        return result;
     }
 
     /**
@@ -168,7 +188,7 @@ public class Army {
      *
      * @return the commander units in the army as a list
      */
-    public List<Unit> getCommanderUnits(){
+    public List<Unit> getCommanderUnits() {
         return militia.stream().filter(p -> p instanceof CommanderUnit).collect(Collectors.toList());
     }
 
@@ -177,7 +197,7 @@ public class Army {
      *
      * @return the ranged units in the army as a list
      */
-    public List<Unit> getRangedUnits(){
+    public List<Unit> getRangedUnits() {
         return militia.stream().filter(p -> p instanceof RangedUnit).collect(Collectors.toList());
     }
 
@@ -188,5 +208,14 @@ public class Army {
      */
     public void setArmyName(String name) {
         this.name = name;
+    }
+
+    public ObservableList<ArmyCount> getArmyCount() {
+        ObservableList<ArmyCount> result = FXCollections.observableArrayList();
+        result.add(new ArmyCount("CavalryUnit", getCavalryUnits().size()));
+        result.add(new ArmyCount("CommanderUnit", getCommanderUnits().size()));
+        result.add(new ArmyCount("InfantryUnit", getInfantryUnits().size()));
+        result.add(new ArmyCount("RangedUnit", getRangedUnits().size()));
+        return result;
     }
 }
