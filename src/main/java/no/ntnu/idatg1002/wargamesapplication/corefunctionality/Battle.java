@@ -37,6 +37,14 @@ public class Battle {
         random = new Random();
     }
 
+    public Army getArmyOne() {
+        return armyOne;
+    }
+
+    public Army getArmyTwo() {
+        return armyTwo;
+    }
+
     public void setTerrain(Character terrain) {
         for (Character obtainTerrain : terrains) {
             if (terrain.equals(obtainTerrain)) {
@@ -56,10 +64,12 @@ public class Battle {
      * @return the winner of the battle as an Army
      */
     public Army simulate() {
-        while (armyOne.hasUnits() && armyTwo.hasUnits()) {
 
+        while (armyOne.hasUnits() && armyTwo.hasUnits()) {
             Unit defenderUnit;
-            if (random.nextInt(2) == 0) {
+            int randint = random.nextInt(2);
+
+            if (randint == 0) {
                 defenderUnit = armyTwo.getRandomUnit();
                 armyOne.getRandomUnit().attack(defenderUnit, terrain);
                 if (!defenderUnit.getIsAlive()) {
@@ -74,13 +84,11 @@ public class Battle {
             }
         }
 
-        if (!armyOne.hasUnits()) {
-            return armyTwo;
-        } else {
+        if (!armyTwo.hasUnits())
             return armyOne;
-        }
+        else
+            return armyTwo;
     }
-
 
     /**
      * This method returns a random army
@@ -105,5 +113,4 @@ public class Battle {
     public String toString() {
         return "Army One: " + armyOne + "Army Two: " + armyTwo;
     }
-
 }
