@@ -1,9 +1,7 @@
 package no.ntnu.idatg1002.wargamesapplication.filehandler;
 
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.UnitFactory;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.*;
 import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Unit;
 
 import java.io.*;
 
@@ -12,16 +10,14 @@ import java.io.*;
  */
 public class ArmyFileHandler {
 
-
     /**
      * Create an Army from a CSV file.
-     *
      * @return Army of units
      */
    public static Army readArmyCsv(String filename) throws IOException {
        Army army = new Army("");
 
-       try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/armyFiles/"+filename+".csv"))) {
+       try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/armyFiles/"+filename))) {
            String lineOfText;
 
            // Reading first line in file
@@ -54,17 +50,15 @@ public class ArmyFileHandler {
      */
     public static void writeArmyCsv(Army army, String fileName) throws IOException {
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/armyFiles/"+fileName+".csv"))){
-            writer.write(army.getName()+"\n");
+       try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/armyFiles/"+fileName+".csv"))){
+           writer.write(army.getName()+"\n");
 
-            for (Unit unit : army.getAllUnits()) {
-                writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n");
-            }
+           for (Unit unit : army.getAllUnits()) {
+               writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n");
+           }
 
-        }catch (IOException e){
-            throw new IOException(e.getMessage());
-        }
-
-
+       }catch (IOException e){
+           throw new IOException(e.getMessage());
+       }
     }
 }
