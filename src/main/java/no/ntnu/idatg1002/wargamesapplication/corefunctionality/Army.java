@@ -67,15 +67,6 @@ public class Army {
     }
 
     /**
-     * This method returns the militia list size
-     *
-     * @return the militia list size as an int
-     */
-    public int getUnitListSize() {
-        return militia.size();
-    }
-
-    /**
      * This method adds a unit to the militia
      *
      * @param unit the unit to be added to the militia
