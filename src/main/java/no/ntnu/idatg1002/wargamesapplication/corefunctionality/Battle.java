@@ -63,13 +63,9 @@ public class Battle {
                 this.terrain = terrain;
                 break;
             }
-            else{
-                throw new IllegalArgumentException("Illegal terrain input");
-            }
         }
-
-        if (terrain == null) {
-            throw new NullPointerException("Illegal terrain input");
+        if(terrain != 'F' && terrain != 'P' && terrain != 'H'){
+            throw new IllegalArgumentException("Illegal terrain input");
         }
     }
 

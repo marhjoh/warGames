@@ -93,7 +93,7 @@ class TestBattle {
     }
 
     @Test
-    @DisplayName("This method test if the setTerrain method throws exceptions if input is invalid")
+    @DisplayName("This method test if the setTerrain method throws exception if input is invalid")
     void testSetTerrain() {
         Assertions.assertThrows(NullPointerException.class, () -> battle.setTerrain(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> battle.setTerrain('C'));
