@@ -21,14 +21,14 @@ class TestUnit {
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() throws UnitException {
+    void setup() throws UnitException {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         infantry2 = new CommanderUnit("Martin", 100, 20, 10);
     }
 
     @Test
     @DisplayName("This method will test the constructor")
-    void TestUnitConstructor() {
+    void testUnitConstructor() {
         assertEquals("Martin", infantry1.getName());
         assertEquals(100, infantry1.getHealth());
         assertEquals(10, infantry1.getAttack());

@@ -22,7 +22,7 @@ class TestCommanderUnit {
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
+    void setup() {
         commanderUnit1 = new CommanderUnit("Martin", 100, 10, 20);
         commanderUnit2 = new CommanderUnit("Martin", 100, 20, 10);
         commanderUnit3 = new CommanderUnit("Martin", 100);
@@ -30,7 +30,7 @@ class TestCommanderUnit {
 
     @Test
     @DisplayName("This method will test the constructor")
-    void TestCommanderUnitConstructor() {
+    void testCommanderUnitConstructor() {
         assertEquals("Martin", commanderUnit1.getName());
         assertEquals(100, commanderUnit1.getHealth());
         assertEquals(10, commanderUnit1.getAttack());
