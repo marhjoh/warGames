@@ -1,5 +1,7 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,16 +33,15 @@ class TestArmy {
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
+    void setup() {
         infantry1 = new InfantryUnit("Martin", 100, 10, 20);
         commander1 = new CommanderUnit("Martin", 100, 20, 10);
         cavalry1 = new CavalryUnit("Martin", 100, 10, 20);
         ranged1 = new RangedUnit("Martin", 100, 10, 20);
         militia = new ArrayList<>();
-        militia1 = new ArrayList<>();
         militia2 = null;
         norway = new Army("Norway", militia);
-        sweden = new Army("Sweden", militia1);
+        sweden = new Army("Sweden");
         finland = new Army("Finland", militia2);
         simpleArmy = new Army("simple");
 
@@ -179,7 +180,6 @@ class TestArmy {
         norway.addToArmy(infantry1);
         norway.addToArmy(cavalry1);
 
-        //TODO: klarer ikke å skille dersom jeg legger den direkte inn i militia, klarer det dersom jeg legger den direkte til i norway.
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
                 "Attack: 10\n" + "Armour: 20]", norway.getCavalryUnits().toString());
     }
@@ -192,5 +192,17 @@ class TestArmy {
 
         assertEquals("[Name: Martin\n" + "Health: 100\n" +
                 "Attack: 10\n" + "Armour: 20]", norway.getRangedUnits().toString());
+    }
+
+    @Test
+    @DisplayName("This method test if the observable list size is as it should be")
+    void testGetArmyCount(){
+        ObservableList<ArmyCount> result = FXCollections.observableArrayList();
+        result.add(new ArmyCount("CavalryUnit", norway.getCavalryUnits().size()));
+        result.add(new ArmyCount("CommanderUnit", norway.getCommanderUnits().size()));
+        result.add(new ArmyCount("InfantryUnit", norway.getInfantryUnits().size()));
+        result.add(new ArmyCount("RangedUnit", norway.getRangedUnits().size()));
+
+        assertEquals(result.size(), norway.getArmyCount().size());
     }
 }
