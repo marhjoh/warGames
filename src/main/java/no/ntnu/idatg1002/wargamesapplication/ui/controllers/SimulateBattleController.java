@@ -250,6 +250,7 @@ public class SimulateBattleController implements Initializable {
       winnerTextArea.setText("The winner is: " + winnerArmy.getName()); }
 
     else {
+      WarGamesApplication.errorPopUpWindow("You have to select a terrain to simulate the battle");
       }
     }
 
@@ -264,6 +265,5 @@ public class SimulateBattleController implements Initializable {
       battleSimulation.setTerrain('H'); }
     else if(rightToggleButton.isSelected()){
       battleSimulation.setTerrain('P'); }
-    else{ WarGamesApplication.errorPopUpWindow("You have to select a terrain to simulate the battle"); }
   }
 }
