@@ -1,5 +1,6 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * This class is a test class of the class battle
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
+ */
 class TestBattle {
 
     private Army dominantArmy;
@@ -19,7 +27,7 @@ class TestBattle {
 
     @BeforeEach
     @DisplayName("This method will create objects for the tests before each test")
-    void Setup() {
+    void setup() {
         //For testing toString
         finland = new Army("Finland");
         island = new Army("Island");
@@ -72,4 +80,28 @@ class TestBattle {
         assertEquals(expected, battle.toString());
     }
 
+    @Test
+    @DisplayName("This method will test the getArmyOne method")
+    void testGetArmyOne() {
+        assertEquals(battle.getArmyOne(), dominantArmy);
+    }
+
+    @Test
+    @DisplayName("This method will test the getArmyTwo method")
+    void testGetArmyTwo() {
+        assertEquals(battle.getArmyTwo(), weakArmy);
+    }
+
+    @Test
+    @DisplayName("This method test if the setTerrain method throws exceptions if input is invalid")
+    void testSetTerrain() {
+        Assertions.assertThrows(NullPointerException.class, () -> battle.setTerrain(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> battle.setTerrain('C'));
+    }
+
+    @Test
+    @DisplayName("This method will test the getTerrain method")
+    void testGetTerrain(){
+        assertEquals('F', battle.getTerrain());
+    }
 }

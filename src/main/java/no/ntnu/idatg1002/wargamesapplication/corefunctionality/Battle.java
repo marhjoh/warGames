@@ -37,24 +37,48 @@ public class Battle {
         random = new Random();
     }
 
+    /**
+     * This method returns army one in the battle as an Army
+     * @return army one as an Army
+     */
     public Army getArmyOne() {
         return armyOne;
     }
 
+    /**
+     * This method returns army two in the battle as an Army
+     * @return army two as an Army
+     */
     public Army getArmyTwo() {
         return armyTwo;
     }
 
+    /**
+     * This method sets a terrain for the battle. If a wrong value is given it will throw an exception
+     * @param terrain the terrain the battle will be fought in
+     */
     public void setTerrain(Character terrain) {
         for (Character obtainTerrain : terrains) {
             if (terrain.equals(obtainTerrain)) {
                 this.terrain = terrain;
                 break;
             }
+            else{
+                throw new IllegalArgumentException("Illegal terrain input");
+            }
         }
+
         if (terrain == null) {
-            throw new IllegalArgumentException("Illegal terrain input");
+            throw new NullPointerException("Illegal terrain input");
         }
+    }
+
+    /**
+     * This method returns the battle terrain as a character
+     * @return the terrain as a character
+     */
+    public Character getTerrain(){
+        return terrain;
     }
 
     /**
