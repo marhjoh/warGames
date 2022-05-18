@@ -243,10 +243,15 @@ public class SimulateBattleController implements Initializable {
    * Makes the text area display the winner of the battle simulation
    */
   private void onSimulateBattleButtonClick(ActionEvent event) throws IOException {
-    checkTerrain();
-    Army winnerArmy = battleSimulation.simulate();
-    winnerTextArea.setText("The winner is: " + winnerArmy.getName());
-  }
+    if(leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
+    {
+      checkTerrain();
+      Army winnerArmy = battleSimulation.simulate();
+      winnerTextArea.setText("The winner is: " + winnerArmy.getName()); }
+
+    else {
+      }
+    }
 
   @FXML
   /**
