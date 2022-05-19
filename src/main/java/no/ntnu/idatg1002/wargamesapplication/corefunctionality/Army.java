@@ -10,7 +10,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * This class represents a militia (an army)
+ * This class represents an army of units
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -201,12 +202,30 @@ public class Army {
         this.name = name;
     }
 
+    /**
+     * This method sets up a summary list for the army
+     *
+     * @return a list of the different unit classes as an ObservableList of ArmyCount
+     */
     public ObservableList<ArmyCount> getArmyCount() {
         ObservableList<ArmyCount> result = FXCollections.observableArrayList();
         result.add(new ArmyCount("CavalryUnit", getCavalryUnits().size()));
         result.add(new ArmyCount("CommanderUnit", getCommanderUnits().size()));
         result.add(new ArmyCount("InfantryUnit", getInfantryUnits().size()));
         result.add(new ArmyCount("RangedUnit", getRangedUnits().size()));
+        return result;
+    }
+
+    /**
+     * This method sets up a list of all the units in the army
+     *
+     * @return a list of all the different units as an observableList of Unit.
+     */
+    public ObservableList<Unit> getFullArmy() {
+        ObservableList<Unit> result = FXCollections.observableArrayList();
+        for(Unit unit : militia){
+            result.add(UnitFactory.createUnit(unit.getClassName(), unit.getName(), unit.getHealth()));
+        }
         return result;
     }
 }
