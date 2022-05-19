@@ -4,6 +4,7 @@ import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
 
 /**
  * This class represents a unit
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -17,6 +18,7 @@ public abstract class Unit {
     private int hitsDealt;
     private int hitsTaken;
     private boolean isAlive;
+    private String className;
 
     /**
      * This method creates a unit
@@ -34,6 +36,7 @@ public abstract class Unit {
         this.attack = attack;
         this.armour = armour;
         this.isAlive = true;
+        this.className = getClass().getSimpleName();
     }
 
     /**
@@ -114,6 +117,15 @@ public abstract class Unit {
         return isAlive;}
 
     /**
+     * This method the simple name of the unit class
+     *
+     * @return the simple name of the unit class as a String
+     */
+    public String getClassName(){
+        return className;
+    }
+
+    /**
      * This method sets the unit's health
      *
      * @param health the unit's health
@@ -141,7 +153,6 @@ public abstract class Unit {
             throw new IllegalArgumentException("Illegal value set in setIsAlive");
         }
     }
-
 
     /**
      * This method returns a string consisting of all the fields in the unit class
@@ -172,7 +183,4 @@ public abstract class Unit {
      * @param terrain the location of the unit
      */
     abstract int getResistBonus(char terrain);
-
-
-
 }

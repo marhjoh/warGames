@@ -123,8 +123,8 @@ public class SimulateBattleController implements Initializable {
     armyTwoTableView.setItems(armyTwoObservableList);
 
     // setting up the observable lists for the detailed table view
-    armyOneObservableList1 = FXCollections.observableList(battleSimulation.getArmyOne().getAllUnits());
-    armyTwoObservableList2 = FXCollections.observableList(battleSimulation.getArmyTwo().getAllUnits());
+    armyOneObservableList1 = FXCollections.observableList(battleSimulation.getArmyOne().getFullArmy());
+    armyTwoObservableList2 = FXCollections.observableList(battleSimulation.getArmyTwo().getFullArmy());
     armyOneDetailedTableView.setItems(armyOneObservableList1);
     armyTwoDetailedTableView.setItems(armyTwoObservableList2);
 
@@ -139,7 +139,7 @@ public class SimulateBattleController implements Initializable {
     armyOneUnitType.setCellValueFactory(new PropertyValueFactory<>("unitName"));
 
     //setting up detailed table view for armyOne
-    armyOneUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("class"));
+    armyOneUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
     armyOneUnitNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     armyOneUnitHealthTableColumn.setCellValueFactory(new PropertyValueFactory<>("health"));
 
@@ -148,7 +148,7 @@ public class SimulateBattleController implements Initializable {
     armyTwoUnitType.setCellValueFactory(new PropertyValueFactory<>("unitName"));
 
     //setting up detailed table view for armyTwo
-    armyTwoUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("class"));
+    armyTwoUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
     armyTwoUnitNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     armyTwoUnitHealthTableColumn.setCellValueFactory(new PropertyValueFactory<>("health"));
   }
@@ -195,7 +195,7 @@ public class SimulateBattleController implements Initializable {
     else {
       armyOne = ArmyFileHandler.readArmyCsv(selectedFile.getName());
       armyOneTableView.setItems(armyOne.getArmyCount());
-      armyOneDetailedTableView.setItems(armyOneObservableList1);
+      armyOneDetailedTableView.setItems(armyOne.getFullArmy());
     }
   }
 
@@ -215,7 +215,7 @@ public class SimulateBattleController implements Initializable {
     else {
       armyTwo = ArmyFileHandler.readArmyCsv(selectedFile.getName());
       armyTwoTableView.setItems(armyTwo.getArmyCount());
-      armyTwoDetailedTableView.setItems(armyTwoObservableList2);
+      armyTwoDetailedTableView.setItems(armyTwo.getFullArmy());
     }
   }
 
@@ -247,7 +247,8 @@ public class SimulateBattleController implements Initializable {
     {
       checkTerrain();
       Army winnerArmy = battleSimulation.simulate();
-      winnerTextArea.setText("The winner is: " + winnerArmy.getName()); }
+      winnerTextArea.setText("The winner is: " + winnerArmy.getName());
+    }
 
     else {
       WarGamesApplication.errorPopUpWindow("You have to select a terrain to simulate the battle");
@@ -266,4 +267,17 @@ public class SimulateBattleController implements Initializable {
     else if(rightToggleButton.isSelected()){
       battleSimulation.setTerrain('P'); }
   }
+
+  @FXML
+  private void resetBattle() throws IOException {
+    root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
+    scene = new Scene(root);
+    WarGamesApplication.primaryStage.setTitle("Battle simulation");
+    WarGamesApplication.primaryStage.setScene(scene);
+    }
+
+    @FXML
+    private void onResetBattleButtonClick(ActionEvent event) throws IOException {
+    resetBattle();
+    }
 }
