@@ -195,7 +195,7 @@ class TestArmy {
     }
 
     @Test
-    @DisplayName("This method test if the observable list size is as it should be")
+    @DisplayName("This method will test if the observable list size and format is as it should be")
     void testGetArmyCount(){
         ObservableList<ArmyCount> result = FXCollections.observableArrayList();
         result.add(new ArmyCount("CavalryUnit", norway.getCavalryUnits().size()));
@@ -203,6 +203,18 @@ class TestArmy {
         result.add(new ArmyCount("InfantryUnit", norway.getInfantryUnits().size()));
         result.add(new ArmyCount("RangedUnit", norway.getRangedUnits().size()));
 
-        assertEquals(result.size(), norway.getArmyCount().size());
+        assertEquals(norway.getArmyCount().size(), result.size());
+    }
+
+    @Test
+    @DisplayName("This method will test if the observable list size and format is as it should be")
+    void testGetFullArmy() {
+        norway.addToArmy(infantry1);
+        norway.addToArmy(cavalry1);
+
+        assertEquals(norway.getAllUnits().size(), norway.getFullArmy().size());
+        assertEquals("[Name: Martin\n" + "Health: 100\n" + "Attack: 15\n" +
+                "Armour: 10, Name: Martin\n" + "Health: 100\n" + "Attack: 20\n" +
+                "Armour: 12]", norway.getFullArmy().toString());
     }
 }

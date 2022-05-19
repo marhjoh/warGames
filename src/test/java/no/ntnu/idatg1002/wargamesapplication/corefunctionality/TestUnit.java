@@ -98,4 +98,10 @@ class TestUnit {
         assertEquals(2, infantry1.getAttackBonus('P'));
         assertEquals(6, infantry2.getAttackBonus('P'));
     }
+
+    @Test
+    @DisplayName("This method will test the getClassName method")
+    void testGetClassName(){
+        assertEquals("InfantryUnit", infantry1.getClassName());
+    }
 }
