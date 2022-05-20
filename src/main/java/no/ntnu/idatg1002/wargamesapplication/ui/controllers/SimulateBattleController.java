@@ -219,65 +219,89 @@ public class SimulateBattleController implements Initializable {
     }
   }
 
-  @FXML
   /**
    * Saves two csv files of the armies, one of each army in the battle.
    */
+  @FXML
   private void onSaveArmiesButtonClick(ActionEvent event) throws IOException {
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "ArmyOne");
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyTwo(), "ArmyTwo");
     WarGamesApplication.confirmationPopUpWindow("The two armies has now been saved");
   }
 
-  @FXML
   /**
    * Saves a csv file of the battle
    */
+  @FXML
   private void onSaveBattleButtonClick(ActionEvent event) throws IOException {
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "Battle");
     WarGamesApplication.confirmationPopUpWindow("The battle has now been saved");
   }
 
-  @FXML
+
   /**
    * Makes the text area display the winner of the battle simulation
    */
+  @FXML
   private void onSimulateBattleButtonClick(ActionEvent event) throws IOException {
-    if(leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
-    {
+    if((leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
+    && (!armyOne.getFullArmy().isEmpty() && !armyTwo.getFullArmy().isEmpty())) {
       checkTerrain();
       Army winnerArmy = battleSimulation.simulate();
       winnerTextArea.setText("The winner is: " + winnerArmy.getName());
     }
-
     else {
-      WarGamesApplication.errorPopUpWindow("You have to select a terrain to simulate the battle");
-      }
+      checkIfArmiesAreEmpty();
+    }
     }
 
+  /**
+   * This method checks whether the armies are empty or not.
+   */
   @FXML
+    void checkIfArmiesAreEmpty(){
+    if((armyOne.getFullArmy().isEmpty() || armyTwo.getFullArmy().isEmpty()) &&
+    (leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())) {
+      if (armyOne.getFullArmy().isEmpty() && armyTwo.getFullArmy().isEmpty()) {
+        WarGamesApplication.errorPopUpWindow("Both of the armies are empty");
+      } else {
+        WarGamesApplication.errorPopUpWindow("One of the armies are empty");
+      }
+    }
+    else{
+      WarGamesApplication.errorPopUpWindow("Select a terrain, and armies that are not empty"); }
+  }
+
   /**
    * This method checks which terrain is selected.
    */
+  @FXML
   private void checkTerrain(){
     if(leftToggleButton.isSelected()){
-      battleSimulation.setTerrain('F'); }
+      battleSimulation.setTerrain('F'); } //Terrain: Forest
     else if(centerToggleButton.isSelected()){
-      battleSimulation.setTerrain('H'); }
+      battleSimulation.setTerrain('H'); } //Terrain: Hills
     else if(rightToggleButton.isSelected()){
-      battleSimulation.setTerrain('P'); }
+      battleSimulation.setTerrain('P'); } //Terrain: Plains
   }
 
+  /**
+   * This method resets the battle from scratch
+   * @throws IOException
+   */
   @FXML
   private void resetBattle() throws IOException {
     root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
     scene = new Scene(root);
     WarGamesApplication.primaryStage.setTitle("Battle simulation");
     WarGamesApplication.primaryStage.setScene(scene);
-    }
+  }
 
-    @FXML
-    private void onResetBattleButtonClick(ActionEvent event) throws IOException {
+  /**
+   * This method makes the "reset battle" menuItem reset the battle from scratch
+   */
+  @FXML
+  private void onResetBattleButtonClick(ActionEvent event) throws IOException {
     resetBattle();
-    }
+  }
 }

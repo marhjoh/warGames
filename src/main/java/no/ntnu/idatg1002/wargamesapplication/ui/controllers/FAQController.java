@@ -31,6 +31,4 @@ public class FAQController {
         WarGamesApplication.primaryStage.setTitle("Main Menu");
         WarGamesApplication.primaryStage.setScene(scene);
     }
-
-
 }
