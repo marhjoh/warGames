@@ -1,9 +1,9 @@
 package no.ntnu.idatg1002.wargamesapplication.filehandler;
 
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.CommanderUnit;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.InfantryUnit;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.RangedUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.CommanderUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.InfantryUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.RangedUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class TestArmyFileHandler {
     @Test
     @DisplayName("This method will test to write an ArmyCsv and to read the ArmyCsv afterwards")
     void testWriteAndReadArmyCsv() {
-        Army army = new Army("Martii");
+        Army army = new Army("Norway");
         army.addToArmy(new InfantryUnit("infantry",100));
         army.addToArmy(new RangedUnit("Ranged",100));
         army.addToArmy(new CommanderUnit("Commander",100));
@@ -33,10 +33,10 @@ class TestArmyFileHandler {
         }
         String armyCsv = "";
         try{
-            armyCsv = ArmyFileHandler.readArmyCsv(army.getName()).toString();
-        } catch(IOException e){
+            armyCsv = ArmyFileHandler.readArmyCsv(army.getName() + ".csv").getName();
+        } catch(Exception e){
             fail();
         }
-        assertEquals(army.toString(), armyCsv);
+        assertEquals(army.getName(), armyCsv);
     }
 }

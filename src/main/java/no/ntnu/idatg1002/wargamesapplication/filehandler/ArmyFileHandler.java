@@ -1,14 +1,26 @@
 package no.ntnu.idatg1002.wargamesapplication.filehandler;
 
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.*;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.Unit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.UnitFactory;
 import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 
 /**
- * Class with static methods for handling ArrayLists of Person.
+ * Class with static methods for handling csv files of Army.
  */
 public class ArmyFileHandler {
+
+    /**
+     * This method creates an armyFileHandler
+     */
+    private ArmyFileHandler(){
+    }
 
     /**
      * Create an Army from a CSV file.
@@ -22,7 +34,7 @@ public class ArmyFileHandler {
 
            // Reading first line in file
            lineOfText = reader.readLine();
-           if(lineOfText.split(",").length != 1){
+           if(lineOfText.split(",").length != 1){   // If the length is more than 1 the format is wrong.
                throw new IOException("File format error. There should only be one value");
            }
            army.setArmyName(lineOfText);
@@ -31,7 +43,7 @@ public class ArmyFileHandler {
            while ((lineOfText = reader.readLine()) != null) {
 
                String[] units = lineOfText.split(",");
-               if(units.length != 3){
+               if(units.length != 3){                      // If the length is more than 3 the format is wrong.
                    throw new IOException("Format error. There should be exactly 3 values");
                }
                army.addToArmy(UnitFactory.createUnit(units[0].strip(), units[1].strip(), Integer.parseInt(units[2].strip())));
