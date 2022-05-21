@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import no.ntnu.idatg1002.wargamesapplication.ui.views.WarGamesApplication;
 
@@ -19,8 +18,6 @@ import java.util.ResourceBundle;
  */
 public class MainMenuController implements Initializable {
 
-    public MenuItem onExitApplication;
-    private Stage stage;
     private Scene scene;
     private Parent root;
 
@@ -31,7 +28,7 @@ public class MainMenuController implements Initializable {
      * @throws IOException
      */
     @FXML
-    private void onCreateNewBattleButtonClick(ActionEvent event) throws IOException {
+    private void onCreateBattleButtonClick(ActionEvent event) throws IOException {
         root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
         scene = new Scene(root);
         WarGamesApplication.primaryStage.setTitle("Battle simulation");
@@ -49,6 +46,17 @@ public class MainMenuController implements Initializable {
         root = new FXMLLoader(getClass().getClassLoader().getResource("FAQView.fxml")).load();
         scene = new Scene(root);
         WarGamesApplication.primaryStage.setTitle("FAQ - Frequently Asked Questions");
+        WarGamesApplication.primaryStage.setScene(scene);
+    }
+
+    /**
+     * This method makes the "Create Army" menuItem move to the Create Army Page
+     */
+    @FXML
+    private void onCreateArmyButtonClick(ActionEvent event) throws IOException {
+        root = new FXMLLoader(getClass().getClassLoader().getResource("CreateArmyView.fxml")).load();
+        scene = new Scene(root);
+        WarGamesApplication.primaryStage.setTitle("Create Army");
         WarGamesApplication.primaryStage.setScene(scene);
     }
 
