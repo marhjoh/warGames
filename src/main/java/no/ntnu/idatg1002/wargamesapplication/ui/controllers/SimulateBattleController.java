@@ -8,21 +8,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Battle;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Unit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.Unit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.UnitFactory;
 import no.ntnu.idatg1002.wargamesapplication.filehandler.ArmyFileHandler;
 import no.ntnu.idatg1002.wargamesapplication.ui.views.WarGamesApplication;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 
 /**
@@ -34,83 +40,41 @@ public class SimulateBattleController implements Initializable {
    * Initializing the text fields and elements in the two tables.
    */
 
-  private Stage stage;
   private Scene scene;
   private Parent root;
-
-  @FXML
-  ToggleButton leftToggleButton;
-
-  @FXML
-  ToggleButton centerToggleButton;
-
-  @FXML
-  ToggleButton rightToggleButton;
-
-  @FXML
-  TableView<Unit> armyOneDetailedTableView;
-
-  @FXML
-  TableView<Unit> armyTwoDetailedTableView;
-
-  @FXML
-  TableColumn<Unit, String> armyOneUnitTypeTableColumn;
-
-  @FXML
-  TableColumn<Unit, String> armyOneUnitNameTableColumn;
-
-  @FXML
-  TableColumn<Unit, Integer> armyOneUnitHealthTableColumn;
-
-  @FXML
-  TableColumn<Unit, String> armyTwoUnitTypeTableColumn;
-
-  @FXML
-  TableColumn<Unit, String> armyTwoUnitNameTableColumn;
-
-  @FXML
-  TableColumn<Unit, Integer> armyTwoUnitHealthTableColumn;
-
-  @FXML
-  TextArea winnerTextArea;
-
-  @FXML
-  Text infantryUnitsArmyOne;
-
-  @FXML
-  Text rangedUnitsArmyOne;
-
-  @FXML
-  Text commanderUnitsArmyOne;
-
-  @FXML
-  Text cavalryUnitsArmyOne;
-
-  @FXML
-  Text totalUnitsArmyOne;
-
-  @FXML
-  Text infantryUnitsArmyTwo;
-
-  @FXML
-  Text rangedUnitsArmyTwo;
-
-  @FXML
-  Text commanderUnitsArmyTwo;
-
-  @FXML
-  Text cavalryUnitsArmyTwo;
-
-  @FXML
-  Text totalUnitsArmyTwo;
-
   private Battle battleSimulation;
   private Army armyOne;
   private Army armyTwo;
+  private Army duplicateArmyOne;
+  private Army duplicateArmyTwo;
+  private ObservableList<Unit> armyOneObservableList;
+  private ObservableList<Unit> armyTwoObservableList;
 
-  ObservableList<Unit> armyOneObservableList1;
-  ObservableList<Unit> armyTwoObservableList2;
-
+  @FXML
+  ToggleButton leftToggleButton;
+  @FXML ToggleButton centerToggleButton;
+  @FXML ToggleButton rightToggleButton;
+  @FXML TableView<Unit> armyOneDetailedTableView;
+  @FXML TableView<Unit> armyTwoDetailedTableView;
+  @FXML TableColumn<Unit, String> armyOneUnitTypeTableColumn;
+  @FXML TableColumn<Unit, String> armyOneUnitNameTableColumn;
+  @FXML TableColumn<Unit, Integer> armyOneUnitHealthTableColumn;
+  @FXML TableColumn<Unit, String> armyTwoUnitTypeTableColumn;
+  @FXML TableColumn<Unit, String> armyTwoUnitNameTableColumn;
+  @FXML TableColumn<Unit, Integer> armyTwoUnitHealthTableColumn;
+  @FXML TextArea winnerTextArea;
+  @FXML Text infantryUnitsArmyOne;
+  @FXML Text rangedUnitsArmyOne;
+  @FXML Text commanderUnitsArmyOne;
+  @FXML Text cavalryUnitsArmyOne;
+  @FXML Text totalUnitsArmyOne;
+  @FXML Text infantryUnitsArmyTwo;
+  @FXML Text rangedUnitsArmyTwo;
+  @FXML Text commanderUnitsArmyTwo;
+  @FXML Text cavalryUnitsArmyTwo;
+  @FXML Text totalUnitsArmyTwo;
+  @FXML Text armyOneName;
+  @FXML Text armyTwoName;
 
   /**
    * Initializing the view
@@ -126,10 +90,10 @@ public class SimulateBattleController implements Initializable {
     battleSimulation = new Battle(armyOne, armyTwo, 'P');
 
     // setting up the observable lists for the detailed table view
-    armyOneObservableList1 = FXCollections.observableList(battleSimulation.getArmyOne().getFullArmy());
-    armyTwoObservableList2 = FXCollections.observableList(battleSimulation.getArmyTwo().getFullArmy());
-    armyOneDetailedTableView.setItems(armyOneObservableList1);
-    armyTwoDetailedTableView.setItems(armyTwoObservableList2);
+    armyOneObservableList = FXCollections.observableList(battleSimulation.getArmyOne().getAllUnits());
+    armyTwoObservableList = FXCollections.observableList(battleSimulation.getArmyTwo().getAllUnits());
+    armyOneDetailedTableView.setItems(armyOneObservableList);
+    armyTwoDetailedTableView.setItems(armyTwoObservableList);
 
     //creating toggleGroup
     ToggleGroup toggleGroup = new ToggleGroup();
@@ -188,9 +152,13 @@ public class SimulateBattleController implements Initializable {
     if(selectedFile == null){
     }
     else {
-      armyOne = ArmyFileHandler.readArmyCsv(selectedFile.getName());
-      armyOneDetailedTableView.setItems(armyOne.getFullArmy());
+      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile.getName());
+      armyOne.setUnits(readFromFileArmy.getAllUnits());
+      armyOne.setArmyName(readFromFileArmy.getName());
+      refreshTableView();
+      armyOneDetailedTableView.setItems(armyOneObservableList);
       displayUnitCount();
+      duplicateArmies();
     }
   }
 
@@ -208,9 +176,13 @@ public class SimulateBattleController implements Initializable {
     if(selectedFile == null){
     }
     else {
-      armyTwo = ArmyFileHandler.readArmyCsv(selectedFile.getName());
-      armyTwoDetailedTableView.setItems(armyTwo.getFullArmy());
+      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile.getName());
+      armyTwo.setUnits(readFromFileArmy.getAllUnits());
+      armyTwo.setArmyName(readFromFileArmy.getName());
+      armyTwoDetailedTableView.setItems(armyTwoObservableList);
+      refreshTableView();
       displayUnitCount();
+      duplicateArmies();
     }
   }
 
@@ -219,6 +191,9 @@ public class SimulateBattleController implements Initializable {
    */
   @FXML
   private void onSaveArmiesButtonClick(ActionEvent event) throws IOException {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Choose file");
+    fileChooser.setInitialFileName(armyOne.getName());
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "ArmyOne");
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyTwo(), "ArmyTwo");
     WarGamesApplication.confirmationPopUpWindow("The two armies has now been saved");
@@ -233,14 +208,13 @@ public class SimulateBattleController implements Initializable {
     WarGamesApplication.confirmationPopUpWindow("The battle has now been saved");
   }
 
-
   /**
    * Makes the text area display the winner of the battle simulation
    */
   @FXML
   private void onSimulateBattleButtonClick(ActionEvent event) throws IOException {
     if((leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
-    && (!armyOne.getFullArmy().isEmpty() && !armyTwo.getFullArmy().isEmpty())) {
+    && (!armyOne.getAllUnits().isEmpty() && !armyTwo.getAllUnits().isEmpty())) {
       checkTerrain();
       Army winnerArmy = battleSimulation.simulate();
       winnerTextArea.setText("The winner is: " + winnerArmy.getName());
@@ -248,16 +222,48 @@ public class SimulateBattleController implements Initializable {
     else {
       checkIfArmiesAreEmpty();
     }
-    }
+  }
+
+  /**
+   * This method makes the "Create Army" menuItem move to the Create Army Page
+   */
+  @FXML
+  private void onCreateArmyButtonClick(ActionEvent event) throws IOException {
+    root = new FXMLLoader(getClass().getClassLoader().getResource("CreateArmyView.fxml")).load();
+    scene = new Scene(root);
+    WarGamesApplication.primaryStage.setTitle("Create Army");
+    WarGamesApplication.primaryStage.setScene(scene);
+  }
+
+  /**
+   * This method makes the "reset battle" menuItem reset the battle from scratch
+   */
+  @FXML
+  private void onResetBattleFullyClick(ActionEvent event) throws IOException {
+    resetBattleFully();
+  }
+
+  /**
+   * This method makes the "reset battle" menuItem reset the battle with the same armies,
+   * without loading the army once more.
+   * @param event
+   * @throws IOException
+   */
+  @FXML
+  private void onResetBattleClick(ActionEvent event) throws IOException{
+    refreshArmies();
+    refreshTableView();
+    winnerTextArea.setText("");
+  }
 
   /**
    * This method checks whether the armies are empty or not.
    */
   @FXML
-    void checkIfArmiesAreEmpty(){
-    if((armyOne.getFullArmy().isEmpty() || armyTwo.getFullArmy().isEmpty()) &&
-    (leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())) {
-      if (armyOne.getFullArmy().isEmpty() && armyTwo.getFullArmy().isEmpty()) {
+  void checkIfArmiesAreEmpty(){
+    if((armyOne.getAllUnits().isEmpty() || armyTwo.getAllUnits().isEmpty()) &&
+            (leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())) {
+      if (armyOne.getAllUnits().isEmpty() && armyTwo.getAllUnits().isEmpty()) {
         WarGamesApplication.errorPopUpWindow("Both of the armies are empty");
       } else {
         WarGamesApplication.errorPopUpWindow("One of the armies are empty");
@@ -285,7 +291,7 @@ public class SimulateBattleController implements Initializable {
    * @throws IOException
    */
   @FXML
-  private void resetBattle() throws IOException {
+  private void resetBattleFully() throws IOException {
     root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
     scene = new Scene(root);
     WarGamesApplication.primaryStage.setTitle("Battle simulation");
@@ -293,11 +299,30 @@ public class SimulateBattleController implements Initializable {
   }
 
   /**
-   * This method makes the "reset battle" menuItem reset the battle from scratch
+   * This method refresh the armies unit lists
    */
   @FXML
-  private void onResetBattleButtonClick(ActionEvent event) throws IOException {
-    resetBattle();
+  private void refreshArmies(){
+    armyOne.setUnits(duplicateArmyOne.getAllUnits());
+    armyTwo.setUnits(duplicateArmyTwo.getAllUnits());
+    duplicateArmies();
+  }
+
+  /**
+   * This method duplicates the armies
+   */
+  @FXML
+  private void duplicateArmies() {
+    duplicateArmyOne = new Army(armyOne.getName());
+    duplicateArmyTwo = new Army(armyTwo.getName());
+
+    for (Unit unit : armyOne.getAllUnits()) {
+      duplicateArmyOne.addToArmy(UnitFactory.createUnit(unit.getClassName(), unit.getName(), unit.getHealth()));
+    }
+
+    for (Unit unit : armyTwo.getAllUnits()) {
+      duplicateArmyTwo.addToArmy(UnitFactory.createUnit(unit.getClassName(), unit.getName(), unit.getHealth()));
+    }
   }
 
   /**
@@ -310,17 +335,26 @@ public class SimulateBattleController implements Initializable {
     rangedUnitsArmyOne.setText(String.valueOf(armyOne.getRangedUnits().size()));
     commanderUnitsArmyOne.setText(String.valueOf(armyOne.getCommanderUnits().size()));
     cavalryUnitsArmyOne.setText(String.valueOf(armyOne.getCavalryUnits().size()));
-
+    armyOneName.setText(armyOne.getName());
     //armyTwo
     infantryUnitsArmyTwo.setText(String.valueOf(armyTwo.getInfantryUnits().size()));
     rangedUnitsArmyTwo.setText(String.valueOf(armyTwo.getRangedUnits().size()));
     commanderUnitsArmyTwo.setText(String.valueOf(armyTwo.getCommanderUnits().size()));
     cavalryUnitsArmyTwo.setText(String.valueOf(armyTwo.getCavalryUnits().size()));
-
+    armyTwoName.setText(armyTwo.getName());
     //totals
     totalUnitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
     totalUnitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
   }
 
-
+  /**
+   * This method refreshes the table views
+   */
+  @FXML
+  private void refreshTableView(){
+    armyOneObservableList = FXCollections.observableList(battleSimulation.getArmyOne().getAllUnits());
+    armyTwoObservableList = FXCollections.observableList(battleSimulation.getArmyTwo().getAllUnits());
+    armyOneDetailedTableView.setItems(armyOneObservableList);
+    armyTwoDetailedTableView.setItems(armyTwoObservableList);
+  }
 }

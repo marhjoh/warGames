@@ -35,8 +35,13 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#onMainMenuButtonClick" text="Main Menu" />
                   <MenuItem mnemonicParsing="false" onAction="#onCreateArmyButtonClick" text="Create Army" />
-                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleButtonClick" text="Reset Battle" />
                </items></Menu>
+            <Menu mnemonicParsing="false" text="Reset Simulation">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleFullyClick" text="From Scratch" />
+                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleClick" text="With Same Armies" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#onFAQButtonClick" text="FAQ" />
