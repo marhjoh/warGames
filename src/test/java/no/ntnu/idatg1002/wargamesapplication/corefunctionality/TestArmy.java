@@ -1,7 +1,5 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -200,9 +198,9 @@ class TestArmy {
         norway.addToArmy(infantry1);
         norway.addToArmy(cavalry1);
 
-        assertEquals(norway.getAllUnits().size(), norway.getFullArmy().size());
+        assertEquals(norway.getAllUnits().size(), norway.getAllUnits().size());
         assertEquals("[Name: Martin\n" + "Health: 100\n" + "Attack: 15\n" +
                 "Armour: 10, Name: Martin\n" + "Health: 100\n" + "Attack: 20\n" +
-                "Armour: 12]", norway.getFullArmy().toString());
+                "Armour: 12]", norway.getAllUnits().toString());
     }
 }

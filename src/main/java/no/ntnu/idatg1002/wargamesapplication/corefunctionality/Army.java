@@ -1,8 +1,5 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,7 +42,6 @@ public class Army {
         } else {
             this.militia = militia;
         }
-
         random = new Random();
     }
 
@@ -82,7 +78,6 @@ public class Army {
      * @param unitList the units to be added to the army
      */
     public void addAllToArmy(List<Unit> unitList) {
-        //unitList is input arraylist
         for (Unit unit : unitList) {
             militia.add(unit);
         }
@@ -118,37 +113,23 @@ public class Army {
     }
 
     /**
-     * This method converts the class details to a string
+     * This method sets the army name
      *
-     * @return the details in a string
+     * @param name army name to be set
      */
-    @Override
-    public String toString() {
-        return "\nName: " + name + "\n" + "Army: " + militia;
+    public void setArmyName(String name) {
+        this.name = name;
     }
 
     /**
-     * This method returns if the armies are equal or not
+     * This method will set the unit list
      *
-     * @param o superclass object comparable
-     * @return if the militias are equal or not as a boolean
+     * @param units the unit list to be set
      */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Army militia1 = (Army) o;
-        return Objects.equals(name, militia1.name) && Objects.equals(militia, militia1.militia);
-    }
-
-    /**
-     * This method returns the army's hash code
-     *
-     * @return the militia's hash code as an int
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, militia);
+    public void setUnits(List<Unit> units) {
+        if (units != null) {
+            this.militia = units;
+        }
     }
 
     /**
@@ -194,24 +175,36 @@ public class Army {
     }
 
     /**
-     * This method sets the army name
+     * This method converts the class details to a string
      *
-     * @param name army name to be set
+     * @return the details in a string
      */
-    public void setArmyName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return "\nName: " + name + "\n" + "Army: " + militia;
     }
 
     /**
-     * This method sets up a list of all the units in the army
+     * This method returns if the armies are equal or not
      *
-     * @return a list of all the different units as an observableList of Unit.
+     * @param o superclass object comparable
+     * @return if the militias are equal or not as a boolean
      */
-    public ObservableList<Unit> getFullArmy() {
-        ObservableList<Unit> result = FXCollections.observableArrayList();
-        for(Unit unit : militia){
-            result.add(UnitFactory.createUnit(unit.getClassName(), unit.getName(), unit.getHealth()));
-        }
-        return result;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Army militia1 = (Army) o;
+        return Objects.equals(name, militia1.name) && Objects.equals(militia, militia1.militia);
+    }
+
+    /**
+     * This method returns the army's hash code
+     *
+     * @return the militia's hash code as an int
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, militia);
     }
 }
