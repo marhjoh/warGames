@@ -1,5 +1,7 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -138,7 +140,7 @@ public class Army {
      * @return the infantry units in the army as a list
      */
     public List<Unit> getInfantryUnits() {
-        return militia.stream().filter(p -> p instanceof InfantryUnit).collect(Collectors.toList());
+        return militia.stream().filter(p -> p instanceof InfantryUnit).toList();
     }
 
     /**
@@ -162,7 +164,7 @@ public class Army {
      * @return the commander units in the army as a list
      */
     public List<Unit> getCommanderUnits() {
-        return militia.stream().filter(p -> p instanceof CommanderUnit).collect(Collectors.toList());
+        return militia.stream().filter(p -> p instanceof CommanderUnit).toList();
     }
 
     /**
@@ -171,7 +173,7 @@ public class Army {
      * @return the ranged units in the army as a list
      */
     public List<Unit> getRangedUnits() {
-        return militia.stream().filter(p -> p instanceof RangedUnit).collect(Collectors.toList());
+        return militia.stream().filter(p -> p instanceof RangedUnit).toList();
     }
 
     /**
