@@ -42,6 +42,7 @@ public class SimulateBattleController implements Initializable {
 
   private Scene scene;
   private Parent root;
+  private FileChooser fileChooser;
   private Battle battleSimulation;
   private Army armyOne;
   private Army armyTwo;
@@ -145,7 +146,7 @@ public class SimulateBattleController implements Initializable {
    */
   @FXML
   private void onLoadArmyOneButtonClick(ActionEvent event) throws IOException {
-    FileChooser fileChooser = new FileChooser();
+    fileChooser = new FileChooser();
     fileChooser.setTitle("Choose file");
     fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
     File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -169,7 +170,7 @@ public class SimulateBattleController implements Initializable {
    */
   @FXML
   private void onLoadArmyTwoButtonClick(ActionEvent event) throws IOException {
-    FileChooser fileChooser = new FileChooser();
+    fileChooser = new FileChooser();
     fileChooser.setTitle("Choose file");
     fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
     File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -191,7 +192,7 @@ public class SimulateBattleController implements Initializable {
    */
   @FXML
   private void onSaveArmiesButtonClick(ActionEvent event) throws IOException {
-    FileChooser fileChooser = new FileChooser();
+    fileChooser = new FileChooser();
     fileChooser.setTitle("Choose file");
     fileChooser.setInitialFileName(armyOne.getName());
     ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "ArmyOne");
@@ -216,7 +217,9 @@ public class SimulateBattleController implements Initializable {
     if((leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
     && (!armyOne.getAllUnits().isEmpty() && !armyTwo.getAllUnits().isEmpty())) {
       checkTerrain();
-      Army winnerArmy = battleSimulation.simulate();
+      Army winnerArmy = battleSimulation.simulate();  //Simulating a battle, returning the winner army
+      refreshTableView(); //Updating the table views
+      displayUnitCount(); //Updating the display of total units of each unit type
       winnerTextArea.setText("The winner is: " + winnerArmy.getName());
     }
     else {
