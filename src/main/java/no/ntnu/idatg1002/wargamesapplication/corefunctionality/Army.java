@@ -203,20 +203,6 @@ public class Army {
     }
 
     /**
-     * This method sets up a summary list for the army
-     *
-     * @return a list of the different unit classes as an ObservableList of ArmyCount
-     */
-    public ObservableList<ArmyCount> getArmyCount() {
-        ObservableList<ArmyCount> result = FXCollections.observableArrayList();
-        result.add(new ArmyCount("CavalryUnit", getCavalryUnits().size()));
-        result.add(new ArmyCount("CommanderUnit", getCommanderUnits().size()));
-        result.add(new ArmyCount("InfantryUnit", getInfantryUnits().size()));
-        result.add(new ArmyCount("RangedUnit", getRangedUnits().size()));
-        return result;
-    }
-
-    /**
      * This method sets up a list of all the units in the army
      *
      * @return a list of all the different units as an observableList of Unit.

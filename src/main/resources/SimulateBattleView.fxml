@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg1002.wargamesapplication.ui.controllers.SimulateBattleController">
+   <children>
+      <Button layoutY="265.0" mnemonicParsing="false" onAction="#onLoadArmyOneButtonClick" prefHeight="8.0" prefWidth="203.0" text="Load Army One" />
+      <ImageView fitHeight="193.0" fitWidth="213.0" layoutX="275.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Logo.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="773.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Save Progress">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveBattleButtonClick" text="Save Battle" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveArmiesButtonClick" text="Save Armies" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Navigate">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onMainMenuButtonClick" text="Main Menu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleButtonClick" text="Reset Battle" />
+               </items></Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onFAQButtonClick" text="FAQ" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <ToggleButton fx:id="leftToggleButton" layoutX="232.0" layoutY="255.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="5.0">
+         <graphic>
+            <ImageView fitHeight="59.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Forest.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="rightToggleButton" layoutX="328.0" layoutY="255.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0">
+         <graphic>
+            <ImageView fitHeight="57.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Hills.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="centerToggleButton" layoutX="433.0" layoutY="252.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Plains.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <Button layoutX="568.0" layoutY="262.0" mnemonicParsing="false" onAction="#onLoadArmyTwoButtonClick" prefHeight="25.0" prefWidth="203.0" text="Load Army Two" />
+      <Button layoutX="334.0" layoutY="388.0" mnemonicParsing="false" onAction="#onSimulateBattleButtonClick" text="Simulate Battle" />
+      <TableView fx:id="armyOneDetailedTableView" layoutX="-2.0" layoutY="388.0" onSort="#onLoadArmyOneButtonClick" prefHeight="142.0" prefWidth="295.0">
+         <columns>
+            <TableColumn fx:id="armyOneUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
+            <TableColumn fx:id="armyOneUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />
+            <TableColumn fx:id="armyOneUnitHealthTableColumn" prefWidth="89.33336639404297" text="Unit Health" />
+         </columns>
+      </TableView>
+      <TableView fx:id="armyTwoDetailedTableView" layoutX="477.0" layoutY="388.0" onSort="#onLoadArmyTwoButtonClick" prefHeight="142.0" prefWidth="295.0">
+         <columns>
+            <TableColumn fx:id="armyTwoUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
+            <TableColumn fx:id="armyTwoUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />
+            <TableColumn fx:id="armyTwoUnitHealthTableColumn" prefWidth="89.33336639404297" text="Unit Health" />
+         </columns>
+      </TableView>
+      <Text layoutX="264.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forest" />
+      <Text layoutX="369.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hills" />
+      <Text layoutX="472.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plains" />
+      <Text layoutX="8.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detailed Unit List " />
+      <Text layoutX="477.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detailed Unit List" />
+      <Text fx:id="armyOneName" layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Army One:" wrappingWidth="191.44664764404297">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="armyTwoName" layoutX="567.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Army Two:" wrappingWidth="191.44664764404303">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="winnerTextArea" layoutX="312.0" layoutY="434.0" prefHeight="81.0" prefWidth="149.0" />
+      <Text layoutX="341.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a terrain" />
+      <Text layoutX="7.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry Units: " wrappingWidth="76.95703125" />
+      <Text layoutX="8.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged Units: " />
+      <Text layoutX="8.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander Units: " />
+      <Text layoutX="8.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry Units: " />
+      <Text fx:id="infantryUnitsArmyOne" layoutX="121.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="76.7578125" />
+      <Text fx:id="rangedUnitsArmyOne" layoutX="121.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="74.548828125" />
+      <Text fx:id="commanderUnitsArmyOne" layoutX="122.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="74.548828125" />
+      <Text fx:id="cavalryUnitsArmyOne" layoutX="121.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="74.548828125" />
+      <Text layoutX="575.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry Units: " wrappingWidth="76.95703125" />
+      <Text layoutX="575.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged Units: " />
+      <Text layoutX="575.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander Units: " />
+      <Text layoutX="576.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry Units: " />
+      <Text fx:id="cavalryUnitsArmyTwo" layoutX="696.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="67.190185546875" />
+      <Text fx:id="commanderUnitsArmyTwo" layoutX="696.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="67.190185546875" />
+      <Text fx:id="rangedUnitsArmyTwo" layoutX="696.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="67.190185546875" />
+      <Text fx:id="infantryUnitsArmyTwo" layoutX="696.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="67.190185546875" />
+      <Text layoutX="8.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: " />
+      <Text layoutX="576.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: " />
+      <Text fx:id="totalUnitsArmyTwo" layoutX="696.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="67.190185546875" />
+      <Text fx:id="totalUnitsArmyOne" layoutX="121.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="xxx" wrappingWidth="74.548828125" />
+      <Line endX="94.0" layoutX="110.0" layoutY="103.0" startX="-110.0" />
+      <Line endX="-2.66668701171875" endY="120.0" layoutX="206.0" layoutY="145.0" startX="-2.66668701171875" startY="-41.5" />
+      <Line endX="110.0" layoutX="663.0" layoutY="104.0" startX="-95.5" />
+      <Line endX="125.0" endY="-69.0" layoutX="442.0" layoutY="173.0" startX="126.0" startY="89.0" />
+      <Line endX="100.0" layoutX="102.0" layoutY="122.0" startX="-102.0" />
+      <Line endX="100.0" layoutX="102.0" layoutY="161.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="102.0" layoutY="184.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="102.0" layoutY="218.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="102.0" layoutY="265.0" startX="-100.0" />
+      <Line endX="103.0" layoutX="670.0" layoutY="262.0" startX="-100.0" />
+      <Line endX="103.0" layoutX="670.0" layoutY="219.0" startX="-100.0" />
+      <Line endX="103.0" layoutX="670.0" layoutY="183.0" startX="-100.0" />
+      <Line endX="103.0" layoutX="670.0" layoutY="161.0" startX="-100.0" />
+      <Line endX="103.0" layoutX="670.0" layoutY="123.0" startX="-100.0" />
+      <Line endX="100.5" endY="53.5" layoutX="673.0" layoutY="208.0" startX="100.5" startY="-103.5" />
+      <Line endX="-2.0" endY="118.0" layoutX="2.0" layoutY="147.0" startX="-2.5" startY="-44.5" />
+   </children>
+</AnchorPane>

@@ -10,10 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
-import no.ntnu.idatg1002.wargamesapplication.corefunctionality.ArmyCount;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Battle;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Unit;
 import no.ntnu.idatg1002.wargamesapplication.filehandler.ArmyFileHandler;
@@ -34,9 +34,6 @@ public class SimulateBattleController implements Initializable {
    * Initializing the text fields and elements in the two tables.
    */
 
-  ObservableList<ArmyCount> armyOneObservableList;
-  ObservableList<ArmyCount> armyTwoObservableList;
-
   private Stage stage;
   private Scene scene;
   private Parent root;
@@ -49,24 +46,6 @@ public class SimulateBattleController implements Initializable {
 
   @FXML
   ToggleButton rightToggleButton;
-
-  @FXML
-  TableView<ArmyCount> armyOneTableView;
-
-  @FXML
-  TableView<ArmyCount> armyTwoTableView;
-
-  @FXML
-  TableColumn<ArmyCount, Integer> armyOneNumberOfUnitsTableColumn;
-
-  @FXML
-  TableColumn<ArmyCount, String> armyOneUnitType;
-
-  @FXML
-  TableColumn<ArmyCount, Integer> armyTwoNumberOfUnitsTableColumn;
-
-  @FXML
-  TableColumn<ArmyCount, String> armyTwoUnitType;
 
   @FXML
   TableView<Unit> armyOneDetailedTableView;
@@ -95,6 +74,36 @@ public class SimulateBattleController implements Initializable {
   @FXML
   TextArea winnerTextArea;
 
+  @FXML
+  Text infantryUnitsArmyOne;
+
+  @FXML
+  Text rangedUnitsArmyOne;
+
+  @FXML
+  Text commanderUnitsArmyOne;
+
+  @FXML
+  Text cavalryUnitsArmyOne;
+
+  @FXML
+  Text totalUnitsArmyOne;
+
+  @FXML
+  Text infantryUnitsArmyTwo;
+
+  @FXML
+  Text rangedUnitsArmyTwo;
+
+  @FXML
+  Text commanderUnitsArmyTwo;
+
+  @FXML
+  Text cavalryUnitsArmyTwo;
+
+  @FXML
+  Text totalUnitsArmyTwo;
+
   private Battle battleSimulation;
   private Army armyOne;
   private Army armyTwo;
@@ -116,12 +125,6 @@ public class SimulateBattleController implements Initializable {
     //Choosing a valid terrain, it will not let it simulate though without choosing a terrain
     battleSimulation = new Battle(armyOne, armyTwo, 'P');
 
-    //setting up the observable lists for the table view
-    armyOneObservableList = FXCollections.observableList(battleSimulation.getArmyOne().getArmyCount());
-    armyTwoObservableList = FXCollections.observableList(battleSimulation.getArmyTwo().getArmyCount());
-    armyOneTableView.setItems(armyOneObservableList);
-    armyTwoTableView.setItems(armyTwoObservableList);
-
     // setting up the observable lists for the detailed table view
     armyOneObservableList1 = FXCollections.observableList(battleSimulation.getArmyOne().getFullArmy());
     armyTwoObservableList2 = FXCollections.observableList(battleSimulation.getArmyTwo().getFullArmy());
@@ -134,18 +137,10 @@ public class SimulateBattleController implements Initializable {
     centerToggleButton.setToggleGroup(toggleGroup);
     rightToggleButton.setToggleGroup(toggleGroup);
 
-    //setting up table view for armyOne
-    armyOneNumberOfUnitsTableColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-    armyOneUnitType.setCellValueFactory(new PropertyValueFactory<>("unitName"));
-
     //setting up detailed table view for armyOne
     armyOneUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
     armyOneUnitNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     armyOneUnitHealthTableColumn.setCellValueFactory(new PropertyValueFactory<>("health"));
-
-    //setting up table view for armyTwo
-    armyTwoNumberOfUnitsTableColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-    armyTwoUnitType.setCellValueFactory(new PropertyValueFactory<>("unitName"));
 
     //setting up detailed table view for armyTwo
     armyTwoUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
@@ -194,8 +189,8 @@ public class SimulateBattleController implements Initializable {
     }
     else {
       armyOne = ArmyFileHandler.readArmyCsv(selectedFile.getName());
-      armyOneTableView.setItems(armyOne.getArmyCount());
       armyOneDetailedTableView.setItems(armyOne.getFullArmy());
+      displayUnitCount();
     }
   }
 
@@ -214,8 +209,8 @@ public class SimulateBattleController implements Initializable {
     }
     else {
       armyTwo = ArmyFileHandler.readArmyCsv(selectedFile.getName());
-      armyTwoTableView.setItems(armyTwo.getArmyCount());
       armyTwoDetailedTableView.setItems(armyTwo.getFullArmy());
+      displayUnitCount();
     }
   }
 
@@ -304,4 +299,28 @@ public class SimulateBattleController implements Initializable {
   private void onResetBattleButtonClick(ActionEvent event) throws IOException {
     resetBattle();
   }
+
+  /**
+   * This method display the unit count of the armies to the view.
+   */
+  @FXML
+  private void displayUnitCount(){
+    //armyOne
+    infantryUnitsArmyOne.setText(String.valueOf(armyOne.getInfantryUnits().size()));
+    rangedUnitsArmyOne.setText(String.valueOf(armyOne.getRangedUnits().size()));
+    commanderUnitsArmyOne.setText(String.valueOf(armyOne.getCommanderUnits().size()));
+    cavalryUnitsArmyOne.setText(String.valueOf(armyOne.getCavalryUnits().size()));
+
+    //armyTwo
+    infantryUnitsArmyTwo.setText(String.valueOf(armyTwo.getInfantryUnits().size()));
+    rangedUnitsArmyTwo.setText(String.valueOf(armyTwo.getRangedUnits().size()));
+    commanderUnitsArmyTwo.setText(String.valueOf(armyTwo.getCommanderUnits().size()));
+    cavalryUnitsArmyTwo.setText(String.valueOf(armyTwo.getCavalryUnits().size()));
+
+    //totals
+    totalUnitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
+    totalUnitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
+  }
+
+
 }
