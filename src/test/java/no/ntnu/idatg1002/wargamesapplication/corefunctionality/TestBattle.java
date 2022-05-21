@@ -1,5 +1,9 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.CavalryUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.CommanderUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.InfantryUnit;
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.RangedUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality.units;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,4 +10,5 @@ module Wargames {
 
     exports no.ntnu.idatg1002.wargamesapplication.ui.controllers;
     exports no.ntnu.idatg1002.wargamesapplication.ui.views to javafx.graphics;
+    opens no.ntnu.idatg1002.wargamesapplication.corefunctionality.units to javafx.base, javafx.fxml;
 }

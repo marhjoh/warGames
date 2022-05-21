@@ -1,4 +1,4 @@
-package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality.units;
 
 /**
  * This class represents a commander unit

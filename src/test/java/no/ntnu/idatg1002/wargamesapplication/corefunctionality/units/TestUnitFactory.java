@@ -1,4 +1,4 @@
-package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
+package no.ntnu.idatg1002.wargamesapplication.corefunctionality.units;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

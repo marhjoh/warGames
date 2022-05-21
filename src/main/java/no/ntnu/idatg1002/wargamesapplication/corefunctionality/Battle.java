@@ -1,5 +1,7 @@
 package no.ntnu.idatg1002.wargamesapplication.corefunctionality;
 
+import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.Unit;
+
 import java.util.*;
 
 /**
