@@ -34,6 +34,7 @@
             <Menu mnemonicParsing="false" text="Navigate">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#onMainMenuButtonClick" text="Main Menu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onCreateArmyButtonClick" text="Create Army" />
                   <MenuItem mnemonicParsing="false" onAction="#onResetBattleButtonClick" text="Reset Battle" />
                </items></Menu>
             <Menu mnemonicParsing="false" text="Help">
