@@ -7,6 +7,7 @@ import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.RangedUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,18 +26,19 @@ class TestArmyFileHandler {
         army.addToArmy(new InfantryUnit("infantry",100));
         army.addToArmy(new RangedUnit("Ranged",100));
         army.addToArmy(new CommanderUnit("Commander",100));
+        File file = new File(army.getName());
 
         try {
-            ArmyFileHandler.writeArmyCsv(army, army.getName());
+            ArmyFileHandler.writeArmyCsv(army, file);
         } catch (IOException e){
             fail();
         }
-        String armyCsv = "";
+        Army armyCsv = null;
         try{
-            armyCsv = ArmyFileHandler.readArmyCsv(army.getName() + ".csv").getName();
+            armyCsv = ArmyFileHandler.readArmyCsv(file);
         } catch(Exception e){
             fail();
         }
-        assertEquals(army.getName(), armyCsv);
+        assertEquals(army.getName(), armyCsv.getName());
     }
 }

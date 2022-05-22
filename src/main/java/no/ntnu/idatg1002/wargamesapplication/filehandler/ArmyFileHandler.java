@@ -5,11 +5,12 @@ import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.Unit;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.UnitFactory;
 import no.ntnu.idatg1002.wargamesapplication.exceptions.UnitException;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 /**
  * Class with static methods for handling csv files of Army.
@@ -26,10 +27,10 @@ public class ArmyFileHandler {
      * Create an Army from a CSV file.
      * @return Army of units
      */
-   public static Army readArmyCsv(String filename) throws IOException {
+   public static Army readArmyCsv(File filename) throws IOException {
        Army army = new Army("");
 
-       try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/armyFiles/"+filename))) {
+       try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
            String lineOfText;
 
            // Reading first line in file
@@ -60,17 +61,17 @@ public class ArmyFileHandler {
      *
      * @param army units in the army.
      */
-    public static void writeArmyCsv(Army army, String fileName) throws IOException {
+    public static void writeArmyCsv(Army army, File file) throws IOException {
 
-       try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/armyFiles/"+fileName+".csv"))){
-           writer.write(army.getName()+"\n");
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+            writer.write(army.getName()+"\n");
 
-           for (Unit unit : army.getAllUnits()) {
-               writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n");
-           }
+            for (Unit unit : army.getAllUnits()) {
+                writer.write(unit.getClass().getSimpleName() + "," + unit.getName() + "," + unit.getHealth() + "\n");
+            }
 
-       }catch (IOException e){
-           throw new IOException(e.getMessage());
-       }
+        }catch (IOException e){
+            throw new IOException(e.getMessage());
+        }
     }
 }
