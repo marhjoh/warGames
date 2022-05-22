@@ -34,6 +34,9 @@ import java.util.ResourceBundle;
 
 /**
  * Class for controlling the simulate battle view.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class SimulateBattleController implements Initializable {
 
@@ -160,8 +163,8 @@ public class SimulateBattleController implements Initializable {
       Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile);
       armyOne.setUnits(readFromFileArmy.getAllUnits());
       armyOne.setArmyName(readFromFileArmy.getName());
-      refreshTableView();
       armyOneTableView.setItems(armyOneObservableList);
+      refreshTableView();
       displayUnitCount();
       duplicateArmies();
     }

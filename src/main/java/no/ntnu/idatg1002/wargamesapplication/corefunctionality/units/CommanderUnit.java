@@ -3,6 +3,7 @@ package no.ntnu.idatg1002.wargamesapplication.corefunctionality.units;
 /**
  * This class represents a commander unit
  * This unit's strength is charge (first attack), then melee (the rest attacks)
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */

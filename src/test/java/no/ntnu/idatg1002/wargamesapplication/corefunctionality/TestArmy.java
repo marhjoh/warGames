@@ -8,10 +8,13 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This class is a test class of the class Army
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */
@@ -56,7 +59,7 @@ class TestArmy {
     @DisplayName("This method will test to create an army with a militia which equals null")
     void testConstructorWithMilitiaEqualsNull(){
         assertEquals("Finland", finland.getName());
-        assertNotNull(finland.getAllUnits().size(), "A new arraylist was not created");
+        assertEquals(0, finland.getAllUnits().size(), "A new arraylist was not created");
     }
 
     @Test

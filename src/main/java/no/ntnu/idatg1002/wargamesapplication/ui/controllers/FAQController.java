@@ -15,6 +15,9 @@ import java.util.ResourceBundle;
 
 /**
  * Class for controlling the FAQ view.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class FAQController implements Initializable {
 

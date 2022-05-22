@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This class is a test class of the class ArmyFileHandler
+ *
  * @author Martin Hegnum Johannessen
  * @version 1.0-SNAPSHOT
  */

@@ -14,6 +14,9 @@ import java.io.File;
 
 /**
  * Class with static methods for handling csv files of Army.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class ArmyFileHandler {
 

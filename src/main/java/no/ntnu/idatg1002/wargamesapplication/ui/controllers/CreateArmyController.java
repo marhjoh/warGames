@@ -33,6 +33,9 @@ import static java.lang.Integer.parseInt;
 
 /**
  * Class for controlling the Create Army View.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class CreateArmyController implements Initializable {
 
@@ -41,7 +44,6 @@ public class CreateArmyController implements Initializable {
     private Army army;
     private ObservableList<Unit> armyObservableList;
     private String[] unitTypes = {"InfantryUnit","RangedUnit","CavalryUnit","CommanderUnit"};
-    private ArrayList<Unit> rows;
 
     @FXML TextField armyNameInput;
     @FXML TextField unitNameInput;
@@ -121,7 +123,7 @@ public class CreateArmyController implements Initializable {
     private void onDeleteUnitButtonClick(){
         try {
             ObservableList<Unit> selectedUnits = tableView.getSelectionModel().getSelectedItems();
-            rows = new ArrayList<>(selectedUnits);
+            ArrayList<Unit> rows = new ArrayList<>(selectedUnits);
 
             if(!selectedUnits.isEmpty()) {
                 rows.forEach(row -> tableView.getItems().remove(row));

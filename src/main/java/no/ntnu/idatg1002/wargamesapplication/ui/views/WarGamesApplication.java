@@ -15,6 +15,9 @@ import java.util.Optional;
 
 /**
  * Class for the graphical user interface. Lets the user interact with the program.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class WarGamesApplication extends Application {
 
@@ -33,7 +36,7 @@ public class WarGamesApplication extends Application {
    * The start-method is called by the JavaFX platform upon starting the JavaFX-platform.
    *
    * @param stage The stage making up the main window.
-   * @throws IOException
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @Override
   public void start(Stage stage) throws IOException {
@@ -52,10 +55,10 @@ public class WarGamesApplication extends Application {
     primaryStage.show();
   }
 
-  @FXML
   /**
    * Method for asking the user for confirmation before closing the application.
    */
+  @FXML
   public static void exitApplicationWindow() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Confirmation Dialog");
@@ -70,49 +73,39 @@ public class WarGamesApplication extends Application {
     }
   }
 
-  @FXML
   /**
    * Method to show an error popupmenu.
-   * @param e, The string of the error message.
+   * @param message, The string of the error message.
    */
-  public static void errorPopUpWindow(String e) {
+  @FXML
+  public static void errorPopUpWindow(String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("There was an error");
-    alert.setContentText("Error: " + e);
+    alert.setContentText("Error: " + message);
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.isPresent()) {
       if (result.get() == ButtonType.OK) {
-
       } else {
       }
     }
   }
 
-  @FXML
   /**
    * Method to show a confirmation popupmenu.
-   * @param e, The string of the confirmation message.
+   * @param message, The string of the confirmation message.
    */
-  public static void confirmationPopUpWindow(String e) {
+  @FXML
+  public static void confirmationPopUpWindow(String message) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("There was a confirmation");
-    alert.setContentText("Confirmation: " + e);
+    alert.setContentText("Confirmation: " + message);
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.isPresent()) {
       if (result.get() == ButtonType.OK) {
-
       } else {
       }
     }
-  }
-
-  /**
-   * The stop() method is being called by the JavaFX-platform when the platform stops, are being
-   * terminated.
-   */
-  public static void exit() {
-    System.exit(0);
   }
 }

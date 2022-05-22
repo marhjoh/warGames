@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 
 /**
  * Class for controlling the main menu view.
+ *
+ * @author Martin Hegnum Johannessen
+ * @version 1.0-SNAPSHOT
  */
 public class MainMenuController implements Initializable {
 
