@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg1002.wargamesapplication.ui.controllers.FAQController">
+<AnchorPane prefHeight="530.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg2001.wargamesapplication.ui.controllers.FAQController">
    <children>
       <Label layoutX="251.0" layoutY="39.0" text="FAQ - Frequently Asked Questions">
          <font>

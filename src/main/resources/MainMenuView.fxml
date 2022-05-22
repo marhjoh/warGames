@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg1002.wargamesapplication.ui.controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatg2001.wargamesapplication.ui.controllers.MainMenuController">
    <children>
       <Button layoutX="395.0" layoutY="427.0" mnemonicParsing="false" onAction="#onCreateBattleButtonClick" text="Create Battle" />
       <ImageView fx:id="logo" fitHeight="353.0" fitWidth="611.0" layoutX="139.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
