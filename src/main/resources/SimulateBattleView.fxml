@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -27,24 +26,24 @@
          <menus>
             <Menu mnemonicParsing="false" text="Save Progress">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onSaveBattleButtonClick" text="Save Battle" />
-                  <MenuItem mnemonicParsing="false" onAction="#onSaveArmiesButtonClick" text="Save Armies" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveArmyOneButtonClick" text="Save Army One" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveArmyTwoButtonClick" text="Save Army Two" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Navigate">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onMainMenuButtonClick" text="Main Menu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMainMenuClick" text="Main Menu" />
                   <MenuItem mnemonicParsing="false" onAction="#onCreateArmyButtonClick" text="Create Army" />
                </items></Menu>
             <Menu mnemonicParsing="false" text="Reset Simulation">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleFullyClick" text="From Scratch" />
+                  <MenuItem mnemonicParsing="false" onAction="#onResetBattleFromScratchClick" text="From Scratch" />
                   <MenuItem mnemonicParsing="false" onAction="#onResetBattleClick" text="With Same Armies" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onFAQButtonClick" text="FAQ" />
+                  <MenuItem mnemonicParsing="false" onAction="#onFAQClick" text="FAQ" />
                </items>
             </Menu>
          </menus>
@@ -77,15 +76,15 @@
          </graphic>
       </ToggleButton>
       <Button layoutX="568.0" layoutY="262.0" mnemonicParsing="false" onAction="#onLoadArmyTwoButtonClick" prefHeight="25.0" prefWidth="203.0" text="Load Army Two" />
-      <Button layoutX="334.0" layoutY="388.0" mnemonicParsing="false" onAction="#onSimulateBattleButtonClick" text="Simulate Battle" />
-      <TableView fx:id="armyOneDetailedTableView" layoutX="-2.0" layoutY="388.0" onSort="#onLoadArmyOneButtonClick" prefHeight="142.0" prefWidth="295.0">
+      <Button fx:id="simulateBattleButton" layoutX="334.0" layoutY="388.0" mnemonicParsing="false" onAction="#onSimulateBattleButtonClick" text="Simulate Battle" />
+      <TableView fx:id="armyOneTableView" layoutX="-2.0" layoutY="388.0" onSort="#onLoadArmyOneButtonClick" prefHeight="142.0" prefWidth="295.0">
          <columns>
             <TableColumn fx:id="armyOneUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
             <TableColumn fx:id="armyOneUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />
             <TableColumn fx:id="armyOneUnitHealthTableColumn" prefWidth="89.33336639404297" text="Unit Health" />
          </columns>
       </TableView>
-      <TableView fx:id="armyTwoDetailedTableView" layoutX="477.0" layoutY="388.0" onSort="#onLoadArmyTwoButtonClick" prefHeight="142.0" prefWidth="295.0">
+      <TableView fx:id="armyTwoTableView" layoutX="477.0" layoutY="388.0" onSort="#onLoadArmyTwoButtonClick" prefHeight="142.0" prefWidth="295.0">
          <columns>
             <TableColumn fx:id="armyTwoUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
             <TableColumn fx:id="armyTwoUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />
@@ -107,7 +106,6 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextArea fx:id="winnerTextArea" layoutX="312.0" layoutY="434.0" prefHeight="81.0" prefWidth="149.0" />
       <Text layoutX="341.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a terrain" />
       <Text layoutX="7.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry Units: " wrappingWidth="76.95703125" />
       <Text layoutX="8.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged Units: " />
@@ -145,5 +143,6 @@
       <Line endX="103.0" layoutX="670.0" layoutY="123.0" startX="-100.0" />
       <Line endX="100.5" endY="53.5" layoutX="673.0" layoutY="208.0" startX="100.5" startY="-103.5" />
       <Line endX="-2.0" endY="118.0" layoutX="2.0" layoutY="147.0" startX="-2.5" startY="-44.5" />
+      <Text fx:id="winnerText" layoutX="339.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The winner is:" wrappingWidth="104.66666666666674" />
    </children>
 </AnchorPane>

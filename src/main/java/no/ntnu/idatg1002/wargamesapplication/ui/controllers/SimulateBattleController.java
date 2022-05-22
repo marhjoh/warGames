@@ -10,13 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Army;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.Battle;
 import no.ntnu.idatg1002.wargamesapplication.corefunctionality.units.Unit;
@@ -27,18 +27,15 @@ import no.ntnu.idatg1002.wargamesapplication.ui.views.WarGamesApplication;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
 /**
- * Class for controlling the TournamentMaker view.
+ * Class for controlling the simulate battle view.
  */
 public class SimulateBattleController implements Initializable {
-
-  /**
-   * Initializing the text fields and elements in the two tables.
-   */
 
   private Scene scene;
   private Parent root;
@@ -50,20 +47,22 @@ public class SimulateBattleController implements Initializable {
   private Army duplicateArmyTwo;
   private ObservableList<Unit> armyOneObservableList;
   private ObservableList<Unit> armyTwoObservableList;
+  private String csvFull = "Comma Separated File";
+  private String chooseFile = "Choose File";
+  private String csv = "*.csv";
 
-  @FXML
-  ToggleButton leftToggleButton;
+  @FXML ToggleButton leftToggleButton;
   @FXML ToggleButton centerToggleButton;
   @FXML ToggleButton rightToggleButton;
-  @FXML TableView<Unit> armyOneDetailedTableView;
-  @FXML TableView<Unit> armyTwoDetailedTableView;
+  @FXML TableView<Unit> armyOneTableView;
+  @FXML TableView<Unit> armyTwoTableView;
   @FXML TableColumn<Unit, String> armyOneUnitTypeTableColumn;
   @FXML TableColumn<Unit, String> armyOneUnitNameTableColumn;
   @FXML TableColumn<Unit, Integer> armyOneUnitHealthTableColumn;
   @FXML TableColumn<Unit, String> armyTwoUnitTypeTableColumn;
   @FXML TableColumn<Unit, String> armyTwoUnitNameTableColumn;
   @FXML TableColumn<Unit, Integer> armyTwoUnitHealthTableColumn;
-  @FXML TextArea winnerTextArea;
+  @FXML Text winnerText;
   @FXML Text infantryUnitsArmyOne;
   @FXML Text rangedUnitsArmyOne;
   @FXML Text commanderUnitsArmyOne;
@@ -76,11 +75,12 @@ public class SimulateBattleController implements Initializable {
   @FXML Text totalUnitsArmyTwo;
   @FXML Text armyOneName;
   @FXML Text armyTwoName;
+  @FXML Button simulateBattleButton;
 
   /**
    * Initializing the view
    * @param url
-   * @param resourceBundle
+   * @param resourceBundle SimulateBattleView.fxml
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,8 +93,8 @@ public class SimulateBattleController implements Initializable {
     // setting up the observable lists for the detailed table view
     armyOneObservableList = FXCollections.observableList(battleSimulation.getArmyOne().getAllUnits());
     armyTwoObservableList = FXCollections.observableList(battleSimulation.getArmyTwo().getAllUnits());
-    armyOneDetailedTableView.setItems(armyOneObservableList);
-    armyTwoDetailedTableView.setItems(armyTwoObservableList);
+    armyOneTableView.setItems(armyOneObservableList);
+    armyTwoTableView.setItems(armyTwoObservableList);
 
     //creating toggleGroup
     ToggleGroup toggleGroup = new ToggleGroup();
@@ -111,15 +111,18 @@ public class SimulateBattleController implements Initializable {
     armyTwoUnitTypeTableColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
     armyTwoUnitNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     armyTwoUnitHealthTableColumn.setCellValueFactory(new PropertyValueFactory<>("health"));
+
+    winnerText.setText("");
   }
 
   /**
-   * Makes the "Help, FAQ" menuitem open FAQ page
-   * @param event
-   * @throws IOException
+   * Makes the "Help, FAQ" menu item open FAQ page
+   *
+   * @param event FAQ menu item is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
-  private void onFAQButtonClick(ActionEvent event) throws IOException {
+  private void onFAQClick(ActionEvent event) throws IOException {
     root = new FXMLLoader(getClass().getClassLoader().getResource("FAQView.fxml")).load();
     scene = new Scene(root);
     WarGamesApplication.primaryStage.setTitle("FAQ - Frequently Asked Questions");
@@ -127,12 +130,13 @@ public class SimulateBattleController implements Initializable {
   }
 
   /**
-   * Makes the "Go back" menuitem open the main menu
-   * @param event
-   * @throws IOException
+   * Makes the "Go back" menu item open the main menu
+   *
+   * @param event main menu - menu item is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
-  private void onMainMenuButtonClick(ActionEvent event) throws IOException {
+  private void onMainMenuClick(ActionEvent event) throws IOException {
     root = new FXMLLoader(getClass().getClassLoader().getResource("MainMenuView.fxml")).load();
     scene = new Scene(root);
     WarGamesApplication.primaryStage.setTitle("Main Menu");
@@ -141,23 +145,23 @@ public class SimulateBattleController implements Initializable {
 
   /**
    * Makes the "load army one" button open directory
-   * @param event
-   * @throws IOException
+   * @param event load army one button is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
   private void onLoadArmyOneButtonClick(ActionEvent event) throws IOException {
     fileChooser = new FileChooser();
-    fileChooser.setTitle("Choose file");
-    fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+    fileChooser.setTitle(chooseFile);
+    fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter(csvFull, csv));
     File selectedFile = fileChooser.showOpenDialog(new Stage());
     if(selectedFile == null){
     }
     else {
-      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile.getName());
+      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile);
       armyOne.setUnits(readFromFileArmy.getAllUnits());
       armyOne.setArmyName(readFromFileArmy.getName());
       refreshTableView();
-      armyOneDetailedTableView.setItems(armyOneObservableList);
+      armyOneTableView.setItems(armyOneObservableList);
       displayUnitCount();
       duplicateArmies();
     }
@@ -165,22 +169,23 @@ public class SimulateBattleController implements Initializable {
 
   /**
    * Makes the "load army two" button open directory
-   * @param event
-   * @throws IOException
+   *
+   * @param event load army two button is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
   private void onLoadArmyTwoButtonClick(ActionEvent event) throws IOException {
     fileChooser = new FileChooser();
-    fileChooser.setTitle("Choose file");
-    fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+    fileChooser.setTitle(chooseFile);
+    fileChooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter(csvFull, csv));
     File selectedFile = fileChooser.showOpenDialog(new Stage());
     if(selectedFile == null){
     }
     else {
-      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile.getName());
+      Army readFromFileArmy = ArmyFileHandler.readArmyCsv(selectedFile);
       armyTwo.setUnits(readFromFileArmy.getAllUnits());
       armyTwo.setArmyName(readFromFileArmy.getName());
-      armyTwoDetailedTableView.setItems(armyTwoObservableList);
+      armyTwoTableView.setItems(armyTwoObservableList);
       refreshTableView();
       displayUnitCount();
       duplicateArmies();
@@ -188,47 +193,77 @@ public class SimulateBattleController implements Initializable {
   }
 
   /**
-   * Saves two csv files of the armies, one of each army in the battle.
+   * Saves a csv file of army one.
+   *
+   * @param event save army one menu item is clicked
    */
   @FXML
-  private void onSaveArmiesButtonClick(ActionEvent event) throws IOException {
+  private void onSaveArmyOneButtonClick(ActionEvent event) {
+    armyOne = new Army(armyOneName.getText());
+    armyOne.addAllToArmy(armyOneObservableList);
     fileChooser = new FileChooser();
-    fileChooser.setTitle("Choose file");
-    fileChooser.setInitialFileName(armyOne.getName());
-    ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "ArmyOne");
-    ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyTwo(), "ArmyTwo");
-    WarGamesApplication.confirmationPopUpWindow("The two armies has now been saved");
+    fileChooser.setTitle(chooseFile);
+    fileChooser.setInitialFileName(armyOne.getName().replace(" ", "-"));
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(csv, csvFull));
+    fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+    File selectedPath = fileChooser.showSaveDialog(simulateBattleButton.getScene().getWindow());
+    try {
+      ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), selectedPath);
+      WarGamesApplication.confirmationPopUpWindow("Army one has now been saved");
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+
   }
 
   /**
-   * Saves a csv file of the battle
+   * Saves a csv file of army two
+   *
+   * @param event save army two menu item is clicked
    */
   @FXML
-  private void onSaveBattleButtonClick(ActionEvent event) throws IOException {
-    ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyOne(), "Battle");
-    WarGamesApplication.confirmationPopUpWindow("The battle has now been saved");
+  private void onSaveArmyTwoButtonClick(ActionEvent event) {
+    armyTwo = new Army(armyTwoName.getText());
+    armyTwo.addAllToArmy(armyTwoObservableList);
+    fileChooser = new FileChooser();
+    fileChooser.setTitle(chooseFile);
+    fileChooser.setInitialFileName(armyTwo.getName().replace(" ", "-"));
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(csv, csvFull));
+    fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+    File selectedPath = fileChooser.showSaveDialog(simulateBattleButton.getScene().getWindow());
+    try {
+      ArmyFileHandler.writeArmyCsv(battleSimulation.getArmyTwo(), selectedPath);
+      WarGamesApplication.confirmationPopUpWindow("Army two has now been saved");
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 
   /**
    * Makes the text area display the winner of the battle simulation
+   *
+   * @param event simulate battle button is clicked
    */
   @FXML
-  private void onSimulateBattleButtonClick(ActionEvent event) throws IOException {
+  private void onSimulateBattleButtonClick(ActionEvent event) {
     if((leftToggleButton.isSelected() || centerToggleButton.isSelected() || rightToggleButton.isSelected())
     && (!armyOne.getAllUnits().isEmpty() && !armyTwo.getAllUnits().isEmpty())) {
       checkTerrain();
       Army winnerArmy = battleSimulation.simulate();  //Simulating a battle, returning the winner army
       refreshTableView(); //Updating the table views
       displayUnitCount(); //Updating the display of total units of each unit type
-      winnerTextArea.setText("The winner is: " + winnerArmy.getName());
+      winnerText.setText("The winner is: \n" + winnerArmy.getName());
     }
     else {
-      checkIfArmiesAreEmpty();
+      checkIfArmiesAreEmpty();  //If armies are empty it will not simulate
     }
   }
 
   /**
    * This method makes the "Create Army" menuItem move to the Create Army Page
+   *
+   * @param event create army menu item is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
   private void onCreateArmyButtonClick(ActionEvent event) throws IOException {
@@ -240,23 +275,31 @@ public class SimulateBattleController implements Initializable {
 
   /**
    * This method makes the "reset battle" menuItem reset the battle from scratch
+   *
+   * @param event battle from scratch button is clicked
+   * @throws IOException throw exceptions if failed or interrupted I/O operations
    */
   @FXML
-  private void onResetBattleFullyClick(ActionEvent event) throws IOException {
-    resetBattleFully();
+  private void onResetBattleFromScratchClick(ActionEvent event) throws IOException {
+    root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
+    scene = new Scene(root);
+    WarGamesApplication.primaryStage.setTitle("Battle simulation");
+    WarGamesApplication.primaryStage.setScene(scene);
   }
 
   /**
    * This method makes the "reset battle" menuItem reset the battle with the same armies,
    * without loading the army once more.
-   * @param event
-   * @throws IOException
+   *
+   * @param event reset battle menu item is clicked
    */
   @FXML
-  private void onResetBattleClick(ActionEvent event) throws IOException{
-    refreshArmies();
-    refreshTableView();
-    winnerTextArea.setText("");
+  private void onResetBattleClick(ActionEvent event) {
+    winnerText.setText("");
+    if(armyOne.hasUnits() || armyTwo.hasUnits()){
+      refreshArmies();
+      refreshTableView();
+    }
   }
 
   /**
@@ -287,18 +330,6 @@ public class SimulateBattleController implements Initializable {
       battleSimulation.setTerrain('H'); } //Terrain: Hills
     else if(rightToggleButton.isSelected()){
       battleSimulation.setTerrain('P'); } //Terrain: Plains
-  }
-
-  /**
-   * This method resets the battle from scratch
-   * @throws IOException
-   */
-  @FXML
-  private void resetBattleFully() throws IOException {
-    root = new FXMLLoader(getClass().getClassLoader().getResource("SimulateBattleView.fxml")).load();
-    scene = new Scene(root);
-    WarGamesApplication.primaryStage.setTitle("Battle simulation");
-    WarGamesApplication.primaryStage.setScene(scene);
   }
 
   /**
@@ -357,7 +388,7 @@ public class SimulateBattleController implements Initializable {
   private void refreshTableView(){
     armyOneObservableList = FXCollections.observableList(battleSimulation.getArmyOne().getAllUnits());
     armyTwoObservableList = FXCollections.observableList(battleSimulation.getArmyTwo().getAllUnits());
-    armyOneDetailedTableView.setItems(armyOneObservableList);
-    armyTwoDetailedTableView.setItems(armyTwoObservableList);
+    armyOneTableView.setItems(armyOneObservableList);
+    armyTwoTableView.setItems(armyTwoObservableList);
   }
 }
