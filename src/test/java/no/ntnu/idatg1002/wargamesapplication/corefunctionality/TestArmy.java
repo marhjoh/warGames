@@ -27,7 +27,6 @@ class TestArmy {
     private Army finland;
     private Army simpleArmy;
     private List<Unit> militia;
-    private List<Unit> militia1;
     private List<Unit> militia2;
 
     @BeforeEach
@@ -151,6 +150,18 @@ class TestArmy {
     void testSetArmyName(){
         norway.setArmyName("sverige");
         assertEquals("sverige", norway.getName());
+    }
+
+    @Test
+    @DisplayName("This method will test the setUnits method")
+    void testSetUnits() {
+        militia2 = new ArrayList<>();
+
+        militia2.add(infantry1);
+        militia2.add(cavalry1);
+        norway.setUnits(militia2);
+
+        assertEquals(norway.getAllUnits(), militia2);
     }
 
     @Test
