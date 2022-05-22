@@ -3,31 +3,42 @@ package no.ntnu.idatg1002.wargamesapplication.ui.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
 import no.ntnu.idatg1002.wargamesapplication.ui.views.WarGamesApplication;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Class for controlling the FAQ view.
  */
-public class FAQController {
+public class FAQController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    @FXML TextArea textArea;
+
+    /**
+     * initializing the view
+     * @param resourceBundle FAQView.fxml
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    textArea.setEditable(false);
+    }
 
     /**
      * Button for returning to the main menu.
-     * @param event
-     * @throws IOException
+     *
+     * @param event main menu button is clicked
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
     @FXML
-    public void OnGoBackToMainMenuButtonClick(ActionEvent event) throws IOException{
-        root = new FXMLLoader(getClass().getClassLoader().getResource("MainMenuView.fxml")).load();
-        scene = new Scene(root);
+    public void onGoBackToMainMenuButtonClick(ActionEvent event) throws IOException{
+        Parent root = new FXMLLoader(getClass().getClassLoader().getResource("MainMenuView.fxml")).load();
+        Scene scene = new Scene(root);
         WarGamesApplication.primaryStage.setTitle("Main Menu");
         WarGamesApplication.primaryStage.setScene(scene);
     }
