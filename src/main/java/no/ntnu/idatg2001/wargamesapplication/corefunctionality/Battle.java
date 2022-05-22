@@ -2,7 +2,9 @@ package no.ntnu.idatg2001.wargamesapplication.corefunctionality;
 
 import no.ntnu.idatg2001.wargamesapplication.corefunctionality.units.Unit;
 
-import java.util.*;
+import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class represents a battle between two armies
