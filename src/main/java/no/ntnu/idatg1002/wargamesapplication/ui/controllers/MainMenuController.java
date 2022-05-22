@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import no.ntnu.idatg1002.wargamesapplication.ui.views.WarGamesApplication;
 
 import java.io.IOException;
@@ -22,10 +21,19 @@ public class MainMenuController implements Initializable {
     private Parent root;
 
     /**
+     * initializing the view
+     * @param url
+     * @param resourceBundle MainMenuView.fxml
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    /**
      * Makes the "Create new battle" button open the simulate battle view.
      *
      * @param event
-     * @throws IOException
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
     @FXML
     private void onCreateBattleButtonClick(ActionEvent event) throws IOException {
@@ -38,8 +46,8 @@ public class MainMenuController implements Initializable {
     /**
      * Makes the "Help, FAQ" menuitem open FAQ page
      *
-     * @param event
-     * @throws IOException
+     * @param event FAQ button is clicked
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
     @FXML
     private void onFAQButtonClick(ActionEvent event) throws IOException {
@@ -51,6 +59,9 @@ public class MainMenuController implements Initializable {
 
     /**
      * This method makes the "Create Army" menuItem move to the Create Army Page
+     *
+     * @param event create army button is clicked
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
     @FXML
     private void onCreateArmyButtonClick(ActionEvent event) throws IOException {
@@ -58,14 +69,5 @@ public class MainMenuController implements Initializable {
         scene = new Scene(root);
         WarGamesApplication.primaryStage.setTitle("Create Army");
         WarGamesApplication.primaryStage.setScene(scene);
-    }
-
-    /**
-     * initializing the view
-     * @param url
-     * @param resourceBundle
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }
