@@ -43,7 +43,7 @@ public class CreateArmyController implements Initializable {
     private Parent root;
     private Army army;
     private ObservableList<Unit> armyObservableList;
-    private String[] unitTypes = {"InfantryUnit","RangedUnit","CavalryUnit","CommanderUnit"};
+    private final String[] unitTypes = {"InfantryUnit","RangedUnit","CavalryUnit","CommanderUnit"};
 
     @FXML TextField armyNameInput;
     @FXML TextField unitNameInput;
@@ -99,20 +99,26 @@ public class CreateArmyController implements Initializable {
      */
     @FXML
     private void onSaveArmyButtonClick() {
-        army = new Army(armyNameInput.getText());
-        army.addAllToArmy(armyObservableList);
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName(armyNameInput.getText().replace(" ", "-"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Comma Separated File", "*.csv"));
-        fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
-        File file = fileChooser.showSaveDialog(armyNameInput.getScene().getWindow());
-        if (file != null) {
-            try {
-                ArmyFileHandler.writeArmyCsv(army, file);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+        if(!armyNameInput.getText().isEmpty() || !armyObservableList.isEmpty()){
+            army = new Army(armyNameInput.getText());
+            army.addAllToArmy(armyObservableList);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName(armyNameInput.getText().replace(" ", "-"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Comma Separated File", "*.csv"));
+            fileChooser.setInitialDirectory(new File(Paths.get(".").toAbsolutePath().normalize().toString()));
+            File file = fileChooser.showSaveDialog(armyNameInput.getScene().getWindow());
+            if (file != null) {
+                try {
+                    ArmyFileHandler.writeArmyCsv(army, file);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         }
+        else{
+            WarGamesApplication.errorPopUpWindow("You cannot save an empty army");
+        }
+
     }
 
     /**
@@ -129,7 +135,7 @@ public class CreateArmyController implements Initializable {
                 rows.forEach(row -> tableView.getItems().remove(row));
                 WarGamesApplication.confirmationPopUpWindow("The unit(s) has been deleted");
             }
-            else if (selectedUnits.isEmpty()){
+            else{
                 WarGamesApplication.errorPopUpWindow("Unit does not exist");
             }
         }
