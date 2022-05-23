@@ -28,12 +28,15 @@ public class ArmyFileHandler {
 
     /**
      * Create an Army from a CSV file.
-     * @return Army of units
+     *
+     * @param file the file to be read
+     * @return Army
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
-   public static Army readArmyCsv(File filename) throws IOException {
+   public static Army readArmyCsv(File file) throws IOException {
        Army army = new Army("");
 
-       try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+       try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
            String lineOfText;
 
            // Reading first line in file
@@ -60,9 +63,11 @@ public class ArmyFileHandler {
    }
 
     /**
-     * Write an Army from a CSV file.
+     * Write an Army to a CSV file.
      *
-     * @param army units in the army.
+     * @param army the army to be written
+     * @param file the file to be written
+     * @throws IOException throw exceptions if failed or interrupted I/O operations
      */
     public static void writeArmyCsv(Army army, File file) throws IOException {
 
