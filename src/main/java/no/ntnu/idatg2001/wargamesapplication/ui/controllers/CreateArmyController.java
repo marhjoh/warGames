@@ -88,6 +88,7 @@ public class CreateArmyController implements Initializable {
             army.addAllToArmy(UnitFactory.createUnitList(unitTypeComboBox.getValue(), unitNameInput.getText(),
                     parseInt(unitHealthInput.getText()), parseInt(amountOfUnitsInput.getText())));
             refreshTableView();
+            armyNameInput.setEditable(false);
         }
         catch (IllegalArgumentException exception){
             WarGamesApplication.errorPopUpWindow("You have to input valid values");
