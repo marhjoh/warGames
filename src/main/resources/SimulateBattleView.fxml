@@ -77,14 +77,14 @@
       </ToggleButton>
       <Button layoutX="568.0" layoutY="262.0" mnemonicParsing="false" onAction="#onLoadArmyTwoButtonClick" prefHeight="25.0" prefWidth="203.0" text="Load Army Two" />
       <Button fx:id="simulateBattleButton" layoutX="334.0" layoutY="388.0" mnemonicParsing="false" onAction="#onSimulateBattleButtonClick" text="Simulate Battle" />
-      <TableView fx:id="armyOneTableView" layoutX="-2.0" layoutY="388.0" onSort="#onLoadArmyOneButtonClick" prefHeight="142.0" prefWidth="295.0">
+      <TableView fx:id="armyOneTableView" layoutX="-2.0" layoutY="388.0" prefHeight="142.0" prefWidth="295.0">
          <columns>
             <TableColumn fx:id="armyOneUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
             <TableColumn fx:id="armyOneUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />
             <TableColumn fx:id="armyOneUnitHealthTableColumn" prefWidth="89.33336639404297" text="Unit Health" />
          </columns>
       </TableView>
-      <TableView fx:id="armyTwoTableView" layoutX="477.0" layoutY="388.0" onSort="#onLoadArmyTwoButtonClick" prefHeight="142.0" prefWidth="295.0">
+      <TableView fx:id="armyTwoTableView" layoutX="477.0" layoutY="388.0" prefHeight="142.0" prefWidth="295.0">
          <columns>
             <TableColumn fx:id="armyTwoUnitTypeTableColumn" prefWidth="113.33331549167633" text="Unit Type" />
             <TableColumn fx:id="armyTwoUnitNameTableColumn" prefWidth="89.33336639404297" text="Unit Name" />

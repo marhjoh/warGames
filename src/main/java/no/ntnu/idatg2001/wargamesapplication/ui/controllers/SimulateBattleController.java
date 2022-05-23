@@ -377,6 +377,7 @@ public class SimulateBattleController implements Initializable {
       totalUnitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
     }
     else{
+      //Setting the default text String values
       infantryUnitsArmyOne.setText("xxx");
       rangedUnitsArmyOne.setText("xxx");
       commanderUnitsArmyOne.setText("xxx");
@@ -394,6 +395,7 @@ public class SimulateBattleController implements Initializable {
       totalUnitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
     }
     else {
+      //Setting the default text String values
       infantryUnitsArmyTwo.setText("xxx");
       rangedUnitsArmyTwo.setText("xxx");
       commanderUnitsArmyTwo.setText("xxx");
