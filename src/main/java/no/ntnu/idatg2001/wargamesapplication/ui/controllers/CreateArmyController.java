@@ -111,6 +111,7 @@ public class CreateArmyController implements Initializable {
             if (file != null) {
                 try {
                     ArmyFileHandler.writeArmyCsv(army, file);
+                    WarGamesApplication.confirmationPopUpWindow("The army has been saved");
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
