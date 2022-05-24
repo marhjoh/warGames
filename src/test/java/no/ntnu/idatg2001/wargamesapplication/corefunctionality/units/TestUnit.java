@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * This class is a test class of the class Unit
@@ -63,8 +65,8 @@ class TestUnit {
         infantry1.setIsAlive(false);
         infantry2.setIsAlive(true);
 
-        assertEquals(false, infantry1.getIsAlive());
-        assertEquals(true, infantry2.getIsAlive());
+        assertFalse(infantry1.getIsAlive());
+        assertTrue(infantry2.getIsAlive());
     }
 
     @Test

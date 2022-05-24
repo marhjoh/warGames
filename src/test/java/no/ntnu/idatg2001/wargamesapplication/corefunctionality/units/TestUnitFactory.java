@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,7 +24,7 @@ class TestUnitFactory {
     void testCreateUnit(){
         InfantryUnit infantryUnit = new InfantryUnit("test", 100);
 
-        assertEquals(infantryUnit.toString(), UnitFactory.createUnit("InfantryUnit", "test", 100).toString());
+        assertEquals(infantryUnit.toString(), Objects.requireNonNull(UnitFactory.createUnit("InfantryUnit", "test", 100)).toString());
         assertNull(UnitFactory.createUnit("WizardUnit", "test", 100));
     }
 
