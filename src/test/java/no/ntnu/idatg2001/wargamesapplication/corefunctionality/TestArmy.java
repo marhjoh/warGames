@@ -10,6 +10,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * This class is a test class of the class Army
@@ -114,7 +116,7 @@ class TestArmy {
     @Test
     @DisplayName("This method will test the hasUnits method")
     void testHasUnits() {
-        assertEquals(false, norway.hasUnits());
+        assertFalse(norway.hasUnits());
     }
 
     @Test
@@ -127,7 +129,7 @@ class TestArmy {
     @Test
     @DisplayName("This method will test the equals method")
     void testEquals() {
-        assertEquals(false, norway.equals(sweden));
+        assertNotEquals(norway, sweden);
     }
 
     @Test
