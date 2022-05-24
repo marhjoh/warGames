@@ -368,41 +368,20 @@ public class SimulateBattleController implements Initializable {
   @FXML
   private void displayUnitCount(){
     //armyOne
-    if(armyOne.hasUnits()){
-      infantryUnitsArmyOne.setText(String.valueOf(armyOne.getInfantryUnits().size()));
-      rangedUnitsArmyOne.setText(String.valueOf(armyOne.getRangedUnits().size()));
-      commanderUnitsArmyOne.setText(String.valueOf(armyOne.getCommanderUnits().size()));
-      cavalryUnitsArmyOne.setText(String.valueOf(armyOne.getCavalryUnits().size()));
-      armyOneName.setText(armyOne.getName());
-      totalUnitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
-    }
-    else{
-      //Setting the default text String values
-      infantryUnitsArmyOne.setText("xxx");
-      rangedUnitsArmyOne.setText("xxx");
-      commanderUnitsArmyOne.setText("xxx");
-      cavalryUnitsArmyOne.setText("xxx");
-      armyOneName.setText(armyOne.getName());
-      totalUnitsArmyTwo.setText("xxx");
-    }
+    infantryUnitsArmyOne.setText(String.valueOf(armyOne.getInfantryUnits().size()));
+    rangedUnitsArmyOne.setText(String.valueOf(armyOne.getRangedUnits().size()));
+    commanderUnitsArmyOne.setText(String.valueOf(armyOne.getCommanderUnits().size()));
+    cavalryUnitsArmyOne.setText(String.valueOf(armyOne.getCavalryUnits().size()));
+    armyOneName.setText(armyOne.getName());
     //armyTwo
-    if(armyTwo.hasUnits()){
-      infantryUnitsArmyTwo.setText(String.valueOf(armyTwo.getInfantryUnits().size()));
-      rangedUnitsArmyTwo.setText(String.valueOf(armyTwo.getRangedUnits().size()));
-      commanderUnitsArmyTwo.setText(String.valueOf(armyTwo.getCommanderUnits().size()));
-      cavalryUnitsArmyTwo.setText(String.valueOf(armyTwo.getCavalryUnits().size()));
-      armyTwoName.setText(armyTwo.getName());
-      totalUnitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
-    }
-    else {
-      //Setting the default text String values
-      infantryUnitsArmyTwo.setText("xxx");
-      rangedUnitsArmyTwo.setText("xxx");
-      commanderUnitsArmyTwo.setText("xxx");
-      cavalryUnitsArmyTwo.setText("xxx");
-      armyTwoName.setText(armyTwo.getName());
-      totalUnitsArmyTwo.setText("xxx");
-    }
+    infantryUnitsArmyTwo.setText(String.valueOf(armyTwo.getInfantryUnits().size()));
+    rangedUnitsArmyTwo.setText(String.valueOf(armyTwo.getRangedUnits().size()));
+    commanderUnitsArmyTwo.setText(String.valueOf(armyTwo.getCommanderUnits().size()));
+    cavalryUnitsArmyTwo.setText(String.valueOf(armyTwo.getCavalryUnits().size()));
+    armyTwoName.setText(armyTwo.getName());
+    //totals
+    totalUnitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
+    totalUnitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
   }
 
   /**
