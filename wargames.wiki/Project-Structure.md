@@ -1,0 +1,1 @@
+![Skjermbilde_2022-05-22_225204](uploads/f11d60964af5a86d4277e3e6bfc62777/Skjermbilde_2022-05-22_225204.png)

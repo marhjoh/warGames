@@ -1,0 +1,4 @@
+- [Wireframe](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Wireframe)
+- [Sequence diagrams](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Sequence-Diagrams)
+- [Domain model](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Domain-model)
+- [Use-Case diagrams](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Use-Case-Diagrams)

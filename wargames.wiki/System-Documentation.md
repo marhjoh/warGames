@@ -1,0 +1,6 @@
+- [Project structure](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Project-Structure)
+- [Project report](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Project-report)
+- [Class diagram](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Class-diagram)
+- [Persistense](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Persistense)
+- [Source code](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/Source-code)
+- [User manual](https://git.gvk.idi.ntnu.no/course/idatg2001/idatg2001-2022-ws/marhjoh/wargames/-/wikis/User-manual)
